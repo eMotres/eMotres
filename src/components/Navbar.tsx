@@ -16,6 +16,8 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link href="/" className="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+              <Link href="/shop" className="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Motors</Link>
+              <Link href="/motor-development-services" className="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Service</Link>
               <Link href="/blog" className="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Technology</Link>
               <Link href="/faq" className="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Faq</Link>
               <Link href="/get-a-quote" className="text-gray-600 hover:text-brand px-3 py-2 rounded-md text-sm font-medium">Get a Quote</Link>
@@ -49,6 +51,8 @@ const Navbar = () => {
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link href="/" className="text-gray-600 hover:text-brand block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+            <Link href="/shop" className="text-gray-600 hover:text-brand block px-3 py-2 rounded-md text-base font-medium">Motors</Link>
+            <Link href="/motor-development-services" className="text-gray-600 hover:text-brand block px-3 py-2 rounded-md text-base font-medium">Service</Link>
             <Link href="/blog" className="text-gray-600 hover:text-brand block px-3 py-2 rounded-md text-base font-medium">Technology</Link>
             <Link href="/faq" className="text-gray-600 hover:text-brand block px-3 py-2 rounded-md text-base font-medium">Faq</Link>
             <Link href="/get-a-quote" className="text-gray-600 hover:text-brand block px-3 py-2 rounded-md text-base font-medium">Get a Quote</Link>
