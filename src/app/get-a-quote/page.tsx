@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import QuoteForm from '@/components/QuoteForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Get a Quote for Custom Electric Motors | eMotres',
+  description: 'Request a quote for a custom-made electric motor. Specify your requirements for continuous power, RPM, voltage, cooling, and more, and we will calculate the approximate cost.',
+};
 
 const GetAQuotePage = () => {
   return (

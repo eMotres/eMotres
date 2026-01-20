@@ -1,6 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'High-Performance Electric Motors for Drones & Aviation | eMotres',
+  description: 'eMotres specializes in developing and producing top-tier, high-performance electric motors with patented construction for drones, aviation, marine, and automotive applications. Custom motor design available.',
+};
 
 const CategoryCard = ({ imageUrl, title }: { imageUrl: string, title: string }) => (
   <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">

@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPost from '@/components/BlogPost';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Electric Motor Technology Blog | eMotres',
+  description: 'Explore the technical features of our electric motors. Our blog covers topics like tangential magnet polarization, comparisons of motor technologies (Inrunner vs. Outrunner, Radial vs. Axial), and more.',
+};
 
 const posts = [
   {

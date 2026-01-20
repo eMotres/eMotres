@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Custom Motor Development Services | eMotres',
+  description: 'eMotres offers comprehensive motor development services, from conceptualization to mass production. We specialize in custom motors and generators (0.5 kW to 800 kW) using advanced electromagnetic, mechanical, and thermal simulations.',
+};
 
 const ServicePage = () => {
   return (

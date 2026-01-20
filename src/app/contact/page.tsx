@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Us | eMotres - High-Performance Electric Motors',
+  description: 'Get in touch with eMotres for questions about our high-performance electric motors. Find our address in Ljubljana, Slovenia, and contact us via email.',
+};
 
 const ContactPage = () => {
   return (

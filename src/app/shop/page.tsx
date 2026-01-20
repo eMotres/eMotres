@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Electric Motors for Drones and Aviation | eMotres Shop',
+  description: 'Explore our range of high-performance electric motors. We offer both air-cooled and liquid-cooled motors from 5 kW to 170 kW, designed for drones, aviation, and other demanding applications.',
+};
 
 const products = [
   {
