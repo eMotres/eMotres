@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "eMotres - High-Performance Electric Motors for Drones and Aviation",
-  description: "eMotres specializes in high-performance electric motors for drones, UAVs, and the aviation industry. Discover our powerful and reliable propulsion systems.",
+  title: "eMotres: High-Performance Electric Motors for Aviation",
+  description: "Custom axial flux motor design and production for aerospace and marine applications.",
 };
 
 export default function RootLayout({

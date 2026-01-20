@@ -15,6 +15,7 @@ module.exports = {
         'orange-600': '#EA580C',
         'white': '#FFFFFF',
         'black': '#000000',
+        brand: '#FF5722',
       },
       spacing: {
         '128': '32rem',
