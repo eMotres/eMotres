@@ -2,59 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Industrial Styling */
-body {
-  background-color: #fff;
-  color: #000;
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  background-color: #F3F4F6;
+  color: #1F2937;
+  font-family: 'Inter', sans-serif;
 }
 
 .accent-orange {
-  color: #FFA500;
+  color: #F97316;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+h1 {
+  @apply text-4xl md:text-6xl font-bold leading-tight;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl font-bold;
+}
+
+h3 {
+  @apply text-xl md:text-2xl font-bold;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-lg p-6 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1;
 }
