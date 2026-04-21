@@ -1,30 +1,65 @@
 'use client';
 
-import { useActionState } from 'react';
-import { submitQuote } from '@/app/actions';
+import { useState } from 'react';
 
-const initialState = {
-  success: false,
-  message: '',
-  errors: {},
-};
+interface FormState {
+  name: string;
+  email: string;
+  message: string;
+  agree: boolean;
+}
+
+interface SubmitState {
+  status: 'idle' | 'success' | 'error';
+  message: string;
+}
 
 const QuoteForm = () => {
-  const [state, formAction, isPending] = useActionState(submitQuote, initialState);
+  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '', agree: false });
+  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle', message: '' });
+  const [isPending, setIsPending] = useState(false);
+
+  const validate = (): boolean => {
+    const newErrors: Partial<Record<keyof FormState, string>> = {};
+    if (!form.name.trim()) newErrors.name = 'Name is required';
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      newErrors.email = 'Valid email is required';
+    if (form.message.trim().length < 10)
+      newErrors.message = 'Message must be at least 10 characters';
+    if (!form.agree) newErrors.agree = 'You must agree to the privacy policy';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setIsPending(true);
+
+    const subject = encodeURIComponent(`Quote Request from ${form.name}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+    );
+    window.location.href = `mailto:sales@emotres.com?subject=${subject}&body=${body}`;
+
+    setTimeout(() => {
+      setIsPending(false);
+      setSubmitState({
+        status: 'success',
+        message: 'Thank you! Your quote request has been sent. We will contact you soon.',
+      });
+      setForm({ name: '', email: '', message: '', agree: false });
+    }, 500);
+  };
 
   return (
-    <form action={formAction} className="space-y-6">
-      {state.success && (
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {submitState.status === 'success' && (
         <div className="p-4 rounded-md bg-green-50 border border-green-200 text-green-700 animate-fade-in">
           <p className="font-medium">Request Sent!</p>
-          <p className="text-sm mt-1">{state.message}</p>
-        </div>
-      )}
-
-      {!state.success && state.message && (
-        <div className="p-4 rounded-md bg-red-50 border border-red-200 text-red-700 animate-fade-in">
-          <p className="font-medium">Error</p>
-          <p className="text-sm mt-1">{state.message}</p>
+          <p className="text-sm mt-1">{submitState.message}</p>
         </div>
       )}
 
@@ -34,11 +69,12 @@ const QuoteForm = () => {
           type="text"
           name="name"
           id="name"
-          className="block w-full shadow-sm py-4 px-4 bg-surface-secondary placeholder-text-secondary focus:ring-brand focus:border-brand border-surface-tertiary rounded-xl transition-colors"
+          value={form.name}
+          onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+          className="block w-full shadow-sm py-4 px-4 bg-surface-secondary placeholder-text-secondary focus:ring-brand focus:border-brand border border-surface-tertiary rounded-xl transition-colors"
           placeholder="Name"
-          required
         />
-        {state.errors?.name && <p className="mt-1 text-sm text-red-600">{state.errors.name}</p>}
+        {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
       </div>
 
       <div>
@@ -48,11 +84,12 @@ const QuoteForm = () => {
           name="email"
           type="email"
           autoComplete="email"
-          className="block w-full shadow-sm py-4 px-4 bg-surface-secondary placeholder-text-secondary focus:ring-brand focus:border-brand border-surface-tertiary rounded-xl transition-colors"
+          value={form.email}
+          onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+          className="block w-full shadow-sm py-4 px-4 bg-surface-secondary placeholder-text-secondary focus:ring-brand focus:border-brand border border-surface-tertiary rounded-xl transition-colors"
           placeholder="E-mail"
-          required
         />
-        {state.errors?.email && <p className="mt-1 text-sm text-red-600">{state.errors.email}</p>}
+        {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
       </div>
 
       <div>
@@ -61,11 +98,12 @@ const QuoteForm = () => {
           id="message"
           name="message"
           rows={4}
-          className="block w-full shadow-sm py-4 px-4 bg-surface-secondary placeholder-text-secondary focus:ring-brand focus:border-brand border-surface-tertiary rounded-xl transition-colors resize-none"
+          value={form.message}
+          onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+          className="block w-full shadow-sm py-4 px-4 bg-surface-secondary placeholder-text-secondary focus:ring-brand focus:border-brand border border-surface-tertiary rounded-xl transition-colors resize-none"
           placeholder="Hi! If possible, please specify: Continuous Power, RPM, Voltage, etc."
-          required
-        ></textarea>
-        {state.errors?.message && <p className="mt-1 text-sm text-red-600">{state.errors.message}</p>}
+        />
+        {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
       </div>
 
       <div className="flex items-start">
@@ -74,15 +112,16 @@ const QuoteForm = () => {
             id="agree"
             name="agree"
             type="checkbox"
+            checked={form.agree}
+            onChange={e => setForm(f => ({ ...f, agree: e.target.checked }))}
             className="h-5 w-5 text-brand focus:ring-brand border-gray-300 rounded cursor-pointer"
-            required
           />
         </div>
         <div className="ml-3 text-sm">
           <label htmlFor="agree" className="text-text-secondary">
             I consent to processing my data in accordance with the Privacy Policy.
           </label>
-          {state.errors?.agree && <p className="mt-1 text-sm text-red-600">{state.errors.agree}</p>}
+          {errors.agree && <p className="mt-1 text-sm text-red-500">{errors.agree}</p>}
         </div>
       </div>
 
