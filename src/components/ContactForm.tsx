@@ -2,97 +2,144 @@
 
 import React, { useState } from 'react';
 
-const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-  const [agree, setAgree] = useState(false);
+// 1. Go to https://formspree.io → sign up free
+// 2. Create a new form → copy the form ID (e.g. "xpwzgkla")
+// 3. Replace YOUR_FORM_ID below
+const FORMSPREE_ID = 'xbddrvlr';
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
+const ContactForm = () => {
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [agree, setAgree] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = 'Name is required';
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Valid email required';
+    if (!form.message.trim()) e.message = 'Message is required';
+    if (!agree) e.agree = 'Please accept the privacy policy';
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="name" className="sr-only">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-brand focus:border-brand border-gray-300 rounded-md"
-            placeholder="Name *"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setStatus('sending');
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.message }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setForm({ name: '', email: '', subject: '', message: '' });
+        setAgree(false);
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const inputClass =
+    'block w-full py-3 px-4 bg-surface-secondary border border-border rounded-xl text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-colors';
+
+  if (status === 'success') {
+    return (
+      <div className="py-12 text-center">
+        <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+          <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
         </div>
-        <div>
-          <label htmlFor="email" className="sr-only">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-brand focus:border-brand border-gray-300 rounded-md"
-            placeholder="E-mail *"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="subject" className="sr-only">Subject</label>
-        <input
-          type="text"
-          name="subject"
-          id="subject"
-          className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-brand focus:border-brand border-gray-300 rounded-md"
-          placeholder="Subject *"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="message" className="sr-only">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-brand focus:border-brand border-gray-300 rounded-md"
-          placeholder="Write Your Message *"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-        ></textarea>
-      </div>
-      <div className="flex items-center">
-        <input
-          id="agree"
-          name="agree"
-          type="checkbox"
-          className="h-4 w-4 text-brand focus:ring-brand border-gray-300 rounded"
-          checked={agree}
-          onChange={(e) => setAgree(e.target.checked)}
-          required
-        />
-        <label htmlFor="agree" className="ml-2 block text-sm text-gray-900">
-          By clicking the &quot;Submit&quot; button, you consent to Motres doo processing your data in accordance with GDPR and our Privacy Policy.
-        </label>
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand"
-        >
-          Send Message
+        <h3 className="text-lg font-bold text-text-primary mb-2">Message sent!</h3>
+        <p className="text-text-secondary text-sm">We&apos;ll get back to you within 1–2 business days.</p>
+        <button onClick={() => setStatus('idle')} className="mt-6 text-sm text-brand font-semibold hover:underline">
+          Send another message
         </button>
       </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <input
+            type="text"
+            placeholder="Name *"
+            value={form.name}
+            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+            className={inputClass}
+          />
+          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+        </div>
+        <div>
+          <input
+            type="email"
+            placeholder="E-mail *"
+            value={form.email}
+            onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+            className={inputClass}
+          />
+          {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+        </div>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Subject"
+        value={form.subject}
+        onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
+        className={inputClass}
+      />
+
+      <div>
+        <textarea
+          rows={5}
+          placeholder="Write your message *"
+          value={form.message}
+          onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+          className={`${inputClass} resize-none`}
+        />
+        {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
+      </div>
+
+      <div className="flex items-start gap-3">
+        <input
+          type="checkbox"
+          id="agree-contact"
+          checked={agree}
+          onChange={e => setAgree(e.target.checked)}
+          className="mt-0.5 h-4 w-4 text-brand border-border rounded cursor-pointer"
+        />
+        <label htmlFor="agree-contact" className="text-sm text-text-secondary cursor-pointer">
+          By clicking &quot;Send Message&quot; you consent to Motres d.o.o. processing your data in accordance with GDPR and our Privacy Policy.
+        </label>
+      </div>
+      {errors.agree && <p className="text-xs text-red-500">{errors.agree}</p>}
+
+      {status === 'error' && (
+        <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+          Something went wrong. Please try again or email us directly at{' '}
+          <a href="mailto:sales@emotres.com" className="underline">sales@emotres.com</a>.
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === 'sending'}
+        className="w-full py-3.5 px-6 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
+      >
+        {status === 'sending' ? 'Sending…' : 'Send Message'}
+      </button>
     </form>
   );
 };

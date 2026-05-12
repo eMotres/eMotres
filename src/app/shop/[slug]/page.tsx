@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { products, getProductBySlug } from '@/lib/products';
 import { Metadata } from 'next';
 
@@ -25,20 +23,25 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
+  const related = products.filter(p => p.slug !== product.slug).slice(0, 4);
+
   return (
     <main className="min-h-screen bg-surface-primary">
-      <Navbar />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <nav className="text-sm text-text-secondary mb-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Breadcrumb */}
+        <nav className="text-sm text-text-secondary mb-8 flex items-center gap-2">
           <Link href="/" className="hover:text-brand transition-colors">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/shop" className="hover:text-brand transition-colors">Motors</Link>
-          <span className="mx-2">/</span>
+          <span>/</span>
+          <Link href="/shop" className="hover:text-brand transition-colors">Shop</Link>
+          <span>/</span>
           <span className="text-text-primary">{product.title}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        {/* Main product layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+
+          {/* Image */}
           <div className="bg-surface-secondary rounded-2xl p-8 flex items-center justify-center aspect-square">
             <Image
               src={product.imageUrl}
@@ -49,28 +52,60 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             />
           </div>
 
-          <div className="flex flex-col justify-center">
-            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-brand bg-orange-50 px-3 py-1 rounded-full mb-4 w-fit">
-              {product.category}
-            </span>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 leading-tight">
-              {product.title}
-            </h1>
-            <p className="text-3xl font-bold text-brand mb-6">{product.price}</p>
-            <p className="text-text-secondary leading-relaxed mb-8">{product.description}</p>
-
-            <div className="bg-surface-secondary rounded-xl p-6 mb-8">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">Specifications</h2>
-              <dl className="space-y-3">
-                {product.specs.map(spec => (
-                  <div key={spec.label} className="flex justify-between items-center border-b border-surface-tertiary pb-3 last:border-0 last:pb-0">
-                    <dt className="text-sm text-text-secondary">{spec.label}</dt>
-                    <dd className="text-sm font-semibold text-text-primary">{spec.value}</dd>
-                  </div>
-                ))}
-              </dl>
+          {/* Info */}
+          <div className="flex flex-col">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-orange-50 px-3 py-1 rounded-full">
+                {product.category}
+              </span>
+              <span className="text-xs text-text-secondary bg-surface-secondary px-3 py-1 rounded-full">
+                SKU: {product.sku}
+              </span>
             </div>
 
+            <h1 className="text-3xl font-extrabold text-text-primary mb-3 leading-tight">
+              {product.title}
+            </h1>
+
+            <p className="text-3xl font-bold text-brand mb-4">{product.price}</p>
+
+            {/* Stock status */}
+            <div className="flex items-center gap-2 mb-6">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block"></span>
+              <span className="text-sm text-text-secondary">{product.status}</span>
+            </div>
+
+            <p className="text-text-secondary leading-relaxed mb-6">{product.description}</p>
+
+            {/* KV selector */}
+            <div className="mb-4">
+              <label className="block text-sm font-semibold text-text-primary mb-2">
+                KV (rpm/V)
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {product.kvOptions.map(kv => (
+                  <span key={kv} className="border border-surface-tertiary text-text-primary text-sm px-4 py-2 rounded-lg bg-surface-secondary">
+                    {kv}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Voltage */}
+            <div className="mb-8">
+              <label className="block text-sm font-semibold text-text-primary mb-2">
+                DC Voltage
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {product.voltageOptions.map(v => (
+                  <span key={v} className="border border-surface-tertiary text-text-primary text-sm px-4 py-2 rounded-lg bg-surface-secondary">
+                    {v}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/get-a-quote"
@@ -87,9 +122,93 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
         </div>
+
+        {/* Details tabs section */}
+        <div className="mb-16">
+          <div className="border-b border-surface-tertiary mb-8">
+            <span className="inline-block border-b-2 border-brand text-brand font-semibold pb-3 text-sm uppercase tracking-wider">
+              Details
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Specs table */}
+            <div className="bg-surface-secondary rounded-xl p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-5">
+                Technical Specifications
+              </h2>
+              <dl className="space-y-3">
+                {product.specs.map(spec => (
+                  <div key={spec.label} className="flex justify-between items-center border-b border-surface-tertiary pb-3 last:border-0 last:pb-0">
+                    <dt className="text-sm text-text-secondary">{spec.label}</dt>
+                    <dd className="text-sm font-semibold text-text-primary text-right">{spec.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            {/* Applications */}
+            <div className="bg-surface-secondary rounded-xl p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-5">
+                Applications
+              </h2>
+              <p className="text-text-secondary leading-relaxed text-sm mb-6">{product.applications}</p>
+
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">
+                Why eMotres?
+              </h2>
+              <ul className="space-y-3 text-sm text-text-secondary">
+                <li className="flex items-start gap-2">
+                  <span className="text-brand mt-0.5">✓</span>
+                  Patented construction — highest torque density on the market
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-brand mt-0.5">✓</span>
+                  Fully sealed IP65 — dust and waterproof
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-brand mt-0.5">✓</span>
+                  Assembled and tested in Slovenia (EU)
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-brand mt-0.5">✓</span>
+                  1-year warranty on all motors
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-brand mt-0.5">✓</span>
+                  Custom motor design available (0.5 kW – 1 MW)
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Related products */}
+        <div>
+          <h2 className="text-2xl font-bold text-text-primary mb-8">Related Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {related.map(p => (
+              <Link
+                key={p.slug}
+                href={`/shop/${p.slug}`}
+                className="group bg-surface-secondary rounded-xl p-4 hover:shadow-lg transition-all duration-300 border border-surface-tertiary hover:-translate-y-1"
+              >
+                <div className="relative h-36 mb-3 bg-surface-primary rounded-lg">
+                  <Image
+                    src={p.imageUrl}
+                    alt={p.title}
+                    fill
+                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <p className="text-xs font-medium text-text-primary leading-snug mb-1">{p.title}</p>
+                <p className="text-brand font-bold text-sm">{p.price}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <Footer />
     </main>
   );
 }

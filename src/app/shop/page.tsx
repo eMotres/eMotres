@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 import { Metadata } from 'next';
@@ -13,7 +11,6 @@ export const metadata: Metadata = {
 const ShopPage = () => {
   return (
     <main>
-      <Navbar />
       <div className="bg-surface-secondary py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold text-center mb-4 text-text-primary">Electric Motors</h1>
@@ -30,9 +27,7 @@ const ShopPage = () => {
             ))}
           </div>
         </div>
-      </div>
-      <Footer />
-    </main>
+      </div>    </main>
   );
 };
 
