@@ -157,7 +157,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         { label: 'Torque', cont: product.performanceSpecs.continuous.torque, peak: product.performanceSpecs.peak.torque },
                         { label: 'Speed', cont: product.performanceSpecs.continuous.speed, peak: product.performanceSpecs.peak.speed },
                         { label: 'Phase Current (RMS)', cont: product.performanceSpecs.continuous.current, peak: product.performanceSpecs.peak.current },
-                        { label: 'Efficiency', cont: product.performanceSpecs.continuous.efficiency, peak: '—' },
+                        { label: 'Efficiency', cont: product.performanceSpecs.continuous.efficiency, peak: product.performanceSpecs.peak.efficiency ?? '—' },
                       ]
                     : []
                   ).map((row, i) => (

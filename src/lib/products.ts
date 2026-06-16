@@ -11,6 +11,7 @@ export interface PerformanceSpecs {
     torque: string;
     speed: string;
     current: string;
+    efficiency?: string;
   };
 }
 
@@ -90,13 +91,14 @@ export const products: Product[] = [
         torque: '0.48 Nm',
         speed: '12,000 rpm',
         current: '35 A',
-        efficiency: '91.8%',
+        efficiency: '75.5%',
       },
       peak: {
         power: '1,402 W',
         torque: '0.70 Nm',
         speed: '14,524 rpm',
         current: '62 A',
+        efficiency: '76.9%',
       },
     },
     dynoTest: {
