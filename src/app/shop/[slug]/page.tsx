@@ -132,62 +132,66 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </span>
           </div>
 
-          {/* Performance table — AeroStator Core motors only */}
-          {product.performanceSpecs && (
-            <div className="mb-8">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">Performance</h2>
-              <div className="rounded-xl overflow-hidden border border-surface-tertiary">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-surface-secondary">
-                      <th className="text-left px-5 py-3 text-text-secondary font-semibold w-1/3"></th>
-                      <th className="px-5 py-3 font-bold text-text-primary text-center">Continuous</th>
-                      <th className="px-5 py-3 font-bold text-brand text-center">Peak</th>
+          {/* Unified specifications table */}
+          <div className="mb-8">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">Specifications</h2>
+            <div className="rounded-xl overflow-hidden border border-surface-tertiary">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-surface-secondary">
+                    <th className="text-left px-5 py-3 text-text-secondary font-semibold w-1/3"></th>
+                    {product.performanceSpecs ? (
+                      <>
+                        <th className="px-5 py-3 font-bold text-text-primary text-center">Continuous</th>
+                        <th className="px-5 py-3 font-bold text-brand text-center">Peak</th>
+                      </>
+                    ) : (
+                      <th className="px-5 py-3 font-bold text-text-primary text-right">Value</th>
+                    )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {(product.performanceSpecs
+                    ? [
+                        { label: 'Power', cont: product.performanceSpecs.continuous.power, peak: product.performanceSpecs.peak.power },
+                        { label: 'Torque', cont: product.performanceSpecs.continuous.torque, peak: product.performanceSpecs.peak.torque },
+                        { label: 'Speed', cont: product.performanceSpecs.continuous.speed, peak: product.performanceSpecs.peak.speed },
+                        { label: 'Phase Current (RMS)', cont: product.performanceSpecs.continuous.current, peak: product.performanceSpecs.peak.current },
+                        { label: 'Efficiency', cont: product.performanceSpecs.continuous.efficiency, peak: '—' },
+                      ]
+                    : []
+                  ).map((row, i) => (
+                    <tr key={row.label} className={i % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
+                      <td className="px-5 py-3 text-text-secondary">{row.label}</td>
+                      <td className="px-5 py-3 text-text-primary font-semibold text-center">{row.cont}</td>
+                      <td className="px-5 py-3 text-brand font-semibold text-center">{row.peak}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      { label: 'Power', cont: product.performanceSpecs.continuous.power, peak: product.performanceSpecs.peak.power },
-                      { label: 'Torque', cont: product.performanceSpecs.continuous.torque, peak: product.performanceSpecs.peak.torque },
-                      { label: 'Speed', cont: product.performanceSpecs.continuous.speed, peak: product.performanceSpecs.peak.speed },
-                      { label: 'Phase Current (RMS)', cont: product.performanceSpecs.continuous.current, peak: product.performanceSpecs.peak.current },
-                      { label: 'Efficiency', cont: product.performanceSpecs.continuous.efficiency, peak: '—' },
-                    ].map((row, i) => (
-                      <tr key={row.label} className={i % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
-                        <td className="px-5 py-3 text-text-secondary">{row.label}</td>
-                        <td className="px-5 py-3 text-text-primary font-semibold text-center">{row.cont}</td>
-                        <td className="px-5 py-3 text-brand font-semibold text-center">{row.peak}</td>
+                  ))}
+                  {product.specs.map((spec, j) => {
+                    const idx = (product.performanceSpecs ? 5 : 0) + j;
+                    return (
+                      <tr key={spec.label} className={idx % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
+                        <td className="px-5 py-3 text-text-secondary">{spec.label}</td>
+                        <td colSpan={product.performanceSpecs ? 2 : 1} className="px-5 py-3 text-text-primary font-semibold text-right">{spec.value}</td>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
-          )}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Specs table */}
-            <div className="bg-surface-secondary rounded-xl p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-5">
-                Motor Data
-              </h2>
-              <dl className="space-y-3">
-                {product.specs.map(spec => (
-                  <div key={spec.label} className="flex justify-between items-center border-b border-surface-tertiary pb-3 last:border-0 last:pb-0">
-                    <dt className="text-sm text-text-secondary">{spec.label}</dt>
-                    <dd className="text-sm font-semibold text-text-primary text-right">{spec.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
             {/* Applications */}
             <div className="bg-surface-secondary rounded-xl p-6">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-5">
                 Applications
               </h2>
-              <p className="text-text-secondary leading-relaxed text-sm mb-6">{product.applications}</p>
+              <p className="text-text-secondary leading-relaxed text-sm">{product.applications}</p>
+            </div>
 
+            {/* Why eMotres */}
+            <div className="bg-surface-secondary rounded-xl p-6">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">
                 Why eMotres?
               </h2>
