@@ -45,7 +45,7 @@ const cianoMotors = [
     tagline: 'Compact precision',
     power: '1,400 W',
     torque: '0.89 Nm',
-    weight: '0.12 kg',
+    weight: '0.125 kg',
     voltage: '15–25 V',
     protection: 'Open frame',
     price: '€100',

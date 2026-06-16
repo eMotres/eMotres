@@ -6,13 +6,28 @@
       "Bash(npm run deploy)",
       "Bash(npm run lint)",
       "Bash(unzip *)",
-      "PowerShell(*)"
+      "PowerShell(*)",
+      "Bash(git *)",
+      "Bash(ls *)",
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit",
+      "Write",
+      "mcp__ccd_session_mgmt__search_session_transcripts",
+      "mcp__ccd_session_mgmt__list_sessions",
+      "mcp__Claude_Preview__*"
     ],
     "deny": [
       "PowerShell(*Remove-Item*)",
       "PowerShell(*rm -rf*)",
       "PowerShell(*del /*)",
-      "PowerShell(*Format-*)"
+      "PowerShell(*Format-*)",
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean *)"
     ]
   }
 }

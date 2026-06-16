@@ -14,6 +14,29 @@ export interface PerformanceSpecs {
   };
 }
 
+/** One operating point from a propeller-dynamometer sweep. */
+export interface DynoPoint {
+  throttle: number; // %
+  rpm: number;
+  voltage: number; // V
+  current: number; // A
+  thrust: number; // gram-force
+  torque: number; // N·m
+  temp: number; // °C
+  pElec: number; // electric power, W
+  pShaft: number; // shaft (mechanical) power, W
+  elecEff: number; // electrical efficiency, %
+  sysEff: number; // system efficiency, gf/W
+}
+
+export interface DynoTest {
+  conditions: string;
+  date: string;
+  setup: { label: string; value: string }[];
+  highlights: { label: string; value: string; sub?: string }[];
+  points: DynoPoint[];
+}
+
 export interface Product {
   slug: string;
   sku: string;
@@ -30,6 +53,7 @@ export interface Product {
   voltageOptions: string[];
   specs: { label: string; value: string }[];
   performanceSpecs?: PerformanceSpecs;
+  dynoTest?: DynoTest;
 }
 
 export const products: Product[] = [
@@ -45,18 +69,18 @@ export const products: Product[] = [
     status: 'Made to order (~2 months)',
     description: 'The CIANO14 40_12 is a compact precision motor built on the AeroStator Core platform. Tangential magnet polarization delivers exceptional torque density in a minimal footprint — ideal for racing UAVs and precision aerial systems.',
     applications: 'Racing drones, precision UAVs, light aerial robotics. Compatible with 18″–24″ propellers.',
-    kvOptions: ['KV 744'],
+    kvOptions: ['KV 850'],
     voltageOptions: ['15–25 V (6S LiPo)'],
     specs: [
       { label: 'SKU', value: 'CIANO14 40_12' },
       { label: 'Configuration', value: '14 Poles / 12 Slots' },
-      { label: 'KV', value: '744 rpm/V' },
-      { label: 'Torque Constant (Kt)', value: '0.013 Nm/A' },
+      { label: 'KV', value: '~850 rpm/V' },
+      { label: 'Torque Constant (Kt)', value: '0.011 Nm/A' },
       { label: 'Voltage', value: '15–25 V (6S LiPo)' },
       { label: 'Cooling', value: 'Air' },
       { label: 'Protection', value: 'Open frame' },
       { label: 'Dimensions (D×L)', value: '40 × 47 mm' },
-      { label: 'Weight', value: '0.12 kg' },
+      { label: 'Weight', value: '0.125 kg' },
       { label: 'Max Temperature', value: '150 °C' },
       { label: 'Warranty', value: '1 year' },
     ],
@@ -74,6 +98,35 @@ export const products: Product[] = [
         speed: '15,000 rpm',
         current: '66 A',
       },
+    },
+    dynoTest: {
+      conditions: 'HQ1050-class propeller · 24 V bus · ambient 31.3 °C',
+      date: '2026-06-16',
+      setup: [
+        { label: 'Test bench', value: 'LY-10KGF dynamometer' },
+        { label: 'Propeller', value: '1050 (HQ1050 class)' },
+        { label: 'ESC', value: '80 A' },
+        { label: 'Bus voltage', value: '24 V' },
+        { label: 'Ambient', value: '31.3 °C / 74.7 % RH' },
+        { label: 'Air pressure', value: '100.70 kPa' },
+      ],
+      highlights: [
+        { label: 'Peak electrical efficiency', value: '76.9 %', sub: 'at 80 % throttle' },
+        { label: 'Max thrust', value: '4304 g', sub: '14,524 rpm @ 24 V' },
+        { label: 'Power at max thrust', value: '1402 W', sub: 'at 61.9 A' },
+      ],
+      points: [
+        { throttle: 10, rpm: 1871, voltage: 24.28, current: 0.33, thrust: 48, torque: 0.011, temp: 29.4, pElec: 8.0, pShaft: 2.2, elecEff: 26.8, sysEff: 5.97 },
+        { throttle: 20, rpm: 4006, voltage: 24.26, current: 1.65, thrust: 252, torque: 0.047, temp: 29.4, pElec: 40.1, pShaft: 19.7, elecEff: 49.2, sysEff: 6.29 },
+        { throttle: 30, rpm: 5533, voltage: 24.19, current: 3.64, thrust: 528, torque: 0.093, temp: 29.6, pElec: 87.9, pShaft: 53.9, elecEff: 61.3, sysEff: 6.01 },
+        { throttle: 40, rpm: 7040, voltage: 24.05, current: 6.81, thrust: 911, torque: 0.151, temp: 30.0, pElec: 163.7, pShaft: 111.3, elecEff: 68.0, sysEff: 5.57 },
+        { throttle: 50, rpm: 8719, voltage: 23.82, current: 12.19, thrust: 1438, torque: 0.231, temp: 30.6, pElec: 290.2, pShaft: 210.9, elecEff: 72.7, sysEff: 4.96 },
+        { throttle: 60, rpm: 10222, voltage: 23.59, current: 19.32, thrust: 1993, torque: 0.317, temp: 31.5, pElec: 455.8, pShaft: 339.3, elecEff: 74.4, sysEff: 4.37 },
+        { throttle: 70, rpm: 11557, voltage: 23.29, current: 28.31, thrust: 2605, torque: 0.414, temp: 32.5, pElec: 659.5, pShaft: 501.0, elecEff: 76.0, sysEff: 3.95 },
+        { throttle: 80, rpm: 12819, voltage: 23.06, current: 39.96, thrust: 3305, torque: 0.528, temp: 33.8, pElec: 921.4, pShaft: 708.8, elecEff: 76.9, sysEff: 3.59 },
+        { throttle: 90, rpm: 13990, voltage: 22.80, current: 54.00, thrust: 3976, torque: 0.639, temp: 35.6, pElec: 1231.2, pShaft: 936.2, elecEff: 76.0, sysEff: 3.23 },
+        { throttle: 100, rpm: 14524, voltage: 22.66, current: 61.89, thrust: 4304, torque: 0.696, temp: 38.0, pElec: 1402.2, pShaft: 1058.6, elecEff: 75.5, sysEff: 3.07 },
+      ],
     },
   },
   {
