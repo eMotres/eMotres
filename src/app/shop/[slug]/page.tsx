@@ -26,6 +26,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const related = products.filter(p => p.slug !== product.slug).slice(0, 4);
 
+  const ps = product.performanceSpecs;
+  const perfRows = ps
+    ? [
+        { label: 'Power', cont: ps.continuous.power, peak: ps.peak.power },
+        { label: 'Torque', cont: ps.continuous.torque, peak: ps.peak.torque },
+        ...(ps.continuous.thrust && ps.peak.thrust
+          ? [{ label: 'Thrust', cont: ps.continuous.thrust, peak: ps.peak.thrust }]
+          : []),
+        { label: 'Speed', cont: ps.continuous.speed, peak: ps.peak.speed },
+        { label: 'Phase Current (RMS)', cont: ps.continuous.current, peak: ps.peak.current },
+        { label: 'Efficiency', cont: ps.continuous.efficiency, peak: ps.peak.efficiency ?? '—' },
+      ]
+    : [];
+
   return (
     <main className="min-h-screen bg-surface-primary">
 
@@ -140,7 +154,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <thead>
                   <tr className="bg-surface-secondary">
                     <th className="text-left px-5 py-3 text-text-secondary font-semibold w-1/3"></th>
-                    {product.performanceSpecs ? (
+                    {ps ? (
                       <>
                         <th className="px-5 py-3 font-bold text-text-primary text-center">Continuous</th>
                         <th className="px-5 py-3 font-bold text-brand text-center">Peak</th>
@@ -151,16 +165,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   </tr>
                 </thead>
                 <tbody>
-                  {(product.performanceSpecs
-                    ? [
-                        { label: 'Power', cont: product.performanceSpecs.continuous.power, peak: product.performanceSpecs.peak.power },
-                        { label: 'Torque', cont: product.performanceSpecs.continuous.torque, peak: product.performanceSpecs.peak.torque },
-                        { label: 'Speed', cont: product.performanceSpecs.continuous.speed, peak: product.performanceSpecs.peak.speed },
-                        { label: 'Phase Current (RMS)', cont: product.performanceSpecs.continuous.current, peak: product.performanceSpecs.peak.current },
-                        { label: 'Efficiency', cont: product.performanceSpecs.continuous.efficiency, peak: product.performanceSpecs.peak.efficiency ?? '—' },
-                      ]
-                    : []
-                  ).map((row, i) => (
+                  {perfRows.map((row, i) => (
                     <tr key={row.label} className={i % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
                       <td className="px-5 py-3 text-text-secondary">{row.label}</td>
                       <td className="px-5 py-3 text-text-primary font-semibold text-center">{row.cont}</td>
@@ -169,11 +174,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   ))}
                   {/* SKU is already shown in the header badge, so skip it here */}
                   {product.specs.filter((s) => s.label !== 'SKU').map((spec, j) => {
-                    const idx = (product.performanceSpecs ? 5 : 0) + j;
+                    const idx = perfRows.length + j;
                     return (
                       <tr key={spec.label} className={idx % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
                         <td className="px-5 py-3 text-text-secondary">{spec.label}</td>
-                        <td colSpan={product.performanceSpecs ? 2 : 1} className="px-5 py-3 text-text-primary font-semibold text-right">{spec.value}</td>
+                        <td colSpan={ps ? 2 : 1} className="px-5 py-3 text-text-primary font-semibold text-right">{spec.value}</td>
                       </tr>
                     );
                   })}

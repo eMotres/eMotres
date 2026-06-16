@@ -5,6 +5,7 @@ export interface PerformanceSpecs {
     speed: string;
     current: string;
     efficiency: string;
+    thrust?: string;
   };
   peak: {
     power: string;
@@ -12,6 +13,7 @@ export interface PerformanceSpecs {
     speed: string;
     current: string;
     efficiency?: string;
+    thrust?: string;
   };
 }
 
@@ -92,6 +94,7 @@ export const products: Product[] = [
         speed: '12,234 rpm',
         current: '35 A',
         efficiency: '76.5%',
+        thrust: '2,980 g',
       },
       peak: {
         power: '1,402 W',
@@ -99,6 +102,7 @@ export const products: Product[] = [
         speed: '14,524 rpm',
         current: '62 A',
         efficiency: '76.9%',
+        thrust: '4,304 g',
       },
     },
     dynoTest: {
