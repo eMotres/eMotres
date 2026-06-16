@@ -93,10 +93,10 @@ export const products: Product[] = [
         efficiency: '91.8%',
       },
       peak: {
-        power: '1,400 W',
-        torque: '0.89 Nm',
-        speed: '15,000 rpm',
-        current: '66 A',
+        power: '1,402 W',
+        torque: '0.70 Nm',
+        speed: '14,524 rpm',
+        current: '62 A',
       },
     },
     dynoTest: {
