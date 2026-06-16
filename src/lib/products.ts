@@ -87,11 +87,11 @@ export const products: Product[] = [
     ],
     performanceSpecs: {
       continuous: {
-        power: '600 W',
+        power: '800 W',
         torque: '0.48 Nm',
-        speed: '12,000 rpm',
+        speed: '12,234 rpm',
         current: '35 A',
-        efficiency: '75.5%',
+        efficiency: '76.5%',
       },
       peak: {
         power: '1,402 W',
