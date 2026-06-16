@@ -167,7 +167,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                       <td className="px-5 py-3 text-brand font-semibold text-center">{row.peak}</td>
                     </tr>
                   ))}
-                  {product.specs.map((spec, j) => {
+                  {/* SKU is already shown in the header badge, so skip it here */}
+                  {product.specs.filter((s) => s.label !== 'SKU').map((spec, j) => {
                     const idx = (product.performanceSpecs ? 5 : 0) + j;
                     return (
                       <tr key={spec.label} className={idx % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
