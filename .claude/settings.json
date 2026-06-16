@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(npm run deploy)",
+      "Bash(npm run lint)",
+      "Bash(unzip *)",
+      "PowerShell(*)"
+    ],
+    "deny": [
+      "PowerShell(*Remove-Item*)",
+      "PowerShell(*rm -rf*)",
+      "PowerShell(*del /*)",
+      "PowerShell(*Format-*)"
+    ]
+  }
+}

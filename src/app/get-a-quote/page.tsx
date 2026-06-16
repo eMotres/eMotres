@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import QuoteForm from '@/components/QuoteForm';
 import { Metadata } from 'next';
 
@@ -12,7 +10,6 @@ export const metadata: Metadata = {
 const GetAQuotePage = () => {
   return (
     <main>
-      <Navbar />
       <div className="bg-gray-100 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
@@ -21,9 +18,7 @@ const GetAQuotePage = () => {
             <QuoteForm />
           </div>
         </div>
-      </div>
-      <Footer />
-    </main>
+      </div>    </main>
   );
 };
 

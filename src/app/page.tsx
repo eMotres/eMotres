@@ -17,15 +17,23 @@ const stats = [
 const technologies = [
   {
     label: 'Best-in-class Air & Liquid Cooling',
-    desc: 'Cutouts directly above each coil give cooling air or liquid the shortest possible thermal path from winding to cooler — no thick yoke barrier in between.',
+    desc: 'Cutouts directly above each coil give cooling air or liquid the shortest possible thermal path from winding to cooler — no thick yoke barrier in between. Surface area is 2× larger than a standard stator.',
+    img: '/images/tech-cooling.png',
   },
   {
-    label: 'Tangential Magnets',
+    label: 'Tangential Magnetization',
     desc: 'Flux concentration beyond standard Halbach arrays — no adhesive, easy re-magnetization.',
+    img: '/images/tech-tangential.png',
   },
   {
     label: 'Rectangular Copper Wire',
     desc: '~70% fill factor. Lower resistance, higher current density, less heat.',
+    img: '/images/tech-wire.png',
+  },
+  {
+    label: 'Manufacturing Simplicity',
+    desc: '2× fewer coils than standard designs — less winding time, lower production cost, higher reliability.',
+    img: '/images/tech-simplicity.png',
   },
 ];
 
@@ -35,11 +43,11 @@ const cianoMotors = [
     slug: 'ciano-40-12',
     name: 'CIANO14 40_12',
     tagline: 'Compact precision',
-    power: '4 kW',
-    torque: '6.4 Nm',
-    weight: '0.75 kg',
-    voltage: '24–60 V',
-    protection: 'IP65',
+    power: '1,400 W',
+    torque: '0.89 Nm',
+    weight: '0.12 kg',
+    voltage: '15–25 V',
+    protection: 'Open frame',
     price: '€100',
     imageUrl: '/ciano14-40-12.png',
   },
@@ -47,11 +55,11 @@ const cianoMotors = [
     slug: 'ciano-150-30',
     name: 'CIANO28 150_30',
     tagline: 'Mid-range aviation',
-    power: '15 kW',
-    torque: '60 Nm',
-    weight: '5.2 kg',
-    voltage: '200–400 V',
-    protection: 'IP65',
+    power: '12,000 W',
+    torque: '47.7 Nm',
+    weight: '3 kg',
+    voltage: '47–76 V',
+    protection: 'Open frame',
     price: '€1,000',
     imageUrl: '/ciano28-150-30.png',
   },
@@ -98,7 +106,7 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-8">
-              Three core technologies in one stator architecture.
+              Four patented technologies in one stator architecture.
               The highest torque density electric motor available on the market — built for drones, UAVs, aviation and robotics.
             </p>
 
@@ -143,23 +151,31 @@ export default function Home() {
               Built on AeroStator Core
             </h2>
             <p className="text-text-secondary mt-3 max-w-xl mx-auto">
-              Every eMotres motor carries all three AeroStator Core technologies — best-in-class cooling, tangential magnets and rectangular copper windings.
+              Every eMotres motor carries all four AeroStator Core technologies — best-in-class cooling, tangential magnetization, rectangular copper windings and simplified manufacturing.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {cianoMotors.map(motor => (
-              <Link
+              <div
                 key={motor.slug}
-                href={`/shop/${motor.slug}`}
-                className="group block bg-surface-secondary rounded-2xl border border-border hover:border-brand/40 hover:shadow-lg transition-all duration-200 overflow-hidden"
+                className="group relative bg-surface-secondary rounded-2xl border border-border hover:border-brand/40 hover:shadow-lg transition-all duration-200 overflow-hidden"
               >
+                {/* Invisible overlay link covering the whole card */}
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                <a
+                  href={`/shop/${motor.slug}/`}
+                  className="absolute inset-0 z-10"
+                  aria-label={`View ${motor.name} specifications`}
+                />
+
                 {/* Image area */}
                 <div className="bg-surface-tertiary flex items-center justify-center p-8 h-56 overflow-hidden rounded-t-2xl">
                   <img
                     src={motor.imageUrl}
                     alt={motor.name}
-                    className="max-h-full max-w-full object-contain transition-opacity duration-300 group-hover:opacity-80"
+                    draggable="false"
+                    className="max-h-full max-w-full object-contain transition-opacity duration-300 group-hover:opacity-80 pointer-events-none select-none mix-blend-multiply"
                   />
                 </div>
 
@@ -200,7 +216,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
 
@@ -219,7 +235,7 @@ export default function Home() {
             <div className="md:w-2/5 mb-12 md:mb-0 md:sticky md:top-24">
               <span className="text-xs font-semibold uppercase tracking-widest text-brand">What&apos;s inside</span>
               <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">
-                Three technologies.<br />One stator.
+                Four technologies.<br />One stator.
               </h2>
               <p className="text-text-secondary leading-relaxed mb-6">
                 Every eMotres motor integrates three patented innovations that work together to push torque density beyond what conventional designs can achieve.
@@ -237,9 +253,13 @@ export default function Home() {
 
             <div className="md:w-3/5 space-y-4">
               {technologies.map((tech, i) => (
-                <div key={tech.label} className="bg-surface-primary rounded-xl border border-border p-5 flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand/10 text-brand flex items-center justify-center text-sm font-bold">
-                    {i + 1}
+                <div key={tech.label} className="bg-surface-primary rounded-xl border border-border p-5 flex gap-4 items-center">
+                  <div className="flex-shrink-0 w-40 h-32 bg-orange-50 rounded-xl flex items-center justify-center overflow-hidden">
+                    <img
+                      src={tech.img}
+                      alt={tech.label}
+                      className="max-w-full max-h-full object-contain p-2 mix-blend-multiply"
+                    />
                   </div>
                   <div>
                     <div className="font-semibold text-text-primary mb-1">{tech.label}</div>
@@ -264,47 +284,37 @@ export default function Home() {
               {
                 title: 'UAV & Drones',
                 desc: 'From compact racing UAVs to heavy-lift multirotor platforms — CIANO motors deliver the torque density that matters.',
-                icon: (
-                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                  </svg>
-                ),
+                img: '/images/app-drone.jpg',
               },
               {
                 title: 'Light Aviation',
                 desc: 'Reliable, sealed and high-efficiency — suitable for certified light electric aircraft and hybrid propulsion.',
-                icon: (
-                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                ),
+                img: '/images/app-aviation.jpg',
               },
               {
                 title: 'Robotics',
                 desc: 'High torque density and compact geometry make CIANO motors ideal for robot joints and actuators demanding peak performance.',
-                icon: (
-                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
-                  </svg>
-                ),
+                img: '/images/app-robotics.jpg',
               },
               {
                 title: 'Marine',
                 desc: 'IP65 sealed housing and corrosion-resistant design make CIANO motors ready for the harshest marine conditions.',
-                icon: (
-                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                  </svg>
-                ),
+                img: '/images/app-marine.jpg',
               },
             ].map(app => (
-              <div key={app.title} className="bg-surface-secondary rounded-2xl border border-border p-7 text-left">
-                <div className="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-                  {app.icon}
+              <div key={app.title} className="bg-surface-secondary rounded-2xl border border-border overflow-hidden text-left group hover:shadow-lg transition-shadow">
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={app.img}
+                    alt={app.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
-                <h3 className="font-bold text-text-primary mb-2">{app.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{app.desc}</p>
+                <div className="p-5">
+                  <h3 className="font-bold text-text-primary mb-2">{app.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">{app.desc}</p>
+                </div>
               </div>
             ))}
           </div>

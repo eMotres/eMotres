@@ -8,6 +8,31 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [
+      { "source": "/service",                    "destination": "/motor-development-services/", "type": 301 },
+      { "source": "/service/",                   "destination": "/motor-development-services/", "type": 301 },
+      { "source": "/services",                   "destination": "/motor-development-services/", "type": 301 },
+      { "source": "/services/",                  "destination": "/motor-development-services/", "type": 301 },
+      { "source": "/contacts",                   "destination": "/contact-us/",                 "type": 301 },
+      { "source": "/contacts/",                  "destination": "/contact-us/",                 "type": 301 },
+      { "source": "/contact",                    "destination": "/contact-us/",                 "type": 301 },
+      { "source": "/motors",                     "destination": "/shop/",                        "type": 301 },
+      { "source": "/motors/",                    "destination": "/shop/",                        "type": 301 },
+      { "source": "/product-category/aviation",  "destination": "/shop/",                        "type": 301 },
+      { "source": "/product-category/aviation/", "destination": "/shop/",                        "type": 301 },
+      { "source": "/product/ciano-40_12",        "destination": "/shop/ciano-40-12/",            "type": 301 },
+      { "source": "/product/ciano-40_12/",       "destination": "/shop/ciano-40-12/",            "type": 301 },
+      { "source": "/product/ciano-150_30",       "destination": "/shop/ciano-150-30/",           "type": 301 },
+      { "source": "/product/ciano-150_30/",      "destination": "/shop/ciano-150-30/",           "type": 301 },
+      { "source": "/term-conditions",            "destination": "/terms-conditions/",            "type": 301 },
+      { "source": "/term-conditions/",           "destination": "/terms-conditions/",            "type": 301 },
+      { "source": "/cart",                       "destination": "/",                             "type": 301 },
+      { "source": "/cart/",                      "destination": "/",                             "type": 301 },
+      { "source": "/checkout",                   "destination": "/",                             "type": 301 },
+      { "source": "/checkout/",                  "destination": "/",                             "type": 301 },
+      { "source": "/my-account",                 "destination": "/",                             "type": 301 },
+      { "source": "/my-account/",                "destination": "/",                             "type": 301 }
+    ],
     "rewrites": [
       {
         "source": "**",
@@ -26,6 +51,15 @@
       },
       {
         "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.txt",
         "headers": [
           {
             "key": "Cache-Control",

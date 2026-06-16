@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { products, getProductBySlug } from '@/lib/products';
+import { products, getProductBySlug, PerformanceSpecs } from '@/lib/products';
 import { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               alt={product.title}
               width={480}
               height={480}
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full mix-blend-multiply"
             />
           </div>
 
@@ -131,11 +131,44 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </span>
           </div>
 
+          {/* Performance table — AeroStator Core motors only */}
+          {product.performanceSpecs && (
+            <div className="mb-8">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">Performance</h2>
+              <div className="rounded-xl overflow-hidden border border-surface-tertiary">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-surface-secondary">
+                      <th className="text-left px-5 py-3 text-text-secondary font-semibold w-1/3"></th>
+                      <th className="px-5 py-3 font-bold text-text-primary text-center">Continuous</th>
+                      <th className="px-5 py-3 font-bold text-brand text-center">Peak</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { label: 'Power', cont: product.performanceSpecs.continuous.power, peak: product.performanceSpecs.peak.power },
+                      { label: 'Torque', cont: product.performanceSpecs.continuous.torque, peak: product.performanceSpecs.peak.torque },
+                      { label: 'Speed', cont: product.performanceSpecs.continuous.speed, peak: product.performanceSpecs.peak.speed },
+                      { label: 'Phase Current (RMS)', cont: product.performanceSpecs.continuous.current, peak: product.performanceSpecs.peak.current },
+                      { label: 'Efficiency', cont: product.performanceSpecs.continuous.efficiency, peak: '—' },
+                    ].map((row, i) => (
+                      <tr key={row.label} className={i % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
+                        <td className="px-5 py-3 text-text-secondary">{row.label}</td>
+                        <td className="px-5 py-3 text-text-primary font-semibold text-center">{row.cont}</td>
+                        <td className="px-5 py-3 text-brand font-semibold text-center">{row.peak}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Specs table */}
             <div className="bg-surface-secondary rounded-xl p-6">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-5">
-                Technical Specifications
+                Motor Data
               </h2>
               <dl className="space-y-3">
                 {product.specs.map(spec => (
@@ -161,14 +194,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <li className="flex items-start gap-2">
                   <span className="text-brand mt-0.5">✓</span>
                   Patented construction — highest torque density on the market
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-0.5">✓</span>
-                  Fully sealed IP65 — dust and waterproof
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-0.5">✓</span>
-                  Assembled and tested in Slovenia (EU)
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand mt-0.5">✓</span>
@@ -198,7 +223,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     src={p.imageUrl}
                     alt={p.title}
                     fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300 mix-blend-multiply"
                   />
                 </div>
                 <p className="text-xs font-medium text-text-primary leading-snug mb-1">{p.title}</p>

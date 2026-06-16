@@ -1,3 +1,19 @@
+export interface PerformanceSpecs {
+  continuous: {
+    power: string;
+    torque: string;
+    speed: string;
+    current: string;
+    efficiency: string;
+  };
+  peak: {
+    power: string;
+    torque: string;
+    speed: string;
+    current: string;
+  };
+}
+
 export interface Product {
   slug: string;
   sku: string;
@@ -5,6 +21,7 @@ export interface Product {
   price: string;
   imageUrl: string;
   category: 'Air-cooled' | 'Liquid-cooled';
+  technology: 'AeroStator Core' | 'Classic';
   power: string;
   status: string;
   description: string;
@@ -12,6 +29,7 @@ export interface Product {
   kvOptions: string[];
   voltageOptions: string[];
   specs: { label: string; value: string }[];
+  performanceSpecs?: PerformanceSpecs;
 }
 
 export const products: Product[] = [
@@ -22,27 +40,41 @@ export const products: Product[] = [
     price: '€100.00',
     imageUrl: '/ciano14-40-12.png',
     category: 'Air-cooled',
+    technology: 'AeroStator Core',
     power: '4 kW',
     status: 'Made to order (~2 months)',
     description: 'The CIANO14 40_12 is a compact precision motor built on the AeroStator Core platform. Tangential magnet polarization delivers exceptional torque density in a minimal footprint — ideal for racing UAVs and precision aerial systems.',
     applications: 'Racing drones, precision UAVs, light aerial robotics. Compatible with 18″–24″ propellers.',
-    kvOptions: ['KV 120', 'KV 240'],
-    voltageOptions: ['24V–60V'],
+    kvOptions: ['KV 744'],
+    voltageOptions: ['15–25 V (6S LiPo)'],
     specs: [
       { label: 'SKU', value: 'CIANO14 40_12' },
-      { label: 'Motor Type', value: 'PMSM' },
-      { label: 'Continuous Power', value: '4 kW @ 6000 rpm' },
-      { label: 'Peak Power', value: '6 kW @ 7500 rpm' },
-      { label: 'Continuous Torque', value: '6.4 Nm' },
-      { label: 'Peak Torque', value: '9.5 Nm' },
-      { label: 'KV', value: '120 / 240 rpm/V' },
-      { label: 'DC Voltage', value: '24V – 60V' },
-      { label: 'Weight', value: '0.75 kg' },
-      { label: 'Protection', value: 'IP65' },
+      { label: 'Configuration', value: '14 Poles / 12 Slots' },
+      { label: 'KV', value: '744 rpm/V' },
+      { label: 'Torque Constant (Kt)', value: '0.013 Nm/A' },
+      { label: 'Voltage', value: '15–25 V (6S LiPo)' },
       { label: 'Cooling', value: 'Air' },
-      { label: 'Sensor', value: 'PT1000' },
+      { label: 'Protection', value: 'Open frame' },
+      { label: 'Dimensions (D×L)', value: '40 × 47 mm' },
+      { label: 'Weight', value: '0.12 kg' },
+      { label: 'Max Temperature', value: '150 °C' },
       { label: 'Warranty', value: '1 year' },
     ],
+    performanceSpecs: {
+      continuous: {
+        power: '600 W',
+        torque: '0.48 Nm',
+        speed: '12,000 rpm',
+        current: '35 A',
+        efficiency: '91.8%',
+      },
+      peak: {
+        power: '1,400 W',
+        torque: '0.89 Nm',
+        speed: '15,000 rpm',
+        current: '66 A',
+      },
+    },
   },
   {
     slug: 'ciano-150-30',
@@ -51,35 +83,50 @@ export const products: Product[] = [
     price: '€1,000.00',
     imageUrl: '/ciano28-150-30.png',
     category: 'Air-cooled',
+    technology: 'AeroStator Core',
     power: '15 kW',
     status: 'Made to order (~2 months)',
     description: 'The CIANO28 150_30 delivers 15 kW continuous power in a fully sealed IP65 housing. Built on the AeroStator Core platform with rectangular copper windings, it achieves the highest torque-to-weight ratio in its class — purpose-built for demanding UAV and light aviation applications.',
     applications: 'Heavy-lift UAVs, light manned aircraft, marine propulsion. Compatible with 55″–65″ propellers.',
-    kvOptions: ['KV 12', 'KV 24'],
-    voltageOptions: ['200V', '400V'],
+    kvOptions: ['KV 43'],
+    voltageOptions: ['47–76 V (18S LiPo)'],
     specs: [
       { label: 'SKU', value: 'CIANO28 150_30' },
-      { label: 'Motor Type', value: 'PMSM' },
-      { label: 'Continuous Power', value: '15 kW @ 2400 rpm' },
-      { label: 'Peak Power', value: '22 kW @ 2800 rpm' },
-      { label: 'Continuous Torque', value: '60 Nm' },
-      { label: 'Peak Torque', value: '75 Nm' },
-      { label: 'KV', value: '12 / 24 rpm/V' },
-      { label: 'DC Voltage', value: '200V / 400V' },
-      { label: 'Weight', value: '5.2 kg' },
-      { label: 'Protection', value: 'IP65' },
+      { label: 'Configuration', value: '42 Poles / 36 Slots' },
+      { label: 'KV', value: '43 rpm/V' },
+      { label: 'Torque Constant (Kt)', value: '0.22 Nm/A' },
+      { label: 'Voltage', value: '47–76 V (18S LiPo)' },
       { label: 'Cooling', value: 'Air' },
-      { label: 'Sensor', value: 'Sensorless / PT1000' },
+      { label: 'Protection', value: 'Open frame' },
+      { label: 'Dimensions (D×L)', value: '150 × 64 mm' },
+      { label: 'Weight', value: '3.2 kg' },
+      { label: 'Max Temperature', value: '150 °C' },
       { label: 'Warranty', value: '1 year' },
     ],
+    performanceSpecs: {
+      continuous: {
+        power: '7,000 W',
+        torque: '33.4 Nm',
+        speed: '2,000 rpm',
+        current: '132 A',
+        efficiency: '93.7%',
+      },
+      peak: {
+        power: '12,000 W',
+        torque: '47.7 Nm',
+        speed: '2,400 rpm',
+        current: '192 A',
+      },
+    },
   },
   {
     slug: '5-kw-air-cooled-electric-motor',
     sku: 'CIAG 125_25',
     title: '5 kW air-cooled electric motor CIAG 125_25',
     price: '€1,500.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/CIAG_125_25_2025-Apr-17_04-52-17PM-000_CustomizedView3927969501-e1744956980369-300x300.png',
+    imageUrl: '/CIAG_125_25_2025-Apr-17_04-52-17PM-000_CustomizedView3927969501-768x576.png',
     category: 'Air-cooled',
+    technology: 'Classic',
     power: '5 kW',
     status: 'Made to order (~2 months)',
     description: 'Compact 5 kW continuous power fully sealed IP65 PMSM motor with air cooling. Patented construction delivers outstanding torque density for lightweight drone and UAV applications.',
@@ -105,8 +152,9 @@ export const products: Product[] = [
     sku: 'CIAG 150_40',
     title: '12 kW air-cooled electric motor',
     price: '€2,000.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/12-kW-electric-motor-150-40-600x600-1-300x300.webp',
+    imageUrl: '/12-kW-electric-motor-150-40-600x600-1-300x300.webp',
     category: 'Air-cooled',
+    technology: 'Classic',
     power: '12 kW',
     status: 'In stock (Slovenia warehouse)',
     description: '12 kW continuous power fully sealed IP65 PMSM motor with air cooling. Utilizes grain-oriented steel and rectangular copper wire for superior efficiency.',
@@ -134,8 +182,9 @@ export const products: Product[] = [
     sku: 'CIAG 200_30',
     title: '13 kW air-cooled electric motor',
     price: '€2,500.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/20-kW-electric-motor-200-30-600x600-1-300x300.webp',
+    imageUrl: '/20-kW-electric-motor-200-30-600x600-1-300x300.webp',
     category: 'Air-cooled',
+    technology: 'Classic',
     power: '13 kW',
     status: 'Made to order (~2 months)',
     description: '13 kW continuous power fully sealed IP65 PMSM motor with air cooling. High efficiency design with customizable voltage range for heavy drone applications.',
@@ -163,8 +212,9 @@ export const products: Product[] = [
     sku: 'CIAG 200_45',
     title: '20 kW air-cooled electric motor',
     price: '€3,000.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/20-kW-electric-motor-200-45-600x600-1-300x300.webp',
+    imageUrl: '/20-kW-electric-motor-200-45-600x600-1-300x300.webp',
     category: 'Air-cooled',
+    technology: 'Classic',
     power: '20 kW',
     status: 'Made to order (~2 months)',
     description: '20 kW continuous power fully sealed IP65 PMSM motor with air cooling. Robust design for demanding aviation and drone applications with high peak torque output.',
@@ -192,8 +242,9 @@ export const products: Product[] = [
     sku: 'CIAG 250_50',
     title: '50 kW air-cooled electric motor',
     price: '€4,000.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/50-kW-electric-motor-200-50-600x600-1-300x300.webp',
+    imageUrl: '/50-kW-electric-motor-200-50-600x600-1-300x300.webp',
     category: 'Air-cooled',
+    technology: 'Classic',
     power: '50 kW',
     status: 'Made to order (~2 months)',
     description: '50 kW continuous power fully sealed IP65 PMSM motor with air cooling. High-power solution for large UAVs and small aircraft with exceptional torque density.',
@@ -221,8 +272,9 @@ export const products: Product[] = [
     sku: 'CILG 200_50',
     title: '50 kW liquid-cooled electric motor',
     price: '€5,000.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/Liquid-cooled-50-kW-electric-motor-600x600-1-300x300.webp',
+    imageUrl: '/Liquid-cooled-50-kW-electric-motor-600x600-1-300x300.webp',
     category: 'Liquid-cooled',
+    technology: 'Classic',
     power: '50 kW',
     status: 'Made to order (~2 months)',
     description: '50 kW continuous power fully sealed IP65 PMSM motor with liquid cooling system. Magnetic encoder for precise FOC control. Ideal for continuous heavy-duty operations.',
@@ -250,8 +302,9 @@ export const products: Product[] = [
     sku: 'CILG 250_50',
     title: '110 kW liquid-cooled electric motor',
     price: '€7,000.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/110-kW-liquid-cooled-electric-motor-250-50-600x600-1-300x300.webp',
+    imageUrl: '/110-kW-liquid-cooled-electric-motor-250-50-600x600-1-300x300.webp',
     category: 'Liquid-cooled',
+    technology: 'Classic',
     power: '110 kW',
     status: 'Made to order (~2 months)',
     description: '110 kW continuous power fully sealed IP65 PMSM motor with liquid cooling. Industrial-grade performance for high-power aircraft and heavy marine vessels.',
@@ -279,8 +332,9 @@ export const products: Product[] = [
     sku: 'CILG 300_70',
     title: '170 kW liquid-cooled electric motor',
     price: '€11,000.00',
-    imageUrl: 'https://emotres.com/wp-content/uploads/2024/08/170-kW-liquid-cooled-electric-motor-300-70-600x600-1-300x300.webp',
+    imageUrl: '/170-kW-liquid-cooled-electric-motor-300-70-600x600-1-300x300.webp',
     category: 'Liquid-cooled',
+    technology: 'Classic',
     power: '170 kW',
     status: 'Made to order (~2 months)',
     description: '170 kW continuous power fully sealed IP65 PMSM motor with liquid cooling. Our most powerful motor — the pinnacle of eMotres engineering for full-scale electric aircraft and heavy marine propulsion.',

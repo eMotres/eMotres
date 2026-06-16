@@ -1,6 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import FaqItem from '@/components/FaqItem';
 import { Metadata } from 'next';
 
@@ -59,7 +57,6 @@ const faqs = [
 const FaqPage = () => {
   return (
     <main>
-      <Navbar />
       <div className="bg-gray-100 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold text-center mb-12">Frequently Asked Questions</h1>
@@ -70,9 +67,7 @@ const FaqPage = () => {
             ))}
           </div>
         </div>
-      </div>
-      <Footer />
-    </main>
+      </div>    </main>
   );
 };
 

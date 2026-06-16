@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "default": "emotres-35963423-468eb"
+  },
   "targets": {},
   "etags": {}
 }
