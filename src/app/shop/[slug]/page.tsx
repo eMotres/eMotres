@@ -90,35 +90,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <span className="text-sm text-text-secondary">{product.status}</span>
             </div>
 
-            <p className="text-text-secondary leading-relaxed mb-6">{product.description}</p>
-
-            {/* KV selector */}
-            <div className="mb-4">
-              <label className="block text-sm font-semibold text-text-primary mb-2">
-                KV (rpm/V)
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {product.kvOptions.map(kv => (
-                  <span key={kv} className="border border-surface-tertiary text-text-primary text-sm px-4 py-2 rounded-lg bg-surface-secondary">
-                    {kv}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Voltage */}
-            <div className="mb-8">
-              <label className="block text-sm font-semibold text-text-primary mb-2">
-                DC Voltage
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {product.voltageOptions.map(v => (
-                  <span key={v} className="border border-surface-tertiary text-text-primary text-sm px-4 py-2 rounded-lg bg-surface-secondary">
-                    {v}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <p className="text-text-secondary leading-relaxed mb-8">{product.description}</p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
