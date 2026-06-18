@@ -18,6 +18,7 @@ type Tech = {
   title: string;
   tagline: string;
   img: string;
+  status?: string;
   points?: { h: string; d: string }[];
   patented?: boolean;
   patent?: string;
@@ -105,10 +106,10 @@ const technologies: Tech[] = [
   },
   {
     title: 'Foil Coil Technology',
-    tagline: 'Single-piece flat-wire coil — fewer joints, fewer eddy-current loss points.',
+    tagline: 'Single-piece flat-sheet coil — zero welded joints, eliminated eddy-current loss points, increased fill factor.',
     img: '/images/aerostator/foil-coil.jpg',
+    status: 'In development now',
     patented: true,
-    patent: 'PCT/IB2025/060049',
     caption: 'Copper & aluminium foil-coil prototypes',
     specs: [
       { k: 'Made from', v: '1 flat sheet' },
@@ -122,10 +123,9 @@ const technologies: Tech[] = [
   },
   {
     title: 'Ceramic Coil Insulation',
-    tagline: 'Three-sided thermal path — Al₂O₃ / AlN plates that insulate electrically yet conduct heat.',
+    tagline: '3-sided heat transfer — ≥100× higher thermal conductivity vs polymer. Enables fully sealed IP65 construction.',
     img: '/images/aerostator/ceramic-insulation.jpg',
     patented: true,
-    patent: 'PCT/IB2025/058444',
     caption: 'Al₂O₃ ceramic insulation plates',
     specs: [
       { k: 'Plates per slot', v: '3' },
@@ -133,7 +133,7 @@ const technologies: Tech[] = [
       { k: 'Thickness', v: '0.1–0.5 mm' },
       { k: 'k (Al₂O₃)', v: '≥25 W/m·K' },
       { k: 'k (AlN)', v: '≥140 W/m·K' },
-      { k: 'vs polymer', v: '<1 W/m·K' },
+      { k: 'vs polymer', v: '<0.2 W/m·K' },
     ],
     why: 'Three-sided coupling (vs two-sided) insulates and conducts heat at once, enabling higher current density at a lower coil temperature.',
   },
@@ -230,15 +230,26 @@ export default function TechnologyPage() {
                 )}
 
                 <div className="md:w-3/5 p-8">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <div className="flex-shrink-0 w-9 h-9 bg-brand rounded-lg flex items-center justify-center text-white font-bold">
                       {i + 1}
                     </div>
                     <h3 className="text-xl font-bold text-text-primary">{tech.title}</h3>
+                    {tech.status && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-orange-50 text-brand px-2.5 py-1 rounded-full">
+                        {tech.status}
+                      </span>
+                    )}
                   </div>
                   {tech.caption && (
                     <p className="text-xs text-text-secondary mb-3">
-                      {tech.caption} · <span className="font-mono text-brand">{tech.patent}</span>
+                      {tech.caption}
+                      {tech.patent && (
+                        <>
+                          {' · '}
+                          <span className="font-mono text-brand">{tech.patent}</span>
+                        </>
+                      )}
                     </p>
                   )}
                   <p className="text-sm text-brand font-medium mb-5">{tech.tagline}</p>
