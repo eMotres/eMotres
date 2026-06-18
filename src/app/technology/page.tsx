@@ -86,7 +86,7 @@ const technologies: Tech[] = [
     ],
   },
   {
-    title: 'Manufacturing Simplicity',
+    title: 'Single Layer Winding',
     tagline: '2× fewer coils than standard designs — less winding time, lower cost, higher reliability.',
     img: '/images/tech-simplicity.png',
     points: [

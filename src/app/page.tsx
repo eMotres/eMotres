@@ -31,7 +31,7 @@ const technologies = [
     img: '/images/tech-wire.png',
   },
   {
-    label: 'Manufacturing Simplicity',
+    label: 'Single Layer Winding',
     desc: '2× fewer coils than standard designs — less winding time, lower production cost, higher reliability.',
     img: '/images/tech-simplicity.png',
   },
