@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const stats = [
   { value: '1.5×', label: 'Higher magnetic field vs radial' },
-  { value: '~70%', label: 'Copper fill factor vs 45% round wire' },
+  { value: '~75%', label: 'Copper fill factor vs 45% round wire' },
   { value: '15', label: 'N·m/kg specific torque density — proven' },
   { value: 'IP65', label: 'Optional fully-sealed construction' },
 ];
@@ -49,11 +49,11 @@ const technologies: Tech[] = [
   },
   {
     title: 'Rectangular Copper Wire',
-    tagline: '~70% slot fill factor vs ~45% for round wire — lower resistance, higher current density, less heat.',
+    tagline: '~75% slot fill factor vs ~45% for round wire — lower resistance, higher current density, less heat.',
     img: '/images/tech-wire.png',
     points: [
       {
-        h: '~70% fill factor vs ~45% round wire',
+        h: '~75% fill factor vs ~45% round wire',
         d: 'Rectangular (flat) wire fills the slot cross-section far more efficiently. More copper per slot means less resistance for the same winding geometry.',
       },
       {

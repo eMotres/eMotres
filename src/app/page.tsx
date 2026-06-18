@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const stats = [
   { value: '1.5×', label: 'Higher magnetic field vs radial construction' },
   { value: 'IP65', label: 'Fully sealed, dust & water proof' },
-  { value: '~70%', label: 'Copper fill factor vs 45% round wire' },
+  { value: '~75%', label: 'Copper fill factor vs 45% round wire' },
   { value: '15', label: 'N·m/kg specific torque — prototype proven' },
 ];
 
@@ -27,7 +27,7 @@ const technologies = [
   },
   {
     label: 'Rectangular Copper Wire',
-    desc: '~70% fill factor. Lower resistance, higher current density, less heat.',
+    desc: '~75% fill factor. Lower resistance, higher current density, less heat.',
     img: '/images/tech-wire.png',
   },
   {
