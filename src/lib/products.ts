@@ -42,6 +42,32 @@ export interface DynoTest {
   points: DynoPoint[];
 }
 
+export interface ComparisonRow {
+  label: string;
+  ours: string;
+  theirs: string;
+  win: 'ours' | 'theirs' | 'tie';
+}
+
+/** A point on a competitor's measured propeller curve (for overlay charts). */
+export interface ComparisonPoint {
+  thrust: number; // gram-force
+  current: number; // A
+  pElec: number; // electric power, W
+  sysEff: number; // system efficiency, gf/W
+  elecEff: number; // electrical efficiency, %
+}
+
+export interface MotorComparison {
+  competitor: string;
+  ourName: string;
+  intro: string;
+  highlights: { value: string; label: string }[];
+  rows: ComparisonRow[];
+  theirsPoints: ComparisonPoint[];
+  note: string;
+}
+
 export interface Product {
   slug: string;
   sku: string;
@@ -59,6 +85,7 @@ export interface Product {
   specs: { label: string; value: string }[];
   performanceSpecs?: PerformanceSpecs;
   dynoTest?: DynoTest;
+  comparison?: MotorComparison;
 }
 
 export const products: Product[] = [
@@ -137,6 +164,46 @@ export const products: Product[] = [
         { throttle: 90, rpm: 13990, voltage: 22.80, current: 54.00, thrust: 3976, torque: 0.639, temp: 35.6, pElec: 1231.2, pShaft: 936.2, elecEff: 76.0, sysEff: 3.23 },
         { throttle: 100, rpm: 14524, voltage: 22.66, current: 61.89, thrust: 4304, torque: 0.696, temp: 38.0, pElec: 1402.2, pShaft: 1058.6, elecEff: 75.5, sysEff: 3.07 },
       ],
+    },
+    comparison: {
+      ourName: 'CIANO14 40_12',
+      competitor: 'T-Motor V3115 KV900',
+      intro:
+        'Measured head-to-head against the commercial T-Motor V3115 KV900 on the same propeller (HQ1050-3) and the same 24 V bus — a fully matched comparison, so the advantage is the motor, not the propeller.',
+      highlights: [
+        { value: '+12–13 pp', label: 'Electrical efficiency at high thrust' },
+        { value: '−15 %', label: 'Current draw at equal thrust' },
+        { value: '−16 %', label: 'Electric power at equal thrust' },
+        { value: '+15–20 %', label: 'System efficiency → flight time' },
+      ],
+      rows: [
+        { label: 'Winding wire', ours: 'Rectangular (flat)', theirs: 'Round', win: 'ours' },
+        { label: 'Coil count', ours: '6 coils', theirs: '12 coils', win: 'ours' },
+        { label: 'Copper fill factor', ours: '~75 %', theirs: '~45 %', win: 'ours' },
+        { label: 'Line-to-line resistance', ours: '19.1 mΩ', theirs: '~76 mΩ', win: 'ours' },
+        { label: 'R·KV² (copper quality, ↓ better)', ours: '14,097', theirs: '~61,560', win: 'ours' },
+        { label: 'KV', ours: '858 rpm/V', theirs: '900 rpm/V', win: 'tie' },
+        { label: 'Weight', ours: '125 g', theirs: '115 g', win: 'theirs' },
+        { label: 'Peak electrical efficiency', ours: '76.9 %', theirs: '~71 %', win: 'ours' },
+        { label: 'Efficiency at high thrust', ours: '76.0 %', theirs: '62–64 %', win: 'ours' },
+        { label: 'Current at ~4,300 g thrust', ours: '61.9 A', theirs: '~72 A', win: 'ours' },
+        { label: 'Electric power at ~4,300 g thrust', ours: '1,402 W', theirs: '~1,662 W', win: 'ours' },
+        { label: 'Max thrust (HQ1050-3, 24 V)', ours: '4,304 g', theirs: '4,605 g', win: 'theirs' },
+      ],
+      theirsPoints: [
+        { thrust: 28, current: 0.49, pElec: 12, sysEff: 2.4, elecEff: 33.2 },
+        { thrust: 282, current: 1.86, pElec: 45, sysEff: 6.3, elecEff: 55.0 },
+        { thrust: 619, current: 4.35, pElec: 104, sysEff: 5.9, elecEff: 65.9 },
+        { thrust: 1106, current: 9.22, pElec: 220, sysEff: 5.0, elecEff: 67.1 },
+        { thrust: 1663, current: 15.23, pElec: 363, sysEff: 4.6, elecEff: 71.0 },
+        { thrust: 2192, current: 24.2, pElec: 582, sysEff: 3.8, elecEff: 66.0 },
+        { thrust: 2907, current: 35.77, pElec: 840, sysEff: 3.5, elecEff: 70.0 },
+        { thrust: 3439, current: 50.80, pElec: 1182, sysEff: 2.9, elecEff: 63.4 },
+        { thrust: 4107, current: 65.69, pElec: 1514, sysEff: 2.7, elecEff: 64.6 },
+        { thrust: 4605, current: 82.99, pElec: 1889, sysEff: 2.4, elecEff: 62.3 },
+      ],
+      note:
+        'T-Motor figures are manufacturer thrust-test data; its electrical efficiency is computed from the published voltage, current, RPM and torque. The two propellers were verified aerodynamically identical (±1 %), so the efficiency advantage comes from the flat-wire winding’s higher copper fill factor and lower resistance. The T-Motor reaches ~7 % higher peak thrust by drawing more current; running cooler with current headroom, the CIANO is expected to close that on a larger or higher-pitch propeller. R·KV² is the normalized copper-quality metric (lower = better).',
     },
   },
   {

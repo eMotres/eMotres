@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { products, getProductBySlug, PerformanceSpecs } from '@/lib/products';
 import DynoTestResults from '@/components/DynoTestResults';
+import MotorComparisonSection from '@/components/MotorComparison';
 import { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -193,6 +194,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
         {/* Test results — motors with dynamometer data only */}
         {product.dynoTest && <DynoTestResults test={product.dynoTest} />}
+
+        {/* Head-to-head comparison — motors with comparison data only */}
+        {product.comparison && (
+          <MotorComparisonSection data={product.comparison} oursPoints={product.dynoTest?.points ?? []} />
+        )}
 
         {/* Related products */}
         <div>
