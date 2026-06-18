@@ -1,21 +1,32 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { Plane, Car, Bot, Anchor } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'AeroStator Core™ — Patented Motor Technology',
   description:
-    'AeroStator Core™ combines tangential magnet polarization, rectangular copper wire, shortest-path cooling and a simplified winding into the highest torque-density electric motor available. Patented foil-coil and ceramic-insulation innovations, IP65 sealing, and a multi-jurisdiction patent portfolio.',
+    'AeroStator Core™ combines tangential magnet polarization, rectangular copper wire, shortest-path cooling, a simplified winding, single-piece foil coils and ceramic insulation into the highest torque-density electric motor available — plus IP65 sealing and a multi-jurisdiction patent portfolio.',
 };
 
 const stats = [
   { value: '1.5×', label: 'Higher magnetic field vs radial' },
   { value: '~70%', label: 'Copper fill factor vs 45% round wire' },
-  { value: '14.9', label: 'N·m/kg specific torque — proven' },
+  { value: '15', label: 'N·m/kg specific torque density — proven' },
   { value: 'IP65', label: 'Optional fully-sealed construction' },
 ];
 
-const coreTech = [
+type Tech = {
+  title: string;
+  tagline: string;
+  img: string;
+  points?: { h: string; d: string }[];
+  patented?: boolean;
+  patent?: string;
+  caption?: string;
+  specs?: { k: string; v: string }[];
+  why?: string;
+};
+
+const technologies: Tech[] = [
   {
     title: 'Tangential Magnet Polarization',
     tagline: 'Flux concentration beyond standard Halbach arrays — no adhesive, easy re-magnetization.',
@@ -92,6 +103,40 @@ const coreTech = [
       },
     ],
   },
+  {
+    title: 'Foil Coil Technology',
+    tagline: 'Single-piece flat-wire coil — fewer joints, fewer eddy-current loss points.',
+    img: '/images/aerostator/foil-coil.jpg',
+    patented: true,
+    patent: 'PCT/IB2025/060049',
+    caption: 'Copper & aluminium foil-coil prototypes',
+    specs: [
+      { k: 'Made from', v: '1 flat sheet' },
+      { k: 'Welded joints', v: 'Zero' },
+      { k: 'Cut variants', v: '2 types' },
+      { k: 'Process', v: '3 steps' },
+      { k: 'Tooling', v: 'Standard' },
+      { k: 'Eddy sources', v: 'Eliminated' },
+    ],
+    why: 'No welds means fewer eddy-current loss points, and standard cut-and-bend tooling makes the coil mass-production ready.',
+  },
+  {
+    title: 'Ceramic Coil Insulation',
+    tagline: 'Three-sided thermal path — Al₂O₃ / AlN plates that insulate electrically yet conduct heat.',
+    img: '/images/aerostator/ceramic-insulation.jpg',
+    patented: true,
+    patent: 'PCT/IB2025/058444',
+    caption: 'Al₂O₃ ceramic insulation plates',
+    specs: [
+      { k: 'Plates per slot', v: '3' },
+      { k: 'Material', v: 'Al₂O₃ / AlN' },
+      { k: 'Thickness', v: '0.1–0.5 mm' },
+      { k: 'k (Al₂O₃)', v: '≥25 W/m·K' },
+      { k: 'k (AlN)', v: '≥140 W/m·K' },
+      { k: 'vs polymer', v: '<1 W/m·K' },
+    ],
+    why: 'Three-sided coupling (vs two-sided) insulates and conducts heat at once, enabling higher current density at a lower coil temperature.',
+  },
 ];
 
 const cooling = {
@@ -110,68 +155,6 @@ const cooling = {
     'Compatible with water-glycol or oil circuits',
   ],
 };
-
-const patented = [
-  {
-    title: 'Foil Coil Technology',
-    patent: 'PCT/IB2025/060049',
-    tagline: 'Single-piece flat-wire coil — fewer joints, fewer eddy-current loss points.',
-    img: '/images/aerostator/foil-coil.jpg',
-    caption: 'Copper & aluminium foil-coil prototypes',
-    specs: [
-      { k: 'Made from', v: '1 flat sheet' },
-      { k: 'Welded joints', v: 'Zero' },
-      { k: 'Cut variants', v: '2 types' },
-      { k: 'Process', v: '3 steps' },
-      { k: 'Tooling', v: 'Standard' },
-      { k: 'Eddy sources', v: 'Eliminated' },
-    ],
-    why: 'No welds means fewer eddy-current loss points, and standard cut-and-bend tooling makes the coil mass-production ready.',
-  },
-  {
-    title: 'Ceramic Coil Insulation',
-    patent: 'PCT/IB2025/058444',
-    tagline: 'Three-sided thermal path — Al₂O₃ / AlN plates that insulate electrically yet conduct heat.',
-    img: '/images/aerostator/ceramic-insulation.jpg',
-    caption: 'Al₂O₃ ceramic insulation plates',
-    specs: [
-      { k: 'Plates per slot', v: '3' },
-      { k: 'Material', v: 'Al₂O₃ / AlN' },
-      { k: 'Thickness', v: '0.1–0.5 mm' },
-      { k: 'k (Al₂O₃)', v: '≥25 W/m·K' },
-      { k: 'k (AlN)', v: '≥140 W/m·K' },
-      { k: 'vs polymer', v: '<1 W/m·K' },
-    ],
-    why: 'Three-sided coupling (vs two-sided) insulates and conducts heat at once, enabling higher current density at a lower coil temperature.',
-  },
-];
-
-const applications = [
-  {
-    Icon: Plane,
-    title: 'UAV & Drones',
-    sub: 'FPV · Heavy-lift · Military',
-    desc: 'From the compact 40_12 (1.4 kW / 125 g) to heavy-lift 150_30 (12 kW / 3 kg). CIANO 40_12 is a direct replacement for the 3115 class — the most widely used motor in military FPV and commercial multirotor platforms.',
-  },
-  {
-    Icon: Car,
-    title: 'Electric Vehicles',
-    sub: 'Traction · Hub motors · Powertrains',
-    desc: 'High torque density and reduced rare-earth content make CIANO motors well suited to EV traction drives and in-wheel hub motors, where mass, efficiency and continuous thermal performance set vehicle range.',
-  },
-  {
-    Icon: Bot,
-    title: 'Robotics & Actuators',
-    sub: 'Joints · Actuators · Servo drives',
-    desc: 'High torque density and compact geometry make CIANO motors ideal for robotic joints and actuators. The inrunner topology integrates cleanly with planetary or direct-drive transmissions.',
-  },
-  {
-    Icon: Anchor,
-    title: 'Marine',
-    sub: 'Thrusters · Winches · Pumps',
-    desc: 'IP65 sealed construction and corrosion-resistant materials make CIANO motors ready for continuous marine operation. Liquid-cooled variants handle extended duty cycles in saltwater environments.',
-  },
-];
 
 const patents = {
   granted: [
@@ -204,7 +187,7 @@ export default function TechnologyPage() {
             Patented Motor Technology
           </h1>
           <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            Four patented technologies in one stator architecture — the highest torque-density electric motor
+            Six patented technologies in one stator architecture — the highest torque-density electric motor
             available, built for drones, UAVs, aviation, EVs and robotics.
           </p>
         </div>
@@ -224,37 +207,69 @@ export default function TechnologyPage() {
         </div>
       </section>
 
-      {/* Core technologies */}
+      {/* Technologies */}
       <section className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold text-text-primary mb-3">Four technologies, one stator</h2>
+          <h2 className="text-3xl font-extrabold text-text-primary mb-3">Six technologies, one stator</h2>
           <p className="text-text-secondary mb-12 max-w-2xl">
-            Every eMotres motor integrates the same four innovations that work together to push torque density
-            beyond what conventional designs can achieve.
+            Every eMotres motor integrates the same six innovations — four production-proven, plus two patented
+            firsts at the coil — that together push torque density beyond what conventional designs can achieve.
           </p>
 
           <div className="space-y-8">
-            {coreTech.map((tech, i) => (
+            {technologies.map((tech, i) => (
               <div key={tech.title} className="bg-surface-secondary rounded-2xl border border-border overflow-hidden md:flex">
-                <div className="md:w-2/5 bg-surface-tertiary flex items-center justify-center p-8">
-                  <img src={tech.img} alt={tech.title} className="max-h-56 w-full object-contain mix-blend-multiply" />
-                </div>
+                {tech.patented ? (
+                  <div className="md:w-2/5 relative min-h-56">
+                    <img src={tech.img} alt={tech.caption ?? tech.title} className="w-full h-64 md:h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="md:w-2/5 bg-surface-tertiary flex items-center justify-center p-8">
+                    <img src={tech.img} alt={tech.title} className="max-h-56 w-full object-contain mix-blend-multiply" />
+                  </div>
+                )}
+
                 <div className="md:w-3/5 p-8">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-3 mb-2">
                     <div className="flex-shrink-0 w-9 h-9 bg-brand rounded-lg flex items-center justify-center text-white font-bold">
                       {i + 1}
                     </div>
                     <h3 className="text-xl font-bold text-text-primary">{tech.title}</h3>
                   </div>
+                  {tech.caption && (
+                    <p className="text-xs text-text-secondary mb-3">
+                      {tech.caption} · <span className="font-mono text-brand">{tech.patent}</span>
+                    </p>
+                  )}
                   <p className="text-sm text-brand font-medium mb-5">{tech.tagline}</p>
-                  <div className="space-y-4">
-                    {tech.points.map((p) => (
-                      <div key={p.h}>
-                        <div className="text-sm font-semibold text-text-primary">{p.h}</div>
-                        <div className="text-sm text-text-secondary leading-relaxed">{p.d}</div>
+
+                  {tech.points && (
+                    <div className="space-y-4">
+                      {tech.points.map((p) => (
+                        <div key={p.h}>
+                          <div className="text-sm font-semibold text-text-primary">{p.h}</div>
+                          <div className="text-sm text-text-secondary leading-relaxed">{p.d}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {tech.specs && (
+                    <>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+                        {tech.specs.map((s) => (
+                          <div key={s.k} className="bg-surface-primary rounded-lg border border-border px-3 py-2">
+                            <div className="text-xs text-text-secondary">{s.k}</div>
+                            <div className="text-sm font-bold text-text-primary">{s.v}</div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                      <p className="text-sm text-text-secondary leading-relaxed">
+                        <span className="font-semibold text-text-primary">Why it matters: </span>
+                        {tech.why}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
@@ -301,75 +316,6 @@ export default function TechnologyPage() {
             <span className="font-semibold text-text-primary">IP65:</span> complete protection against dust ingress
             and low-pressure water jets from any direction — available as a factory option on all CIANO motors.
           </p>
-        </div>
-      </section>
-
-      {/* Patented innovations */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-5xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand">Patented innovations</span>
-          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-12">Engineered down to the coil</h2>
-
-          <div className="space-y-8">
-            {patented.map((p) => (
-              <div key={p.title} className="bg-surface-secondary rounded-2xl border border-border overflow-hidden md:flex">
-                <div className="md:w-2/5 relative">
-                  <img src={p.img} alt={p.caption} className="w-full h-64 md:h-full object-cover" />
-                  <span className="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-wider bg-brand text-white px-2.5 py-1 rounded-full">
-                    Patented
-                  </span>
-                </div>
-                <div className="md:w-3/5 p-8">
-                  <h3 className="text-xl font-bold text-text-primary">{p.title}</h3>
-                  <p className="text-xs text-text-secondary mb-1">{p.caption}</p>
-                  <p className="text-xs font-mono text-brand mb-4">{p.patent}</p>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-5">{p.tagline}</p>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-                    {p.specs.map((s) => (
-                      <div key={s.k} className="bg-surface-primary rounded-lg border border-border px-3 py-2">
-                        <div className="text-xs text-text-secondary">{s.k}</div>
-                        <div className="text-sm font-bold text-text-primary">{s.v}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <p className="text-sm text-text-secondary leading-relaxed">
-                    <span className="font-semibold text-text-primary">Why it matters: </span>
-                    {p.why}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Applications */}
-      <section className="bg-surface-secondary border-y border-border px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-5xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand">Applications</span>
-          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-3">Engineered for demanding environments</h2>
-          <p className="text-text-secondary mb-10 max-w-2xl">
-            AeroStator Core™ scales from 40 mm compact UAV motors to 200+ mm aviation powertrains.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-6">
-            {applications.map(({ Icon, title, sub, desc }) => (
-              <div key={title} className="bg-surface-primary rounded-2xl border border-border p-7">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-brand" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-text-primary">{title}</h3>
-                    <div className="text-xs text-brand font-medium">{sub}</div>
-                  </div>
-                </div>
-                <p className="text-sm text-text-secondary leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
