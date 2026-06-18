@@ -3,8 +3,14 @@ import DynoChart from '@/components/DynoChart';
 
 export default function DynoTestResults({ test }: { test: DynoTest }) {
   const peakEff = Math.max(...test.points.map((p) => p.elecEff));
+  const hasThrottle = test.points.some((p) => p.throttle != null);
+  const maxTorque = Math.max(...test.points.map((p) => p.torque));
+  const torqueDec = maxTorque >= 10 ? 1 : 3; // table
+  const torqueYDec = maxTorque >= 10 ? 0 : 1; // chart axis
+  const torqueTipDec = maxTorque >= 10 ? 1 : 3; // chart tooltip
+
   const cols = [
-    'Throttle',
+    ...(hasThrottle ? ['Throttle'] : []),
     'RPM',
     'V',
     'A',
@@ -26,9 +32,7 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
       </div>
 
       <p className="text-sm text-text-secondary mb-6 max-w-3xl">
-        First propeller-dynamometer sweep of the flat-wire (hairpin) winding, measured on a {test.conditions}{' '}
-        ({test.date}). Electrical efficiency holds a 75–77 % plateau to the top of the range while the winding
-        stays cool. Hover any chart to read the values at each point.
+        {test.intro} Hover any chart to read the values at each point.
       </p>
 
       {/* Highlights */}
@@ -46,7 +50,7 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <DynoChart points={test.points} xKey="rpm" yKey="elecEff" title="Electrical efficiency (%)" xUnit="rpm" yUnit="%" xAxis="rpm" yDecimals={0} tipDecimals={1} />
         <DynoChart points={test.points} xKey="thrust" yKey="sysEff" title="System efficiency (gf/W)" xUnit="g" yUnit="gf/W" xAxis="int" yDecimals={0} tipDecimals={2} />
-        <DynoChart points={test.points} xKey="rpm" yKey="torque" title="Shaft torque (N·m)" xUnit="rpm" yUnit="N·m" xAxis="rpm" yDecimals={1} tipDecimals={3} />
+        <DynoChart points={test.points} xKey="rpm" yKey="torque" title="Shaft torque (N·m)" xUnit="rpm" yUnit="N·m" xAxis="rpm" yDecimals={torqueYDec} tipDecimals={torqueTipDec} />
         <DynoChart points={test.points} xKey="rpm" yKey="pElec" title="Electric power (W)" xUnit="rpm" yUnit="W" xAxis="rpm" yDecimals={0} tipDecimals={1} />
       </div>
 
@@ -67,13 +71,15 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
               {test.points.map((p, i) => {
                 const peak = p.elecEff === peakEff;
                 return (
-                  <tr key={p.throttle} className={peak ? 'bg-brand/10' : i % 2 ? 'bg-surface-secondary' : 'bg-surface-primary'}>
-                    <td className="px-3 py-2 text-left font-semibold text-text-primary">{p.throttle}%</td>
-                    <td className="px-3 py-2 text-right text-text-primary">{p.rpm.toLocaleString('en-US')}</td>
+                  <tr key={i} className={peak ? 'bg-brand/10' : i % 2 ? 'bg-surface-secondary' : 'bg-surface-primary'}>
+                    {hasThrottle && (
+                      <td className="px-3 py-2 text-left font-semibold text-text-primary">{p.throttle}%</td>
+                    )}
+                    <td className="px-3 py-2 text-right text-text-primary first:text-left first:font-semibold">{p.rpm.toLocaleString('en-US')}</td>
                     <td className="px-3 py-2 text-right text-text-secondary">{p.voltage.toFixed(2)}</td>
                     <td className="px-3 py-2 text-right text-text-secondary">{p.current.toFixed(2)}</td>
                     <td className="px-3 py-2 text-right text-text-primary">{p.thrust.toLocaleString('en-US')}</td>
-                    <td className="px-3 py-2 text-right text-text-primary">{p.torque.toFixed(3)}</td>
+                    <td className="px-3 py-2 text-right text-text-primary">{p.torque.toFixed(torqueDec)}</td>
                     <td className="px-3 py-2 text-right text-text-secondary">{p.temp.toFixed(1)}</td>
                     <td className="px-3 py-2 text-right text-text-primary">{p.pElec.toFixed(1)}</td>
                     <td className="px-3 py-2 text-right text-text-secondary">{p.pShaft.toFixed(1)}</td>
@@ -89,8 +95,8 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
 
       <p className="text-xs text-text-secondary mt-3 max-w-3xl">
         Electrical efficiency = shaft power / electric power. System efficiency = thrust / electric power. Peak
-        electrical-efficiency point highlighted. Temperatures are from an automatic ramp (transient, not
-        steady-state). Setup: {test.setup.map((s) => `${s.label} ${s.value}`).join(' · ')}.
+        electrical-efficiency point highlighted.{test.note ? ` ${test.note}` : ''} Setup:{' '}
+        {test.setup.map((s) => `${s.label} ${s.value}`).join(' · ')}.
       </p>
     </section>
   );

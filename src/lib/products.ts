@@ -19,7 +19,7 @@ export interface PerformanceSpecs {
 
 /** One operating point from a propeller-dynamometer sweep. */
 export interface DynoPoint {
-  throttle: number; // %
+  throttle?: number; // % (optional — some sweeps are stepped by power/RPM, not throttle)
   rpm: number;
   voltage: number; // V
   current: number; // A
@@ -33,8 +33,10 @@ export interface DynoPoint {
 }
 
 export interface DynoTest {
-  conditions: string;
-  date: string;
+  intro: string;
+  conditions?: string;
+  date?: string;
+  note?: string;
   setup: { label: string; value: string }[];
   highlights: { label: string; value: string; sub?: string }[];
   points: DynoPoint[];
@@ -106,8 +108,10 @@ export const products: Product[] = [
       },
     },
     dynoTest: {
+      intro: 'First propeller-dynamometer sweep of the CIANO14 40_12 flat-wire winding on an HQ1050-class propeller at 24 V (2026-06-16) — electrical efficiency holds a 75–77 % plateau to the top of the range while the winding stays cool.',
       conditions: 'HQ1050-class propeller · 24 V bus · ambient 31.3 °C',
       date: '2026-06-16',
+      note: 'Temperatures are from an automatic ramp (transient, not steady-state).',
       setup: [
         { label: 'Test bench', value: 'LY-10KGF dynamometer' },
         { label: 'Propeller', value: '1050 (HQ1050 class)' },
@@ -176,6 +180,33 @@ export const products: Product[] = [
         speed: '2,400 rpm',
         current: '192 A',
       },
+    },
+    dynoTest: {
+      intro: 'Propeller-dynamometer sweep of the CIANO28 150_30 on a 56″ propeller — sustaining ~49 kg of continuous thrust at 8.1 kW, with the motor peaking near 92 % efficiency.',
+      conditions: '56″ propeller · high-voltage bus · ambient 26 °C',
+      note: 'Electrical efficiency in the table is electric → shaft (drive, includes the controller); the motor alone peaks at 92.3 %. The continuous point (≈49 kg @ 8.1 kW) was measured at 74.9 V.',
+      setup: [
+        { label: 'Propeller', value: '56″' },
+        { label: 'Bus voltage', value: '~70 V sweep / 74.9 V continuous' },
+        { label: 'Ambient', value: '26 °C / 56 % RH' },
+        { label: 'Motor weight', value: '3.0 kg' },
+      ],
+      highlights: [
+        { label: 'Continuous thrust', value: '48.8 kg', sub: '8.1 kW · 2,293 rpm · 90.3 % motor η' },
+        { label: 'Peak thrust', value: '67.2 kg', sub: '14.4 kW · 2,700 rpm' },
+        { label: 'Peak motor efficiency', value: '92.3 %', sub: 'electric → shaft 86.6 %' },
+      ],
+      points: [
+        { rpm: 1200, voltage: 70.2, current: 19.09, thrust: 12604, torque: 8.54, temp: 25.5, pElec: 1340.1, pShaft: 1073.2, elecEff: 80.1, sysEff: 9.40 },
+        { rpm: 1470, voltage: 70.1, current: 34.40, thrust: 19474, torque: 13.18, temp: 27.0, pElec: 2411.4, pShaft: 2028.9, elecEff: 84.1, sysEff: 8.10 },
+        { rpm: 1680, voltage: 69.8, current: 49.59, thrust: 25824, torque: 16.68, temp: 29.3, pElec: 3461.4, pShaft: 2934.5, elecEff: 84.8, sysEff: 7.50 },
+        { rpm: 1860, voltage: 69.7, current: 67.74, thrust: 33150, torque: 20.71, temp: 33.0, pElec: 4721.5, pShaft: 4033.9, elecEff: 85.4, sysEff: 7.00 },
+        { rpm: 2010, voltage: 69.5, current: 87.27, thrust: 39189, torque: 24.96, temp: 37.5, pElec: 6065.3, pShaft: 5253.7, elecEff: 86.6, sysEff: 6.50 },
+        { rpm: 2220, voltage: 68.7, current: 115.93, thrust: 45660, torque: 29.49, temp: 41.4, pElec: 7964.4, pShaft: 6855.8, elecEff: 86.1, sysEff: 5.70 },
+        { rpm: 2400, voltage: 68.4, current: 150.24, thrust: 54736, torque: 35.10, temp: 47.8, pElec: 10276.4, pShaft: 8821.6, elecEff: 85.8, sysEff: 5.30 },
+        { rpm: 2640, voltage: 67.4, current: 208.72, thrust: 66254, torque: 42.84, temp: 56.4, pElec: 14067.7, pShaft: 11843.6, elecEff: 84.2, sysEff: 4.70 },
+        { rpm: 2700, voltage: 68.3, current: 210.91, thrust: 67174, torque: 43.43, temp: 57.1, pElec: 14405.2, pShaft: 12279.5, elecEff: 85.2, sysEff: 4.70 },
+      ],
     },
   },
   {

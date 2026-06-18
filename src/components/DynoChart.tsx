@@ -9,7 +9,7 @@ const TXT = 'var(--color-text-secondary)';
 const SURFACE = 'var(--color-surface-primary)';
 
 type NumKey = {
-  [K in keyof DynoPoint]: DynoPoint[K] extends number ? K : never;
+  [K in keyof DynoPoint]-?: DynoPoint[K] extends number ? K : never;
 }[keyof DynoPoint];
 
 /** Round an axis maximum up to a clean value. */
@@ -89,7 +89,11 @@ export default function DynoChart({
   let tip: { x: number; y: number; w: number; h: number; lines: string[] } | null = null;
   if (hover !== null) {
     const p = points[hover];
-    const lines = [`${p.throttle}% throttle`, `${fmtFull(p[xKey])} ${xUnit}`, `${p[yKey].toFixed(tipDecimals)} ${yUnit}`];
+    const lines = [
+      ...(p.throttle != null ? [`${p.throttle}% throttle`] : []),
+      `${fmtFull(p[xKey])} ${xUnit}`,
+      `${p[yKey].toFixed(tipDecimals)} ${yUnit}`,
+    ];
     const w = Math.max(...lines.map((l) => l.length)) * 5.1 + 16;
     const h = 14 + lines.length * 12;
     const px = sx(p[xKey]);
@@ -179,18 +183,21 @@ export default function DynoChart({
         {tip && (
           <g pointerEvents="none">
             <rect x={tip.x} y={tip.y} width={tip.w} height={tip.h} rx="6" fill={SURFACE} stroke={GRID} strokeWidth="1" />
-            {tip.lines.map((l, i) => (
-              <text
-                key={i}
-                x={tip!.x + 8}
-                y={tip!.y + 15 + i * 12}
-                fontSize="9"
-                fontWeight={i === 2 ? 700 : 400}
-                fill={i === 2 ? BRAND : TXT}
-              >
-                {l}
-              </text>
-            ))}
+            {tip.lines.map((l, i) => {
+              const isValue = i === tip!.lines.length - 1;
+              return (
+                <text
+                  key={i}
+                  x={tip!.x + 8}
+                  y={tip!.y + 15 + i * 12}
+                  fontSize="9"
+                  fontWeight={isValue ? 700 : 400}
+                  fill={isValue ? BRAND : TXT}
+                >
+                  {l}
+                </text>
+              );
+            })}
           </g>
         )}
 
