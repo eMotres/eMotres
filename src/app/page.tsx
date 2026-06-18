@@ -11,7 +11,7 @@ const stats = [
   { value: '1.5×', label: 'Higher magnetic field vs radial construction' },
   { value: 'IP65', label: 'Fully sealed, dust & water proof' },
   { value: '~70%', label: 'Copper fill factor vs 45% round wire' },
-  { value: '14.9', label: 'N·m/kg specific torque — prototype proven' },
+  { value: '15', label: 'N·m/kg specific torque — prototype proven' },
 ];
 
 const technologies = [

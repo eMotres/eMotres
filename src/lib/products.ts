@@ -172,7 +172,7 @@ export const products: Product[] = [
         torque: '29 Nm',
         speed: '2,293 rpm',
         current: '108 A',
-        efficiency: '85.8%',
+        efficiency: '90.3%',
         thrust: '48.8 kg',
       },
       peak: {
@@ -180,7 +180,7 @@ export const products: Product[] = [
         torque: '43.4 Nm',
         speed: '2,700 rpm',
         current: '211 A',
-        efficiency: '85.2%',
+        efficiency: '92.3%',
         thrust: '67.2 kg',
       },
     },
