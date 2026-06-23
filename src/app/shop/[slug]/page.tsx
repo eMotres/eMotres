@@ -36,7 +36,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           ? [{ label: 'Thrust', cont: ps.continuous.thrust, peak: ps.peak.thrust }]
           : []),
         { label: 'Speed', cont: ps.continuous.speed, peak: ps.peak.speed },
-        { label: 'Phase Current (RMS)', cont: ps.continuous.current, peak: ps.peak.current },
+        { label: 'DC current', cont: ps.continuous.current, peak: ps.peak.current },
         { label: 'Efficiency', cont: ps.continuous.efficiency, peak: ps.peak.efficiency ?? '—' },
       ]
     : [];
