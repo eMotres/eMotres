@@ -118,12 +118,12 @@ export const products: Product[] = [
     ],
     performanceSpecs: {
       continuous: {
-        power: '800 W',
-        torque: '0.48 Nm',
-        speed: '12,234 rpm',
-        current: '35 A',
-        efficiency: '76.5%',
-        thrust: '2,980 g',
+        power: '1,038 W',
+        torque: '0.56 Nm',
+        speed: '13,081 rpm',
+        current: '44 A',
+        efficiency: '74.2%',
+        thrust: '3,455 g',
       },
       peak: {
         power: '1,402 W',
