@@ -187,7 +187,7 @@ export default function TechnologyPage() {
             Patented Motor Technology
           </h1>
           <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            Six patented technologies in one stator architecture — the highest torque-density electric motor
+            Six patented technologies in one motor architecture — the highest torque-density electric motor
             available, built for drones, UAVs, aviation, EVs and robotics.
           </p>
         </div>

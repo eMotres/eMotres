@@ -121,7 +121,7 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-8">
-              Four patented technologies in one stator architecture.
+              Four patented technologies in one motor architecture.
               The highest torque density electric motor available on the market — built for drones, UAVs, aviation and robotics.
             </p>
 
