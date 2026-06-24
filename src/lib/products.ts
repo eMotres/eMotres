@@ -73,6 +73,9 @@ export interface Product {
   sku: string;
   title: string;
   price: string;
+  priceBadge?: string;
+  priceNote?: string;
+  priceComingSoon?: string;
   imageUrl: string;
   category: 'Air-cooled' | 'Liquid-cooled';
   technology: 'AeroStator Core' | 'Classic';
@@ -93,12 +96,15 @@ export const products: Product[] = [
     slug: 'ciano-40-12',
     sku: 'CIANO14 40_12',
     title: 'CIANO14 40_12 — Compact High-Torque Motor',
-    price: '€100.00',
+    price: '€300',
+    priceBadge: 'Engineering sample',
+    priceNote: 'Hand-built and individually bench-tested.',
+    priceComingSoon: 'Series price €60 — coming soon at production volume.',
     imageUrl: '/ciano14-40-12.png',
     category: 'Air-cooled',
     technology: 'AeroStator Core',
     power: '4 kW',
-    status: 'Made to order (~2 months)',
+    status: 'Engineering samples — made to order (~2 months)',
     description: 'The CIANO14 40_12 is a compact precision motor built on the AeroStator Core platform. Tangential magnet polarization delivers exceptional torque density in a minimal footprint — ideal for racing UAVs and precision aerial systems.',
     applications: 'Racing drones, precision UAVs, light aerial robotics. Compatible with 18″–24″ propellers.',
     kvOptions: ['KV 850'],

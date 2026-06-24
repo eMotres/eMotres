@@ -39,6 +39,7 @@ const ShopPage = () => {
                   imageUrl={product.imageUrl}
                   title={product.title}
                   price={product.price}
+                  priceTag={product.priceBadge ? 'sample' : undefined}
                   productUrl={`/shop/${product.slug}`}
                 />
               ))}
@@ -65,6 +66,7 @@ const ShopPage = () => {
                   imageUrl={product.imageUrl}
                   title={product.title}
                   price={product.price}
+                  priceTag={product.priceBadge ? 'sample' : undefined}
                   productUrl={`/shop/${product.slug}`}
                 />
               ))}

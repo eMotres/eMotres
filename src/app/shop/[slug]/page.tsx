@@ -83,12 +83,34 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               {product.title}
             </h1>
 
-            <p className="text-3xl font-bold text-brand mb-4">{product.price}</p>
+            <div className="mb-6">
+              <div className="flex items-center gap-3 flex-wrap">
+                <p className="text-3xl font-bold text-brand">{product.price}</p>
+                {product.priceBadge && (
+                  <span className="text-xs font-semibold uppercase tracking-wide text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">
+                    {product.priceBadge}
+                  </span>
+                )}
+              </div>
 
-            {/* Stock status */}
-            <div className="flex items-center gap-2 mb-6">
-              <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block"></span>
-              <span className="text-sm text-text-secondary">{product.status}</span>
+              {product.priceNote && (
+                <p className="text-sm text-text-secondary mt-2">{product.priceNote}</p>
+              )}
+
+              {product.priceComingSoon && (
+                <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-brand bg-orange-50 border border-orange-100 rounded-lg px-3 py-2">
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {product.priceComingSoon}
+                </p>
+              )}
+
+              {/* Stock status */}
+              <div className="flex items-center gap-2 mt-4">
+                <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block"></span>
+                <span className="text-sm text-text-secondary">{product.status}</span>
+              </div>
             </div>
 
             <p className="text-text-secondary leading-relaxed mb-8">{product.description}</p>

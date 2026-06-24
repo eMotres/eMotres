@@ -38,7 +38,19 @@ const technologies = [
 ];
 
 
-const cianoMotors = [
+const cianoMotors: {
+  slug: string;
+  name: string;
+  tagline: string;
+  power: string;
+  torque: string;
+  weight: string;
+  voltage: string;
+  protection: string;
+  price: string;
+  imageUrl: string;
+  priceTag?: string;
+}[] = [
   {
     slug: 'ciano-40-12',
     name: 'CIANO14 40_12',
@@ -48,7 +60,8 @@ const cianoMotors = [
     weight: '0.125 kg',
     voltage: '15–25 V',
     protection: 'Open frame',
-    price: '€100',
+    price: '€300',
+    priceTag: 'sample',
     imageUrl: '/ciano14-40-12.png',
   },
   {
@@ -207,7 +220,14 @@ export default function Home() {
                   </div>
 
                   <div className="mt-5 flex items-center justify-between">
-                    <span className="text-lg font-extrabold text-text-primary">{motor.price}</span>
+                    <span className="flex items-baseline gap-2">
+                      <span className="text-lg font-extrabold text-text-primary">{motor.price}</span>
+                      {motor.priceTag && (
+                        <span className="text-[10px] font-semibold uppercase tracking-wide text-amber-800 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">
+                          {motor.priceTag}
+                        </span>
+                      )}
+                    </span>
                     <div className="flex items-center gap-1 text-sm font-semibold text-brand group-hover:gap-2 transition-all">
                       View specifications
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
