@@ -9,6 +9,8 @@ export const metadata: Metadata = {
 type NewsItem = {
   date: string;
   title: string;
+  image?: string;
+  video?: boolean;
   intro: string[];
   metrics?: { k: string; v: string }[];
   outro?: string[];
@@ -20,6 +22,8 @@ const news: NewsItem[] = [
   {
     date: 'June 23, 2026',
     title: '6 kW/kg continuous — the CIANO14 40_12 runs 30 minutes straight',
+    image: '/images/news/news-jun23-continuous.jpg',
+    video: true,
     intro: [
       'We ran the CIANO14 40_12 on a propeller test stand for 30 minutes straight — roughly double the sustained power of any 3115-class motor on the market. Here’s what the stand logged at minute 29 (125 g motor):',
     ],
@@ -39,6 +43,8 @@ const news: NewsItem[] = [
   {
     date: 'June 16, 2026',
     title: 'An inrunner that beats the class-leading outrunner',
+    image: '/images/news/news-jun16-vs-tmotor.jpg',
+    video: true,
     intro: [
       'First bench tests of the CIANO14 40_12, built on AeroStator Core™, challenge a basic assumption in this class. Conventional wisdom says outrunners own drone propulsion on efficiency and thrust density — our first data says otherwise.',
       'Benchmarked on the same propeller and the same 24 V against the class-leading T-Motor V3115 outrunner:',
@@ -56,6 +62,7 @@ const news: NewsItem[] = [
   {
     date: 'May 7, 2026',
     title: 'First test results — the 150_30 reaches 50 kg continuous thrust',
+    image: '/images/news/news-may-150-30.jpg',
     intro: [
       'The first drone-propulsion motor built on AeroStator Core™ completed its initial bench tests on a thrust stand. At 50 kg continuous thrust (56″ propeller, BLDC controller):',
     ],
@@ -93,6 +100,26 @@ export default function NewsPage() {
         <div className="space-y-8">
           {news.map((item) => (
             <article key={item.url} className="bg-surface-secondary rounded-2xl border border-border p-7 sm:p-8">
+              {item.image && (
+                <div className="relative rounded-xl overflow-hidden mb-5 bg-surface-tertiary flex justify-center">
+                  <img src={item.image} alt={item.title} loading="lazy" className="max-h-96 w-auto object-contain" />
+                  {item.video && (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Watch on LinkedIn"
+                      className="absolute inset-0 flex items-center justify-center group"
+                    >
+                      <span className="w-14 h-14 rounded-full bg-black/55 group-hover:bg-brand transition-colors flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
+                    </a>
+                  )}
+                </div>
+              )}
               <time className="text-xs font-semibold uppercase tracking-wider text-brand">{item.date}</time>
               <h2 className="text-2xl font-bold text-text-primary mt-2 mb-4 leading-tight">{item.title}</h2>
 
