@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/shop', label: 'Motors' },
   { href: '/technology', label: 'Technology' },
   { href: '/motor-development-services', label: 'Services' },
+  { href: '/news', label: 'News' },
   { href: '/blog', label: 'Blog' },
   { href: '/faq', label: 'FAQ' },
 ];
