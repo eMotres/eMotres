@@ -113,6 +113,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
 
+            {product.keyClaim && (
+              <div className="flex items-center gap-3 bg-orange-50 border border-orange-200 rounded-xl px-4 py-3.5 mb-6">
+                <svg className="w-6 h-6 text-brand shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                </svg>
+                <p className="text-sm sm:text-base font-bold text-text-primary leading-snug">{product.keyClaim}</p>
+              </div>
+            )}
+
             <p className="text-text-secondary leading-relaxed mb-8">{product.description}</p>
 
             {/* CTAs */}
