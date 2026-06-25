@@ -112,7 +112,8 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-6BEVZ36QEB');
+            gtag('config', 'G-6BEVZ36QEB'); // Google Analytics (GA4)
+            gtag('config', 'AW-796970697'); // Google Ads
           `}
         </Script>
         <Navbar />
