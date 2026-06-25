@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { products, getProductBySlug, PerformanceSpecs } from '@/lib/products';
 import DynoTestResults from '@/components/DynoTestResults';
 import MotorComparisonSection from '@/components/MotorComparison';
+import BuyButton from '@/components/BuyButton';
+import { isBuyable } from '@/lib/store';
 import { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -37,6 +39,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
 
   const related = products.filter(p => p.slug !== product.slug).slice(0, 4);
+  const canBuy = isBuyable(product);
 
   const ps = product.performanceSpecs;
   const perfRows = ps
@@ -174,20 +177,37 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <p className="text-text-secondary leading-relaxed mb-8">{product.description}</p>
 
-            {/* CTAs */}
+            {/* CTAs — Buy now (in stock) takes over as primary, else quote-only */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/get-a-quote"
-                className="flex-1 text-center bg-brand text-white font-bold py-4 px-8 rounded-xl hover:bg-brand-dark transition-colors shadow-lg"
-              >
-                Request a Quote
-              </Link>
-              <Link
-                href="/contact"
-                className="flex-1 text-center bg-surface-secondary text-text-primary font-bold py-4 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-surface-tertiary"
-              >
-                Contact Us
-              </Link>
+              {canBuy ? (
+                <>
+                  <BuyButton
+                    product={product}
+                    className="flex-1 text-center bg-brand text-white font-bold py-4 px-8 rounded-xl hover:bg-brand-dark transition-colors shadow-lg"
+                  />
+                  <Link
+                    href="/get-a-quote"
+                    className="flex-1 text-center bg-surface-secondary text-text-primary font-bold py-4 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-surface-tertiary"
+                  >
+                    Request a Quote
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/get-a-quote"
+                    className="flex-1 text-center bg-brand text-white font-bold py-4 px-8 rounded-xl hover:bg-brand-dark transition-colors shadow-lg"
+                  >
+                    Request a Quote
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="flex-1 text-center bg-surface-secondary text-text-primary font-bold py-4 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-surface-tertiary"
+                  >
+                    Contact Us
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

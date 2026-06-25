@@ -77,6 +77,8 @@ export interface Product {
   priceNote?: string;
   priceComingSoon?: string;
   keyClaim?: string;
+  inStock?: boolean;            // currently available to buy now (vs made-to-order)
+  stripePaymentLink?: string;   // Stripe Payment Link URL — enables the "Buy now" button
   imageUrl: string;
   category: 'Air-cooled' | 'Liquid-cooled';
   technology: 'AeroStator Core' | 'Classic';
@@ -102,6 +104,7 @@ export const products: Product[] = [
     priceNote: 'Hand-built and individually bench-tested.',
     priceComingSoon: 'Series price €60 — coming soon at production volume.',
     keyClaim: '2× the continuous power and thrust of any comparable 3115-class motor.',
+    inStock: false, // → set true + add stripePaymentLink to sell CIANO14 directly (see src/lib/store.ts)
     imageUrl: '/ciano14-40-12.png',
     category: 'Air-cooled',
     technology: 'AeroStator Core',
