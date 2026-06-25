@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | eMotres',
+  title: 'Privacy Policy',
+  alternates: { canonical: '/privacy-policy/' },
   description: 'Privacy Policy of MOTRES D.O.O. — how we collect, use and protect your personal data in accordance with GDPR.',
 };
 

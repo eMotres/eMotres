@@ -18,12 +18,28 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://emotres.com"),
   title: {
     default: "eMotres | High-Performance Electric Motors",
     template: "%s | eMotres",
   },
-  description: "eMotres designs and manufactures high-performance axial flux electric motors for drones, aviation, and marine applications. Custom engineering solutions.",
-  keywords: ["electric motors", "aviation motors", "drone motors", "axial flux", "high torque density", "custom motor design"],
+  description:
+    "eMotres designs and manufactures high-performance electric motors built on the patented AeroStator Core™ architecture — tangential magnet polarization and rectangular copper windings for the highest torque density on the market. For drones, UAVs, aviation and marine.",
+  keywords: [
+    "electric motors",
+    "drone motors",
+    "UAV motors",
+    "aviation motors",
+    "high torque density",
+    "AeroStator Core",
+    "tangential magnet polarization",
+    "inrunner motor",
+    "BLDC motor",
+    "custom motor design",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
@@ -31,25 +47,48 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://emotres.com/",
+    url: "/",
     title: "eMotres | High-Performance Electric Motors",
-    description: "Developing top-tier electric motors for aviation and drones.",
+    description:
+      "High-performance electric motors built on the patented AeroStator Core™ architecture — the highest torque density on the market, for drones, UAVs and aviation.",
     siteName: "eMotres",
     images: [
       {
-        url: "https://emotres.com/images/electric-motor.webp", // Fallback to provided image
+        url: "/images/electric-motor.webp",
         width: 1200,
         height: 630,
-        alt: "eMotres Electric Motor",
+        alt: "eMotres AeroStator Core electric motor",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "eMotres | High-Performance Electric Motors",
-    description: "Developing top-tier electric motors for aviation and drones.",
-    images: ["https://emotres.com/images/electric-motor.webp"],
+    description:
+      "High-performance electric motors built on the patented AeroStator Core™ architecture — the highest torque density on the market.",
+    images: ["/images/electric-motor.webp"],
   },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "eMotres",
+  legalName: "MOTRES D.O.O",
+  url: "https://emotres.com",
+  logo: "https://emotres.com/images/electric-motor.webp",
+  email: "sales@emotres.com",
+  vatID: "SI22399933",
+  description:
+    "eMotres designs and manufactures high-performance electric motors built on the patented AeroStator Core™ architecture for drones, UAVs, aviation and marine applications.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Kotnikova 34",
+    addressLocality: "Ljubljana",
+    postalCode: "1000",
+    addressCountry: "SI",
+  },
+  sameAs: ["https://www.linkedin.com/company/motres/"],
 };
 
 export default function RootLayout({
@@ -60,6 +99,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-6BEVZ36QEB"
           strategy="afterInteractive"

@@ -3,7 +3,8 @@ import FaqItem from '@/components/FaqItem';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FAQ - eMotres | Electric Motors for Drones & Aviation',
+  title: 'FAQ — Electric Motors for Drones & Aviation',
+  alternates: { canonical: '/faq/' },
   description: 'Find answers to frequently asked questions about our electric motors, including production, payment, shipping, warranty, technology, custom design, and order fulfillment.',
 };
 

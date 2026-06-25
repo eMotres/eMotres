@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'AeroStator Core™ — Patented Motor Technology',
+  alternates: { canonical: '/technology/' },
   description:
     'AeroStator Core™ combines tangential magnet polarization, rectangular copper wire, shortest-path cooling, a simplified winding, single-piece foil coils and ceramic insulation into the highest torque-density electric motor available — plus IP65 sealing and a multi-jurisdiction patent portfolio.',
 };
@@ -210,7 +211,7 @@ export default function TechnologyPage() {
       {/* Technologies */}
       <section className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold text-text-primary mb-3">Six technologies, one stator</h2>
+          <h2 className="text-3xl font-extrabold text-text-primary mb-3">Six technologies, one motor</h2>
           <p className="text-text-secondary mb-12 max-w-2xl">
             Every eMotres motor integrates the same six innovations — four production-proven, plus two patented
             firsts at the coil — that together push torque density beyond what conventional designs can achieve.

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'News',
+  alternates: { canonical: '/news/' },
   description:
     'Latest from eMotres — AeroStator Core™ test results, milestones and announcements: CIANO14 40_12 and CIANO 150_30 bench tests, efficiency benchmarks vs T-Motor, and continuous-power records.',
 };

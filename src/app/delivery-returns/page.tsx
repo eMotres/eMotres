@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Delivery & Returns | eMotres',
+  title: 'Delivery & Returns',
+  alternates: { canonical: '/delivery-returns/' },
   description: 'Shipping, delivery and returns policy for eMotres electric motors.',
 };
 

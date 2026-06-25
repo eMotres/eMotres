@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Radial GO and Axial Motors Technology Comparison | eMotres',
+  title: 'Radial and Axial Motor Technology Comparison',
+  alternates: { canonical: '/radial-go-and-axial-motors-technology/' },
   description: 'Technical comparison of radial motors with Grain Oriented (GO) steel cores vs axial motor designs (YASA, Emrax). Analysis of core material, winding, magnetic systems and efficiency.',
 };
 

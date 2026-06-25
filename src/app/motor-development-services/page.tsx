@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Custom Motor Development Services | eMotres',
+  title: 'Custom Motor Development Services',
+  alternates: { canonical: '/motor-development-services/' },
   description: 'eMotres offers comprehensive motor development services, from conceptualization to mass production. We specialize in custom motors and generators (0.5 kW to 800 kW) using advanced electromagnetic, mechanical, and thermal simulations.',
 };
 

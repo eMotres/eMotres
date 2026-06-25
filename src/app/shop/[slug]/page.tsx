@@ -14,9 +14,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return {};
+  const url = `/shop/${product.slug}/`;
   return {
-    title: `${product.title} | eMotres`,
+    title: product.title,
     description: product.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'website',
+      siteName: 'eMotres',
+      locale: 'en_US',
+      title: `${product.title} | eMotres`,
+      description: product.description,
+      url,
+      images: [{ url: product.imageUrl, width: 600, height: 600, alt: product.title }],
+    },
   };
 }
 
@@ -41,8 +52,47 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       ]
     : [];
 
+  const productUrl = `https://emotres.com/shop/${product.slug}/`;
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    image: [`https://emotres.com${product.imageUrl}`],
+    description: product.description,
+    sku: product.sku,
+    category: product.category,
+    brand: { '@type': 'Brand', name: 'eMotres' },
+    offers: {
+      '@type': 'Offer',
+      url: productUrl,
+      priceCurrency: 'EUR',
+      price: product.price.replace(/[^0-9.]/g, ''),
+      availability: /in stock/i.test(product.status)
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/BackOrder',
+      seller: { '@type': 'Organization', name: 'eMotres' },
+    },
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://emotres.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Shop', item: 'https://emotres.com/shop/' },
+      { '@type': 'ListItem', position: 3, name: product.title, item: productUrl },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-surface-primary">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Breadcrumb */}

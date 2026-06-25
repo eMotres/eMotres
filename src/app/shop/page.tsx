@@ -4,7 +4,8 @@ import { products } from '@/lib/products';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Electric Motors for Drones and Aviation | eMotres Shop',
+  title: 'Electric Motors for Drones, UAVs & Aviation',
+  alternates: { canonical: '/shop/' },
   description: 'Explore our range of high-performance electric motors. We offer both air-cooled and liquid-cooled motors from 5 kW to 170 kW, designed for drones, aviation, and other demanding applications.',
 };
 

@@ -5,6 +5,16 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'High-Performance Electric Motors for Drones & Aviation | eMotres',
   description: 'eMotres CIANO motors — patented AeroStator Core technology. Highest torque density on the market. IP65 sealed, rectangular copper windings, topology-optimized stator yoke. Built for drones, UAVs, aviation and robotics.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'eMotres',
+    locale: 'en_US',
+    title: 'High-Performance Electric Motors for Drones & Aviation | eMotres',
+    description: 'eMotres CIANO motors — patented AeroStator Core™ technology. Highest torque density on the market, built for drones, UAVs and aviation.',
+    url: '/',
+    images: [{ url: '/images/electric-motor.webp', width: 1200, height: 630, alt: 'eMotres AeroStator Core electric motor' }],
+  },
 };
 
 const stats = [

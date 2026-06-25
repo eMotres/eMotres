@@ -3,7 +3,8 @@ import ContactForm from '@/components/ContactForm';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | eMotres - High-Performance Electric Motors',
+  title: 'Contact Us',
+  alternates: { canonical: '/contact-us/' },
   description: 'Get in touch with eMotres for questions about our high-performance electric motors. Find our address in Ljubljana, Slovenia, and contact us via email.',
 };
 
