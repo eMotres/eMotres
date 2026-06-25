@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { trackLead } from '@/lib/gtag';
 
 // 1. Go to https://formspree.io → sign up free
 // 2. Create a new form → copy the form ID (e.g. "xpwzgkla")
@@ -40,6 +41,7 @@ const ContactForm = () => {
         setStatus('success');
         setForm({ name: '', email: '', subject: '', message: '' });
         setAgree(false);
+        trackLead('contact');
       } else {
         setStatus('error');
       }

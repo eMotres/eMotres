@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackLead } from '@/lib/gtag';
 
 // Same Formspree form ID as ContactForm
 const FORMSPREE_ID = 'xbddrvlr';
@@ -41,6 +42,7 @@ const QuoteForm = () => {
       if (res.ok) {
         setStatus('success');
         setForm({ name: '', email: '', message: '', agree: false });
+        trackLead('get-a-quote');
       } else {
         setStatus('error');
       }
