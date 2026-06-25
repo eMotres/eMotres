@@ -33,12 +33,6 @@
       { "source": "/my-account",                 "destination": "/",                             "type": 301 },
       { "source": "/my-account/",                "destination": "/",                             "type": 301 }
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/404.html"
-      }
-    ],
     "headers": [
       {
         "source": "**/*.@(js|css|webp|png|jpg|jpeg|svg|ico|woff2)",
