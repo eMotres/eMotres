@@ -12,7 +12,7 @@ export const GOOGLE_ADS_ID = 'AW-796970697';
 //   send_to: 'AW-796970697/XXXXXXXXXXXXXXXXXX'  — paste ONLY the part after the
 //   slash here. Until this is set, submissions still fire the GA4 `generate_lead`
 //   event, which can be imported into Google Ads as a conversion.
-export const ADS_LEAD_CONVERSION_LABEL = '';
+export const ADS_LEAD_CONVERSION_LABEL = 'MSqtCOaQmcUcEMmdg_wC';
 
 /**
  * Report a successful lead (quote / contact form submission) to GA4 and Google Ads.
