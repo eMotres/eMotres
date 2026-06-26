@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { products } from '@/lib/products';
+import { SITE_URL } from '@/lib/site';
 
-const BASE = 'https://emotres.com';
+const BASE = SITE_URL;
 
 export const dynamic = 'force-static';
 

@@ -9,7 +9,7 @@
 //   1. In Stripe → Payment links (https://dashboard.stripe.com/payment-links)
 //      create a link for the product. Turn on "Collect shipping address" and,
 //      for EU VAT, enable Stripe Tax. Set the "after payment" redirect to
-//      https://emotres.com/order-confirmed/
+//      https://aerostator.com/order-confirmed/
 //   2. Paste that link into the product's `stripePaymentLink` in
 //      src/lib/products.ts and set `inStock: true`.
 //   3. Flip STORE_ENABLED to true below.

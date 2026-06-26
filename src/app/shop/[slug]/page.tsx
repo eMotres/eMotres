@@ -6,6 +6,7 @@ import DynoTestResults from '@/components/DynoTestResults';
 import MotorComparisonSection from '@/components/MotorComparison';
 import BuyButton from '@/components/BuyButton';
 import { isBuyable } from '@/lib/store';
+import { SITE_URL } from '@/lib/site';
 import { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -55,12 +56,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       ]
     : [];
 
-  const productUrl = `https://emotres.com/shop/${product.slug}/`;
+  const productUrl = `${SITE_URL}/shop/${product.slug}/`;
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
-    image: [`https://emotres.com${product.imageUrl}`],
+    image: [`${SITE_URL}${product.imageUrl}`],
     description: product.description,
     sku: product.sku,
     category: product.category,
@@ -80,8 +81,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://emotres.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Shop', item: 'https://emotres.com/shop/' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Shop', item: `${SITE_URL}/shop/` },
       { '@type': 'ListItem', position: 3, name: product.title, item: productUrl },
     ],
   };

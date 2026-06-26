@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://emotres.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "eMotres | High-Performance Electric Motors",
     template: "%s | eMotres",
@@ -75,8 +76,8 @@ const organizationSchema = {
   "@type": "Organization",
   name: "eMotres",
   legalName: "MOTRES D.O.O",
-  url: "https://emotres.com",
-  logo: "https://emotres.com/images/electric-motor.webp",
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/electric-motor.webp`,
   email: "sales@emotres.com",
   vatID: "SI22399933",
   description:
