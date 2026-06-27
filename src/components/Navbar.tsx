@@ -14,24 +14,6 @@ const navLinks: { href: string; key: keyof typeof ui.en.nav; zh: boolean }[] = [
   { href: '/faq', key: 'faq', zh: true },
 ];
 
-const LocaleSwitcher = ({ locale }: { locale: 'en' | 'zh' }) => (
-  <div className="flex items-center gap-1.5 text-xs font-semibold">
-    <Link
-      href="/"
-      className={locale === 'en' ? 'text-brand' : 'text-text-secondary hover:text-text-primary transition-colors'}
-    >
-      EN
-    </Link>
-    <span className="text-border">|</span>
-    <Link
-      href="/zh"
-      className={locale === 'zh' ? 'text-brand' : 'text-text-secondary hover:text-text-primary transition-colors'}
-    >
-      中文
-    </Link>
-  </div>
-);
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -80,7 +62,6 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <LocaleSwitcher locale={locale} />
             <Link
               href={contactHref}
               className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
@@ -137,9 +118,6 @@ const Navbar = () => {
             >
               {t.contact}
             </Link>
-            <div className="px-3 py-2">
-              <LocaleSwitcher locale={locale} />
-            </div>
             <Link
               href={quoteHref}
               onClick={() => setIsOpen(false)}
