@@ -1,102 +1,108 @@
-import QuoteForm from "@/components/QuoteForm";
 import Link from "next/link";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'High-Performance Electric Motors for Drones & Aviation | eMotres',
-  description: 'eMotres CIANO motors — patented AeroStator Core technology. Highest torque density on the market. IP65 sealed, rectangular copper windings, topology-optimized stator yoke. Built for drones, UAVs, aviation and robotics.',
-  alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh' } },
+  title: '高性能无人机与航空电机',
+  description:
+    'eMotres CIANO 电机——专利 AeroStator Core 技术，市场领先的扭矩密度。IP65 密封、扁平铜线绕组，专为无人机、UAV、航空与机器人打造。',
+  alternates: { canonical: '/zh', languages: { en: '/', 'zh-CN': '/zh' } },
   openGraph: {
     type: 'website',
     siteName: 'eMotres',
-    locale: 'en_US',
-    title: 'High-Performance Electric Motors for Drones & Aviation | eMotres',
-    description: 'eMotres CIANO motors — patented AeroStator Core™ technology. Highest torque density on the market, built for drones, UAVs and aviation.',
-    url: '/',
-    images: [{ url: '/images/electric-motor.webp', width: 1200, height: 630, alt: 'eMotres AeroStator Core electric motor' }],
+    locale: 'zh_CN',
+    title: '高性能无人机与航空电机 | eMotres',
+    description: 'eMotres CIANO 电机——专利 AeroStator Core 技术，市场领先的扭矩密度，专为无人机、UAV 与航空打造。',
+    url: '/zh',
+    images: [{ url: '/images/electric-motor.webp', width: 1200, height: 630, alt: 'eMotres AeroStator Core 电机' }],
   },
 };
 
 const stats = [
-  { value: '1.5×', label: 'Higher magnetic field vs radial construction' },
-  { value: 'IP65', label: 'Possible fully sealed construction' },
-  { value: '~75%', label: 'Copper fill factor vs 45% round wire' },
-  { value: '15', label: 'N·m/kg specific torque — prototype proven' },
+  { value: '1.5×', label: '相比径向结构更高的磁场' },
+  { value: 'IP65', label: '可选全密封结构' },
+  { value: '~75%', label: '铜槽满率（圆线仅 45%）' },
+  { value: '15', label: 'N·m/kg 比扭矩——原型验证' },
 ];
 
 const technologies = [
   {
-    label: 'Best-in-class Air & Liquid Cooling',
-    desc: 'Cutouts directly above each coil give cooling air or liquid the shortest possible thermal path from winding to cooler — no thick yoke barrier in between. Surface area is 2× larger than a standard stator.',
+    label: '一流的风冷与液冷',
+    desc: '线圈正上方的开口让冷却风或液体以最短热路径从绕组直达散热器——中间没有厚轭部阻隔。散热表面积是标准定子的 2 倍。',
     img: '/images/tech-cooling.png',
   },
   {
-    label: 'Tangential Magnetization',
-    desc: 'Flux concentration beyond standard Halbach arrays — no adhesive, easy re-magnetization.',
+    label: '切向磁化',
+    desc: '磁通聚集超越标准 Halbach 阵列——无需胶粘，易于重新充磁。',
     img: '/images/tech-tangential.png',
   },
   {
-    label: 'Rectangular Copper Wire',
-    desc: '~75% fill factor. Lower resistance, higher current density, less heat.',
+    label: '扁平铜线',
+    desc: '约 75% 的槽满率。更低电阻、更高电流密度、更少发热。',
     img: '/images/tech-wire.png',
   },
   {
-    label: 'Single Layer Winding',
-    desc: '2× fewer coils than standard designs — less winding time, lower production cost, higher reliability.',
+    label: '单层绕组',
+    desc: '线圈数量是标准设计的一半——绕线时间更短、生产成本更低、可靠性更高。',
     img: '/images/tech-simplicity.png',
   },
 ];
-
 
 const cianoMotors: {
   slug: string;
   name: string;
   tagline: string;
-  power: string;
-  torque: string;
-  weight: string;
-  voltage: string;
+  specs: { k: string; v: string }[];
   protection: string;
   price: string;
-  imageUrl: string;
   priceTag?: string;
   highlight?: string;
+  imageUrl: string;
 }[] = [
   {
     slug: 'ciano-40-12',
     name: 'CIANO14 40_12',
-    tagline: 'Compact precision',
-    power: '1,400 W',
-    torque: '0.70 Nm',
-    weight: '0.125 kg',
-    voltage: '15–25 V',
-    protection: 'Open frame',
+    tagline: '紧凑精密',
+    specs: [
+      { k: '功率', v: '1,400 W' },
+      { k: '扭矩', v: '0.70 Nm' },
+      { k: '重量', v: '0.125 kg' },
+      { k: '电压', v: '15–25 V' },
+    ],
+    protection: '开放式结构',
     price: '€300',
-    priceTag: 'sample',
-    highlight: '2× continuous power & thrust vs class',
+    priceTag: '样品',
+    highlight: '同级别 2 倍持续功率与推力',
     imageUrl: '/ciano14-40-12.png',
   },
   {
     slug: 'ciano-150-30',
     name: 'CIANO28 150_30',
-    tagline: 'Mid-range aviation',
-    power: '14,400 W',
-    torque: '43.5 Nm',
-    weight: '3 kg',
-    voltage: '47–76 V',
-    protection: 'Open frame',
+    tagline: '中功率航空',
+    specs: [
+      { k: '功率', v: '14,400 W' },
+      { k: '扭矩', v: '43.5 Nm' },
+      { k: '重量', v: '3 kg' },
+      { k: '电压', v: '47–76 V' },
+    ],
+    protection: '开放式结构',
     price: '€1,000',
     imageUrl: '/ciano28-150-30.png',
   },
 ];
 
-export default function Home() {
+const applications = [
+  { title: '无人机', desc: '从紧凑型竞速无人机到重载多旋翼平台——CIANO 电机提供真正重要的扭矩密度。', img: '/images/app-drone.jpg' },
+  { title: '轻型航空', desc: '可靠、密封、高效——适用于认证的轻型电动飞机与混合动力推进。', img: '/images/app-aviation.jpg' },
+  { title: '机器人', desc: '高扭矩密度与紧凑结构，使 CIANO 电机成为对峰值性能有要求的机器人关节与执行器的理想之选。', img: '/images/app-robotics.jpg' },
+  { title: '船舶海事', desc: 'IP65 密封外壳与防腐设计，使 CIANO 电机可应对最严苛的海洋环境。', img: '/images/app-marine.jpg' },
+];
+
+export default function HomeZh() {
   return (
     <main className="flex flex-col min-h-screen bg-surface-primary text-text-primary">
 
       {/* ─── HERO ─── */}
       <section className="relative bg-surface-primary pt-16 pb-0 px-4 sm:px-6 lg:px-8">
-        {/* subtle background grid */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
@@ -105,21 +111,18 @@ export default function Home() {
             backgroundSize: '48px 48px',
           }}
         />
-
         <div className="relative max-w-6xl mx-auto">
-          {/* Top text block */}
           <div className="text-center pt-10 pb-6">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand mb-8">
               <span className="w-6 h-px bg-brand inline-block" />
-              Patented Motor Technology
+              专利电机技术
               <span className="w-6 h-px bg-brand inline-block" />
             </span>
 
-            {/* Hero image — between label and heading */}
             <div className="flex justify-center mb-8">
               <img
                 src="/aerostator-core.png"
-                alt="AeroStator Core — eMotres patented motor stator"
+                alt="AeroStator Core — eMotres 专利电机定子"
                 className="w-full max-w-xl object-contain select-none drop-shadow-xl"
               />
             </div>
@@ -131,22 +134,15 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-8">
-              Four patented technologies in one motor architecture.
-              The highest torque density electric motor available on the market — built for drones, UAVs, aviation and robotics.
+              四项专利技术，集成于同一电机架构。市场上扭矩密度最高的电机——专为无人机、UAV、航空与机器人打造。
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-6">
-              <Link
-                href="/shop"
-                className="bg-brand text-white font-bold py-3.5 px-8 rounded-xl hover:bg-brand-dark transition-colors text-sm"
-              >
-                View All Motors
+              <Link href="/shop" className="bg-brand text-white font-bold py-3.5 px-8 rounded-xl hover:bg-brand-dark transition-colors text-sm">
+                查看全部电机
               </Link>
-              <Link
-                href="/technology"
-                className="bg-surface-secondary text-text-primary font-semibold py-3.5 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-border text-sm"
-              >
-                How it works →
+              <Link href="/technology" className="bg-surface-secondary text-text-primary font-semibold py-3.5 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-border text-sm">
+                工作原理 →
               </Link>
             </div>
           </div>
@@ -171,40 +167,22 @@ export default function Home() {
       <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ position: 'relative', zIndex: 0 }}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-
-            <h2 className="text-4xl font-extrabold text-text-primary mt-3">
-              Built on AeroStator Core
-            </h2>
+            <h2 className="text-4xl font-extrabold text-text-primary mt-3">基于 AeroStator Core 打造</h2>
             <p className="text-text-secondary mt-3 max-w-xl mx-auto">
-              Every eMotres motor carries all four AeroStator Core technologies — best-in-class cooling, tangential magnetization, rectangular copper windings and simplified manufacturing.
+              每一台 eMotres 电机都集成全部四项 AeroStator Core 技术——一流散热、切向磁化、扁平铜线绕组与简化制造。
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {cianoMotors.map(motor => (
-              <div
-                key={motor.slug}
-                className="group relative bg-surface-secondary rounded-2xl border border-border hover:border-brand/40 hover:shadow-lg transition-all duration-200 overflow-hidden"
-              >
-                {/* Invisible overlay link covering the whole card */}
+              <div key={motor.slug} className="group relative bg-surface-secondary rounded-2xl border border-border hover:border-brand/40 hover:shadow-lg transition-all duration-200 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                <a
-                  href={`/shop/${motor.slug}/`}
-                  className="absolute inset-0 z-10"
-                  aria-label={`View ${motor.name} specifications`}
-                />
+                <a href={`/shop/${motor.slug}/`} className="absolute inset-0 z-10" aria-label={`查看 ${motor.name} 规格`} />
 
-                {/* Image area */}
                 <div className="bg-surface-tertiary flex items-center justify-center p-8 h-56 overflow-hidden rounded-t-2xl">
-                  <img
-                    src={motor.imageUrl}
-                    alt={motor.name}
-                    draggable="false"
-                    className="max-h-full max-w-full object-contain transition-opacity duration-300 group-hover:opacity-80 pointer-events-none select-none mix-blend-multiply"
-                  />
+                  <img src={motor.imageUrl} alt={motor.name} draggable="false" className="max-h-full max-w-full object-contain transition-opacity duration-300 group-hover:opacity-80 pointer-events-none select-none mix-blend-multiply" />
                 </div>
 
-                {/* Content */}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <div>
@@ -216,14 +194,8 @@ export default function Home() {
                     </span>
                   </div>
 
-                  {/* Specs grid */}
                   <div className="grid grid-cols-2 gap-3 mt-4">
-                    {[
-                      { k: 'Power', v: motor.power },
-                      { k: 'Torque', v: motor.torque },
-                      { k: 'Weight', v: motor.weight },
-                      { k: 'Voltage', v: motor.voltage },
-                    ].map(spec => (
+                    {motor.specs.map(spec => (
                       <div key={spec.k} className="bg-surface-primary rounded-lg px-3 py-2 border border-border">
                         <div className="text-xs text-text-secondary">{spec.k}</div>
                         <div className="text-sm font-bold text-text-primary">{spec.v}</div>
@@ -250,7 +222,7 @@ export default function Home() {
                       )}
                     </span>
                     <div className="flex items-center gap-1 text-sm font-semibold text-brand group-hover:gap-2 transition-all">
-                      View specifications
+                      查看规格
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
@@ -263,7 +235,7 @@ export default function Home() {
 
           <div className="mt-8 text-center">
             <Link href="/shop" className="text-sm font-semibold text-text-secondary hover:text-brand transition-colors">
-              See the full motor lineup →
+              查看完整产品线 →
             </Link>
           </div>
         </div>
@@ -274,18 +246,13 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="md:flex md:items-start md:gap-16">
             <div className="md:w-2/5 mb-12 md:mb-0 md:sticky md:top-24">
-              <span className="text-xs font-semibold uppercase tracking-widest text-brand">What&apos;s inside</span>
-              <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">
-                Four technologies.<br />One stator.
-              </h2>
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand">核心技术</span>
+              <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">四项技术，<br />一个定子。</h2>
               <p className="text-text-secondary leading-relaxed mb-6">
-                Every eMotres motor integrates three patented innovations that work together to push torque density beyond what conventional designs can achieve.
+                每一台 eMotres 电机都集成多项专利创新，协同将扭矩密度推升至传统设计无法企及的水平。
               </p>
-              <Link
-                href="/technology"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3 transition-all"
-              >
-                Full technology overview
+              <Link href="/technology" className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3 transition-all">
+                完整技术介绍
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
@@ -293,14 +260,10 @@ export default function Home() {
             </div>
 
             <div className="md:w-3/5 space-y-4">
-              {technologies.map((tech, i) => (
+              {technologies.map(tech => (
                 <div key={tech.label} className="bg-surface-primary rounded-xl border border-border p-5 flex gap-4 items-center">
                   <div className="flex-shrink-0 w-40 h-32 bg-orange-50 rounded-xl flex items-center justify-center overflow-hidden">
-                    <img
-                      src={tech.img}
-                      alt={tech.label}
-                      className="max-w-full max-h-full object-contain p-2 mix-blend-multiply"
-                    />
+                    <img src={tech.img} alt={tech.label} className="max-w-full max-h-full object-contain p-2 mix-blend-multiply" />
                   </div>
                   <div>
                     <div className="font-semibold text-text-primary mb-1">{tech.label}</div>
@@ -316,40 +279,13 @@ export default function Home() {
       {/* ─── APPLICATIONS STRIP ─── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand">Applications</span>
-          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-10">
-            Engineered for demanding environments
-          </h2>
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand">应用领域</span>
+          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-10">为严苛环境而生</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {[
-              {
-                title: 'UAV & Drones',
-                desc: 'From compact racing UAVs to heavy-lift multirotor platforms — CIANO motors deliver the torque density that matters.',
-                img: '/images/app-drone.jpg',
-              },
-              {
-                title: 'Light Aviation',
-                desc: 'Reliable, sealed and high-efficiency — suitable for certified light electric aircraft and hybrid propulsion.',
-                img: '/images/app-aviation.jpg',
-              },
-              {
-                title: 'Robotics',
-                desc: 'High torque density and compact geometry make CIANO motors ideal for robot joints and actuators demanding peak performance.',
-                img: '/images/app-robotics.jpg',
-              },
-              {
-                title: 'Marine',
-                desc: 'IP65 sealed housing and corrosion-resistant design make CIANO motors ready for the harshest marine conditions.',
-                img: '/images/app-marine.jpg',
-              },
-            ].map(app => (
+            {applications.map(app => (
               <div key={app.title} className="bg-surface-secondary rounded-2xl border border-border overflow-hidden text-left group hover:shadow-lg transition-shadow">
                 <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={app.img}
-                    alt={app.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <img src={app.img} alt={app.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
                 <div className="p-5">
@@ -362,38 +298,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── QUOTE FORM ─── */}
-      <section id="get-quote" className="bg-surface-secondary border-t border-border py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-brand">Custom order</span>
-              <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">
-                Need a custom motor?
-              </h2>
-              <p className="text-text-secondary leading-relaxed mb-6">
-                Our engineers can design a motor to your exact specifications. Fill in the form and we&apos;ll calculate an approximate cost within 2 business days.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  'Custom diameter, length, voltage range',
-                  'IP67 / IP68 sealing on request',
-                  'Custom KV, torque and RPM targets',
-                  'Series production available',
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-text-secondary">
-                    <span className="text-brand font-bold mt-0.5">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-surface-primary rounded-2xl border border-border p-8">
-              <QuoteForm />
-            </div>
-          </div>
+      {/* ─── CUSTOM ORDER CTA ─── */}
+      <section className="bg-surface-secondary border-t border-border py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand">定制订单</span>
+          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">需要定制电机？</h2>
+          <p className="text-text-secondary leading-relaxed mb-8 max-w-2xl mx-auto">
+            我们的工程师可按您的精确规格设计电机（定制直径、长度、电压范围；可选 IP67 / IP68 密封；定制 KV、扭矩与转速目标；支持批量生产）。填写表单，我们将在 2 个工作日内估算大致成本。
+          </p>
+          <Link href="/get-a-quote" className="inline-block bg-brand text-white font-bold py-4 px-10 rounded-xl hover:bg-brand-dark transition-colors">
+            获取报价
+          </Link>
         </div>
-      </section>    </main>
+      </section>
+    </main>
   );
 }
