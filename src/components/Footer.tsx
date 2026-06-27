@@ -1,15 +1,39 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { ui, localeFromPathname } from '@/i18n/dictionaries';
+
+// en href is the original; zh href points to the Chinese page where one exists,
+// otherwise falls back to the English page (legal pages aren't translated yet).
+const companyLinks = [
+  { en: '/motor-development-services', zh: '/zh/motor-development-services', key: 'service' },
+  { en: '/blog', zh: '/zh/technology', key: 'technology' },
+  { en: '/contact-us', zh: '/zh/contact-us', key: 'contacts' },
+] as const;
+
+const supportLinks = [
+  { en: '/faq', zh: '/zh/faq', key: 'faq' },
+  { en: '/get-a-quote', zh: '/zh/get-a-quote', key: 'getQuote' },
+  { en: '/terms-conditions', zh: '/terms-conditions', key: 'terms' },
+  { en: '/delivery-returns', zh: '/delivery-returns', key: 'delivery' },
+  { en: '/privacy-policy', zh: '/privacy-policy', key: 'privacy' },
+] as const;
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const locale = localeFromPathname(pathname || '/');
+  const t = ui[locale].footer;
+  const home = locale === 'zh' ? '/zh' : '/';
 
   return (
     <footer className="bg-gray-900 text-gray-300 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
-            <Link href="/" className="text-2xl font-bold text-white mb-4 inline-block">eMotres</Link>
+            <Link href={home} className="text-2xl font-bold text-white mb-4 inline-block">eMotres</Link>
             <p className="text-sm leading-relaxed mb-4">
               MOTRES D.O.O<br />
               Reg. No.: 7255691000<br />
@@ -27,27 +51,33 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Company</h3>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">{t.company}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/motor-development-services" className="hover:text-white transition-colors">Service</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Technology</Link></li>
-              <li><Link href="/contact-us" className="hover:text-white transition-colors">Contacts</Link></li>
+              {companyLinks.map(link => (
+                <li key={link.key}>
+                  <Link href={locale === 'zh' ? link.zh : link.en} className="hover:text-white transition-colors">
+                    {t[link.key]}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Support</h3>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">{t.support}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link href="/get-a-quote" className="hover:text-white transition-colors">Get a Quote</Link></li>
-              <li><Link href="/terms-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</Link></li>
-              <li><Link href="/delivery-returns" className="hover:text-white transition-colors">Delivery &amp; Returns</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              {supportLinks.map(link => (
+                <li key={link.key}>
+                  <Link href={locale === 'zh' ? link.zh : link.en} className="hover:text-white transition-colors">
+                    {t[link.key]}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Connect</h3>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">{t.connect}</h3>
             <a
               href="https://www.linkedin.com/company/motres/"
               target="_blank"
@@ -63,7 +93,11 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-          <p>Copyright © {year} eMotres. All rights reserved.</p>
+          <p>
+            {locale === 'zh'
+              ? `版权所有 © ${year} eMotres。${t.rights}`
+              : `Copyright © ${year} eMotres. ${t.rights}`}
+          </p>
         </div>
       </div>
     </footer>

@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ui, localeFromPathname } from '@/i18n/dictionaries';
 
-const navLinks: { href: string; key: keyof typeof ui.en.nav }[] = [
-  { href: '/shop', key: 'shop' },
-  { href: '/technology', key: 'technology' },
-  { href: '/motor-development-services', key: 'services' },
-  { href: '/news', key: 'news' },
-  { href: '/blog', key: 'blog' },
-  { href: '/faq', key: 'faq' },
+const navLinks: { href: string; key: keyof typeof ui.en.nav; zh: boolean }[] = [
+  { href: '/shop', key: 'shop', zh: true },
+  { href: '/technology', key: 'technology', zh: true },
+  { href: '/motor-development-services', key: 'services', zh: true },
+  { href: '/news', key: 'news', zh: true },
+  { href: '/blog', key: 'blog', zh: false },
+  { href: '/faq', key: 'faq', zh: true },
 ];
 
 const LocaleSwitcher = ({ locale }: { locale: 'en' | 'zh' }) => (
@@ -39,6 +39,12 @@ const Navbar = () => {
   const locale = localeFromPathname(pathname || '/');
   const t = ui[locale];
   const home = locale === 'zh' ? '/zh' : '/';
+  // On /zh, link to the Chinese pages; blog has no zh version yet so it's hidden there.
+  const links = navLinks
+    .filter(l => locale === 'en' || l.zh)
+    .map(l => ({ ...l, url: locale === 'zh' ? `/zh${l.href}` : l.href }));
+  const contactHref = locale === 'zh' ? '/zh/contact-us' : '/contact-us';
+  const quoteHref = locale === 'zh' ? '/zh/get-a-quote' : '/get-a-quote';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -61,10 +67,10 @@ const Navbar = () => {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-7">
-            {navLinks.map(link => (
+            {links.map(link => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={link.url}
                 className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
               >
                 {t.nav[link.key]}
@@ -76,13 +82,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-3">
             <LocaleSwitcher locale={locale} />
             <Link
-              href="/contact-us"
+              href={contactHref}
               className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
             >
               {t.contact}
             </Link>
             <Link
-              href="/get-a-quote"
+              href={quoteHref}
               className="text-sm font-semibold bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand-dark transition-colors"
             >
               {t.quote}
@@ -114,10 +120,10 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden border-t border-border bg-surface-primary">
           <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
-            {navLinks.map(link => (
+            {links.map(link => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={link.url}
                 onClick={() => setIsOpen(false)}
                 className="text-sm font-medium text-text-secondary hover:text-text-primary px-3 py-2 rounded-md hover:bg-surface-secondary transition-colors"
               >
@@ -125,7 +131,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="/contact-us"
+              href={contactHref}
               onClick={() => setIsOpen(false)}
               className="text-sm font-medium text-text-secondary hover:text-text-primary px-3 py-2 rounded-md hover:bg-surface-secondary transition-colors"
             >
@@ -135,7 +141,7 @@ const Navbar = () => {
               <LocaleSwitcher locale={locale} />
             </div>
             <Link
-              href="/get-a-quote"
+              href={quoteHref}
               onClick={() => setIsOpen(false)}
               className="mt-2 text-sm font-semibold bg-brand text-white text-center px-4 py-2.5 rounded-lg hover:bg-brand-dark transition-colors"
             >

@@ -10,6 +10,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, changeFrequency: 'weekly', priority: 1 },
     { url: `${BASE}/zh`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/zh/shop`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE}/zh/technology`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/zh/news`, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${BASE}/zh/motor-development-services`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/zh/get-a-quote`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/zh/faq`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/zh/contact-us`, changeFrequency: 'yearly', priority: 0.5 },
     { url: `${BASE}/shop/`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE}/technology/`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/news/`, changeFrequency: 'weekly', priority: 0.8 },

@@ -1,0 +1,167 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '新闻',
+  alternates: {
+    canonical: '/zh/news',
+    languages: { en: '/news', 'zh-CN': '/zh/news' },
+  },
+  description:
+    'eMotres 最新动态 —— AeroStator Core™ 测试结果、里程碑与公告：CIANO14 40_12 和 CIANO 150_30 台架测试、与 T-Motor 的效率对比，以及持续功率纪录。',
+};
+
+type NewsItem = {
+  date: string;
+  title: string;
+  image?: string;
+  video?: string;
+  intro: string[];
+  metrics?: { k: string; v: string }[];
+  outro?: string[];
+  url: string;
+};
+
+// Newest first.
+const news: NewsItem[] = [
+  {
+    date: '2026年6月23日',
+    title: '6 kW/kg 持续功率 —— CIANO14 40_12 连续运行 30 分钟',
+    image: '/images/news/news-jun23-continuous.jpg',
+    video: '/videos/news-jun23-continuous.mp4',
+    intro: [
+      '我们将 CIANO14 40_12 装在螺旋桨测试台上连续运行了 30 分钟 —— 持续功率大约是市面上任何 3115 级别电机的两倍。以下是测试台在第 29 分钟记录的数据（125 g 电机）：',
+    ],
+    metrics: [
+      { k: '推力', v: '3,455 g' },
+      { k: '轴功率', v: '770 W (6.16 kW/kg)' },
+      { k: '电输入', v: '1,038 W' },
+      { k: '效率', v: '74.2 %' },
+      { k: '电流', v: '43.85 A @ 23.7 V' },
+      { k: '最高温度', v: '150 °C（已稳定）' },
+    ],
+    outro: [
+      '标准的 3115 在达到热极限之前，持续功率上限为 300–350 W。相同的外形尺寸 —— 持续功率却翻倍。绕组在整个过程中始终保持在其 200 °C 绝缘极限之内。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_electricmotors-bldc-aerostatorcore-activity-7475080394271358976-39zl',
+  },
+  {
+    date: '2026年6月16日',
+    title: '一台胜过同级领先外转子的内转子电机',
+    image: '/images/news/news-jun16-vs-tmotor.jpg',
+    video: '/videos/news-jun16-vs-tmotor.mp4',
+    intro: [
+      '基于 AeroStator Core™ 打造的 CIANO14 40_12 首批台架测试，挑战了这一级别的一个基本假设。传统观念认为，外转子在效率和推力密度方面主导着无人机推进领域 —— 而我们的首批数据却给出了相反的结论。',
+      '在相同的螺旋桨和相同的 24 V 条件下，与同级领先的 T-Motor V3115 外转子进行对比测试：',
+    ],
+    metrics: [
+      { k: '电效率', v: '+12–13 pp at high thrust' },
+      { k: '峰值效率', v: '76.9 % (75–77 % plateau)' },
+      { k: 'T-Motor V3115 at max', v: '~64 %' },
+    ],
+    outro: [
+      '而且这些还是梯形波 BLDC 的结果 —— 我们尚未切换到 FOC，因此仍有明显的提升空间。下一步：将控制器直接集成到电机内部、0.15 mm 叠片以及箔式（扁平）线圈。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_drones-uav-electricmotors-activity-7472592376310468608-pxKm',
+  },
+  {
+    date: '2026年5月7日',
+    title: '首批测试结果 —— 150_30 达到 50 kg 持续推力',
+    image: '/images/news/news-may-150-30.jpg',
+    intro: [
+      '首台基于 AeroStator Core™ 打造的无人机推进电机在推力测试台上完成了初步台架测试。在 50 kg 持续推力（56″ 螺旋桨、BLDC 控制器）下：',
+    ],
+    metrics: [
+      { k: '持续推力', v: '50 kg' },
+      { k: '轴功率', v: '~7,800 W' },
+      { k: '扭矩', v: '~32 N·m (10.7 N·m/kg)' },
+      { k: '比功率', v: '2,600 W/kg' },
+      { k: '电机效率', v: '91 %' },
+      { k: '工作温度', v: '115 °C（风冷）' },
+    ],
+    outro: [
+      'AeroStator Core™ 架构将定子轭部转变为一个主动散热结构 —— 使得采用标准 F45SH 磁体的切向极化能够在通常需要更重或更昂贵散热方案才能达到的性能水平上运行。路线图：在同样的 3 kg 重量下实现 60 kg 持续推力，途径包括 FOC 集成、28 极与 42 极分析，以及 63″ 螺旋桨测试。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_motres-aerostatorcore-dronemotors-activity-7458072864370462720-A9jB',
+  },
+];
+
+export default function NewsPage() {
+  return (
+    <main className="min-h-screen bg-surface-primary">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
+        <header className="text-center mb-14">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-orange-50 px-3 py-1 rounded-full">
+            新闻
+          </span>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-5">
+            eMotres 最新动态
+          </h1>
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
+            来自 AeroStator Core™ 项目的测试结果、里程碑与公告。
+          </p>
+        </header>
+
+        <div className="space-y-8">
+          {news.map((item) => (
+            <article key={item.url} className="bg-surface-secondary rounded-2xl border border-border p-7 sm:p-8">
+              {item.video ? (
+                <div className="rounded-xl overflow-hidden mb-5 bg-black flex justify-center">
+                  <video
+                    controls
+                    preload="metadata"
+                    playsInline
+                    poster={item.image}
+                    className="max-h-[30rem] w-auto"
+                  >
+                    <source src={item.video} type="video/mp4" />
+                  </video>
+                </div>
+              ) : item.image ? (
+                <div className="rounded-xl overflow-hidden mb-5 bg-surface-tertiary flex justify-center">
+                  <img src={item.image} alt={item.title} loading="lazy" className="max-h-96 w-auto object-contain" />
+                </div>
+              ) : null}
+              <time className="text-xs font-semibold uppercase tracking-wider text-brand">{item.date}</time>
+              <h2 className="text-2xl font-bold text-text-primary mt-2 mb-4 leading-tight">{item.title}</h2>
+
+              {item.intro.map((p) => (
+                <p key={p} className="text-text-secondary leading-relaxed mb-4">
+                  {p}
+                </p>
+              ))}
+
+              {item.metrics && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-5">
+                  {item.metrics.map((m) => (
+                    <div key={m.k} className="bg-surface-primary rounded-lg border border-border px-3 py-2">
+                      <div className="text-xs text-text-secondary">{m.k}</div>
+                      <div className="text-sm font-bold text-text-primary">{m.v}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {item.outro?.map((p) => (
+                <p key={p} className="text-text-secondary leading-relaxed mb-4">
+                  {p}
+                </p>
+              ))}
+
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3 transition-all mt-1"
+              >
+                在LinkedIn上阅读
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
