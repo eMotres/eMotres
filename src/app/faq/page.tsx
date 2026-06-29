@@ -5,21 +5,21 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'FAQ — Electric Motors for Drones & Aviation',
   alternates: { canonical: '/faq/' },
-  description: 'Find answers to frequently asked questions about our electric motors, including production, payment, shipping, warranty, technology, custom design, and order fulfillment.',
+  description: 'Answers to common questions about our AeroStator Core™ electric motors — production, payment, shipping, warranty, technology, custom design and lead times.',
 };
 
 const faqs = [
   {
     question: "Where are your motors produced?",
-    answer: "Our motors are assembled and tested in Slovenia (EU), with some parts ordered from China.",
+    answer: "Our motors are manufactured in China, with final assembly and testing available in the EU on request.",
   },
   {
     question: "How can I make a payment?",
-    answer: "Currently, payment can only be made via invoice. However, an option to purchase through our online shop will be available soon",
+    answer: "Payment is currently made by invoice. An option to buy directly through our online shop is coming soon.",
   },
   {
     question: "How do you handle shipment?",
-    answer: "Shipments within the EU are handled by GLS, and shipments outside the EU are managed by DHL.",
+    answer: "Shipments within the EU are handled by GLS; shipments outside the EU are handled by DHL.",
   },
   {
     question: "What warranty do you offer?",
@@ -27,48 +27,52 @@ const faqs = [
   },
   {
     question: "Why are your motors more efficient than others?",
-    answer: "Our motors are more efficient due to advanced technologies like tangential magnet polarization, grain-oriented (GO) steel, rectangular copper wire, and direct stator cooling.",
+    answer: "All our motors are built on our patented AeroStator Core™ architecture — tangential magnet polarization, rectangular copper windings and direct stator cooling — which together deliver the highest torque density and efficiency in their class.",
   },
   {
     question: "How do your motors compare with axial flux motors?",
-    answer: "Our motors provide higher torque density, greater efficiency, and lower cost compared to any existing axial flux motors of the same weight and KV rating.",
+    answer: "At the same weight and KV rating, AeroStator Core motors offer higher torque density, greater efficiency and lower cost than existing axial-flux motors.",
   },
   {
     question: "What controller do you recommend for your motors?",
-    answer: "We recommend using Field-Oriented Control (FOC) controllers, as they are more efficient than Brushless DC (BLDC) controllers.",
+    answer: "We recommend Field-Oriented Control (FOC) controllers, as they are more efficient than trapezoidal BLDC controllers.",
   },
   {
     question: "What position sensors do you use?",
-    answer: "For our air-cooled motors, we operate in sensorless mode. For liquid-cooled motors, we use magnetic encoder sensors.",
+    answer: "Air-cooled motors run in sensorless mode; liquid-cooled motors use magnetic encoder sensors.",
   },
   {
     question: "Can you develop a custom motor design?",
-    answer: "Yes, we can develop custom motor designs ranging from 0.5 kW to 1 MW. We can tailor the design for high torque density or high power density, with different cooling systems, voltages, and currents to meet your specific requirements.",
+    answer: "Yes — we develop custom motors from 0.5 kW to 1 MW, optimized for high torque density or high power density, with the cooling system, voltage and current to match your requirements.",
   },
   {
     question: "How long does it take to fulfill an order?",
-    answer: "Standard order production takes approximately two months from the time payment is received. However, some of our most popular motor models are in stock and available for quicker shipment.",
-  },
-  {
-    question: "Is it possible to get a discount on your motors?",
-    answer: "Yes, discounts are possible depending on the quantity ordered and for certain non-commercial projects.",
+    answer: "Standard production takes about 1.5 months from order. Engineering samples of selected models may be available sooner — just ask.",
   },
 ];
 
 const FaqPage = () => {
   return (
-    <main>
-      <div className="bg-gray-100 py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold text-center mb-12">Frequently Asked Questions</h1>
-          <p className="text-center text-lg text-gray-600 mb-12">about payment methods, custom manufacturing lead times, warranties, etc.</p>
-          <div className="max-w-3xl mx-auto">
-            {faqs.map((faq, index) => (
-              <FaqItem key={index} {...faq} />
-            ))}
-          </div>
+    <main className="min-h-screen bg-surface-primary">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
+        <header className="text-center mb-12">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-orange-50 px-3 py-1 rounded-full">
+            FAQ
+          </span>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-4">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-lg text-text-secondary">
+            Payment, lead times, warranty, technology and custom design.
+          </p>
+        </header>
+        <div>
+          {faqs.map((faq, index) => (
+            <FaqItem key={index} {...faq} />
+          ))}
         </div>
-      </div>    </main>
+      </div>
+    </main>
   );
 };
 
