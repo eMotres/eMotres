@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const stats = [
   { value: '1.5×', label: '相比径向更高的磁场' },
-  { value: '~75%', label: '铜槽满率，相比圆线 45%' },
+  { value: '~75%', label: '铜槽满率，相比圆线 35%' },
   { value: '15', label: 'N·m/kg 比扭矩密度——已验证' },
   { value: 'IP65', label: '可选全密封结构' },
 ];
@@ -53,11 +53,11 @@ const technologies: Tech[] = [
   },
   {
     title: '扁平铜线',
-    tagline: '约 75% 槽满率，相比圆线约 45%——电阻更低、电流密度更高、发热更少。',
+    tagline: '约 75% 槽满率，相比圆线约 35%——电阻更低、电流密度更高、发热更少。',
     img: '/images/tech-wire.png',
     points: [
       {
-        h: '约 75% 槽满率，相比圆线约 45%',
+        h: '约 75% 槽满率，相比圆线约 35%',
         d: '扁平铜线对槽截面的填充效率大幅提升。每槽容纳更多铜意味着在相同绕组几何结构下电阻更低。',
       },
       {

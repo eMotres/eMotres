@@ -190,7 +190,7 @@ export const products: Product[] = [
       rows: [
         { label: 'Winding wire', ours: 'Rectangular (flat)', theirs: 'Round', win: 'ours' },
         { label: 'Coil count', ours: '6 coils', theirs: '12 coils', win: 'ours' },
-        { label: 'Copper fill factor', ours: '~75 %', theirs: '~45 %', win: 'ours' },
+        { label: 'Copper fill factor', ours: '~75 %', theirs: '~35 %', win: 'ours' },
         { label: 'Line-to-line resistance', ours: '19.1 mΩ', theirs: '~76 mΩ', win: 'ours' },
         { label: 'R·KV² (copper quality, ↓ better)', ours: '14,097', theirs: '~61,560', win: 'ours' },
         { label: 'KV', ours: '858 rpm/V', theirs: '900 rpm/V', win: 'tie' },

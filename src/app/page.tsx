@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const stats = [
   { value: '1.5×', label: 'Higher magnetic field vs radial construction' },
   { value: 'IP65', label: 'Possible fully sealed construction' },
-  { value: '~75%', label: 'Copper fill factor vs 45% round wire' },
+  { value: '~75%', label: 'Copper fill factor vs 35% round wire' },
   { value: '15', label: 'N·m/kg specific torque — prototype proven' },
 ];
 

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const stats = [
   { value: '1.5×', label: '相比径向结构更高的磁场' },
   { value: 'IP65', label: '可选全密封结构' },
-  { value: '~75%', label: '铜槽满率（圆线仅 45%）' },
+  { value: '~75%', label: '铜槽满率（圆线仅 35%）' },
   { value: '15', label: 'N·m/kg 比扭矩——原型验证' },
 ];
 
