@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     question: "How long does it take to fulfill an order?",
-    answer: "Standard production takes about 1.5 months from order. Engineering samples of selected models may be available sooner — just ask.",
+    answer: "Production takes 1.3 to 3 months, depending on the motor and the quantity ordered.",
   },
 ];
 
