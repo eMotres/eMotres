@@ -172,7 +172,6 @@ const patents = {
   ],
   pending: [
     { office: 'PCT', number: 'PCT/IB2026/053894', desc: '核心 AeroStator Core™ 拓扑 · 2026年4月20日' },
-    { office: 'EP', number: 'EP 4287460 A1', desc: '欧洲专利 · 审查中 · 2023年12月6日' },
     { office: 'ES', number: 'ESU202490013', desc: '西班牙 · 审查中' },
     { office: 'IN', number: '202517116950', desc: '印度 · 2025年11月25日提交' },
   ],

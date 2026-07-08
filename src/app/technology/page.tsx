@@ -169,7 +169,6 @@ const patents = {
   ],
   pending: [
     { office: 'PCT', number: 'PCT/IB2026/053894', desc: 'Core AeroStator Core™ topology · Apr 20 2026' },
-    { office: 'EP', number: 'EP 4287460 A1', desc: 'European patent · Under examination · Dec 6 2023' },
     { office: 'ES', number: 'ESU202490013', desc: 'Spain · In examination' },
     { office: 'IN', number: '202517116950', desc: 'India · Filed Nov 25 2025' },
   ],
