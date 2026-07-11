@@ -25,7 +25,7 @@ export interface DynoPoint {
   current: number; // A
   thrust: number; // gram-force
   torque: number; // N·m
-  temp: number; // °C
+  temp?: number; // °C (optional — some controller logs have no temperature channel)
   pElec: number; // electric power, W
   pShaft: number; // shaft (mechanical) power, W
   elecEff: number; // electrical efficiency, %
@@ -33,6 +33,7 @@ export interface DynoPoint {
 }
 
 export interface DynoTest {
+  title?: string;
   intro: string;
   conditions?: string;
   date?: string;
@@ -91,6 +92,7 @@ export interface Product {
   specs: { label: string; value: string }[];
   performanceSpecs?: PerformanceSpecs;
   dynoTest?: DynoTest;
+  dynoTestFoc?: DynoTest;
   comparison?: MotorComparison;
 }
 
@@ -146,6 +148,7 @@ export const products: Product[] = [
       },
     },
     dynoTest: {
+      title: 'BLDC controller (trapezoidal)',
       intro: 'First propeller-dynamometer sweep of the CIANO14 40_12 flat-wire winding on an HQ1050-class propeller at 24 V (2026-06-16) — electrical efficiency holds a 75–77 % plateau to the top of the range while the winding stays cool.',
       conditions: 'HQ1050-class propeller · 24 V bus · ambient 31.3 °C',
       date: '2026-06-16',
@@ -174,6 +177,39 @@ export const products: Product[] = [
         { throttle: 80, rpm: 12819, voltage: 23.06, current: 39.96, thrust: 3305, torque: 0.528, temp: 33.8, pElec: 921.4, pShaft: 708.8, elecEff: 76.9, sysEff: 3.59 },
         { throttle: 90, rpm: 13990, voltage: 22.80, current: 54.00, thrust: 3976, torque: 0.639, temp: 35.6, pElec: 1231.2, pShaft: 936.2, elecEff: 76.0, sysEff: 3.23 },
         { throttle: 100, rpm: 14524, voltage: 22.66, current: 61.89, thrust: 4304, torque: 0.696, temp: 38.0, pElec: 1402.2, pShaft: 1058.6, elecEff: 75.5, sysEff: 3.07 },
+      ],
+    },
+    dynoTestFoc: {
+      title: 'FOC controller (sinusoidal)',
+      intro: 'The same CIANO14 40_12 driven by a field-oriented (FOC / sinusoidal) controller on a 10×4.5 propeller at 22 V (2026-07-09). Moving from trapezoidal BLDC to FOC lifts peak motor efficiency to 84.2 % — about 7 points higher — across a smoother sweep.',
+      conditions: '10×4.5 (1045) propeller · 22 V bus · FOC controller',
+      date: '2026-07-09',
+      note: 'Efficiency is motor efficiency = shaft power / electric power. This controller log has no temperature channel.',
+      setup: [
+        { label: 'Test bench', value: 'DET G10-10KGF dynamometer' },
+        { label: 'Propeller', value: '10×4.5 (1045)' },
+        { label: 'Controller', value: 'Hobbywing X8 · FOC (sinusoidal)' },
+        { label: 'Bus voltage', value: '22 V' },
+        { label: 'Signal', value: '50 Hz PWM sweep' },
+      ],
+      highlights: [
+        { label: 'Peak motor efficiency', value: '84.2 %', sub: 'at ~8,500 rpm / 1,579 g' },
+        { label: 'Efficiency vs BLDC', value: '+7 pp', sub: '84.2 % vs 76.9 % (trapezoidal)' },
+        { label: 'Max thrust', value: '3622 g', sub: '12,606 rpm @ 21.2 V' },
+      ],
+      points: [
+        { rpm: 1935, voltage: 22.11, current: 0.377, thrust: 55, torque: 0.0196, pElec: 8.3, pShaft: 4.0, elecEff: 47.5, sysEff: 6.54 },
+        { rpm: 3087, voltage: 22.09, current: 1.025, thrust: 177, torque: 0.0424, pElec: 22.6, pShaft: 13.7, elecEff: 60.5, sysEff: 7.84 },
+        { rpm: 4159, voltage: 22.08, current: 2.110, thrust: 348, torque: 0.0706, pElec: 46.6, pShaft: 30.7, elecEff: 65.9, sysEff: 7.48 },
+        { rpm: 6215, voltage: 22.04, current: 6.199, thrust: 822, torque: 0.1626, pElec: 136.6, pShaft: 105.8, elecEff: 77.4, sysEff: 6.02 },
+        { rpm: 7078, voltage: 21.98, current: 9.059, thrust: 1078, torque: 0.2132, pElec: 199.1, pShaft: 157.9, elecEff: 79.3, sysEff: 5.41 },
+        { rpm: 7936, voltage: 21.93, current: 12.783, thrust: 1381, torque: 0.2785, pElec: 280.3, pShaft: 231.4, elecEff: 82.5, sysEff: 4.93 },
+        { rpm: 8467, voltage: 21.90, current: 15.637, thrust: 1579, torque: 0.3253, pElec: 342.4, pShaft: 288.3, elecEff: 84.2, sysEff: 4.61 },
+        { rpm: 9963, voltage: 21.74, current: 26.294, thrust: 2254, torque: 0.4557, pElec: 571.6, pShaft: 475.2, elecEff: 83.1, sysEff: 3.94 },
+        { rpm: 10825, voltage: 21.62, current: 34.602, thrust: 2703, torque: 0.5468, pElec: 748.1, pShaft: 619.5, elecEff: 82.8, sysEff: 3.61 },
+        { rpm: 11601, voltage: 21.48, current: 44.240, thrust: 3088, torque: 0.6276, pElec: 950.3, pShaft: 762.1, elecEff: 80.2, sysEff: 3.25 },
+        { rpm: 12260, voltage: 21.32, current: 54.231, thrust: 3412, torque: 0.7018, pElec: 1156.3, pShaft: 900.6, elecEff: 77.9, sysEff: 2.95 },
+        { rpm: 12606, voltage: 21.22, current: 60.537, thrust: 3622, torque: 0.7425, pElec: 1284.6, pShaft: 979.6, elecEff: 76.3, sysEff: 2.82 },
       ],
     },
     comparison: {

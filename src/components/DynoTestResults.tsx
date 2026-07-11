@@ -4,6 +4,7 @@ import DynoChart from '@/components/DynoChart';
 export default function DynoTestResults({ test }: { test: DynoTest }) {
   const peakEff = Math.max(...test.points.map((p) => p.elecEff));
   const hasThrottle = test.points.some((p) => p.throttle != null);
+  const hasTemp = test.points.some((p) => p.temp != null);
   const maxTorque = Math.max(...test.points.map((p) => p.torque));
   const torqueDec = maxTorque >= 10 ? 1 : 3; // table
   const torqueYDec = maxTorque >= 10 ? 0 : 1; // chart axis
@@ -16,7 +17,7 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
     'A',
     'Thrust (g)',
     'Torque (N·m)',
-    'Temp (°C)',
+    ...(hasTemp ? ['Temp (°C)'] : []),
     'P elec (W)',
     'P shaft (W)',
     'Elec eff (%)',
@@ -27,7 +28,7 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
     <section className="mb-16">
       <div className="border-b border-surface-tertiary mb-6">
         <span className="inline-block border-b-2 border-brand text-brand font-semibold pb-3 text-sm uppercase tracking-wider">
-          Test Results
+          Test Results{test.title ? ` — ${test.title}` : ''}
         </span>
       </div>
 
@@ -80,7 +81,9 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
                     <td className="px-3 py-2 text-right text-text-secondary">{p.current.toFixed(2)}</td>
                     <td className="px-3 py-2 text-right text-text-primary">{p.thrust.toLocaleString('en-US')}</td>
                     <td className="px-3 py-2 text-right text-text-primary">{p.torque.toFixed(torqueDec)}</td>
-                    <td className="px-3 py-2 text-right text-text-secondary">{p.temp.toFixed(1)}</td>
+                    {hasTemp && (
+                      <td className="px-3 py-2 text-right text-text-secondary">{p.temp != null ? p.temp.toFixed(1) : '—'}</td>
+                    )}
                     <td className="px-3 py-2 text-right text-text-primary">{p.pElec.toFixed(1)}</td>
                     <td className="px-3 py-2 text-right text-text-secondary">{p.pShaft.toFixed(1)}</td>
                     <td className="px-3 py-2 text-right font-semibold text-brand">{p.elecEff.toFixed(1)}</td>
