@@ -113,7 +113,7 @@ export const products: Product[] = [
     power: '4 kW',
     status: 'Engineering samples — made to order (~1.5 months)',
     description: 'The CIANO14 40_12 is a compact precision motor built on the AeroStator Core platform. Tangential magnet polarization delivers exceptional torque density in a minimal footprint — ideal for racing UAVs and precision aerial systems.',
-    applications: 'Racing drones, precision UAVs, light aerial robotics. Compatible with 18″–24″ propellers.',
+    applications: 'Racing drones, precision UAVs, light aerial robotics. Compatible with 10″–12″ propellers.',
     kvOptions: ['KV 850'],
     voltageOptions: ['15–25 V (6S LiPo)'],
     specs: [
