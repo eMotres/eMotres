@@ -184,7 +184,7 @@ export const products: Product[] = [
       intro: 'The same CIANO14 40_12 driven by a field-oriented (FOC / sinusoidal) controller on a 2-blade 10×4.5 propeller at 22 V (2026-07-09). Moving from trapezoidal BLDC to FOC lifts peak system efficiency to 84.2 % — about 7 points higher — across a smoother sweep.',
       conditions: '10×4.5 (1045) · 2-blade propeller · 22 V bus · FOC controller',
       date: '2026-07-09',
-      note: 'Efficiency is system efficiency (motor + controller) = shaft power / electric power. This controller log has no temperature channel. The propeller differs from the BLDC run (2-blade 10×4.5 vs 3-blade 10.5×5), so peak thrust is not directly comparable between the two runs — the efficiency gain is.',
+      note: 'Efficiency is system efficiency (motor + controller) = shaft power / electric power. This controller log has no temperature channel. This run differs from the BLDC run in more than the controller — different dynamometer (DET G10-10KGF vs LY-10KGF), propeller (2-blade 10×4.5 vs 3-blade 10.5×5) and bus voltage (22 V vs 24 V). The two are therefore separate data points, not a controlled A/B: neither the thrust nor the efficiency difference can be attributed to the controller alone.',
       setup: [
         { label: 'Test bench', value: 'DET G10-10KGF dynamometer' },
         { label: 'Propeller', value: '10×4.5 (1045) · 2-blade' },

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { DynoPoint } from '@/lib/products';
+import { yAxisFor, tickDecimals } from '@/lib/chartScale';
 
 const BRAND = 'var(--color-brand)';
 const GRID = 'var(--color-border)';
@@ -11,15 +12,6 @@ const SURFACE = 'var(--color-surface-primary)';
 type NumKey = {
   [K in keyof DynoPoint]-?: DynoPoint[K] extends number ? K : never;
 }[keyof DynoPoint];
-
-/** Round an axis maximum up to a clean value. */
-function axisMax(v: number): number {
-  if (v <= 0) return 1;
-  const pow = Math.pow(10, Math.floor(Math.log10(v)));
-  const steps = [1, 1.2, 1.6, 2, 2.5, 3, 4, 5, 6, 8, 10];
-  for (const s of steps) if (s * pow >= v * 1.0001) return s * pow;
-  return 10 * pow;
-}
 
 const fmtFull = (n: number) => Math.round(n).toLocaleString('en-US');
 const fmtAxisRpm = (n: number) => `${(n / 1000).toFixed(1)}k`;
@@ -57,13 +49,12 @@ export default function DynoChart({
   const ys = points.map((p) => p[yKey]);
   const xMin = Math.min(...xs);
   const xMax = Math.max(...xs);
-  const yMin = 0;
-  const yMax = axisMax(Math.max(...ys));
+  const { min: yMin, max: yMax, step: yStep } = yAxisFor(ys);
 
   const sx = (x: number) => pad.l + ((x - xMin) / (xMax - xMin || 1)) * plotW;
   const sy = (y: number) => pad.t + plotH - ((y - yMin) / (yMax - yMin || 1)) * plotH;
 
-  const fmtY = (n: number) => n.toFixed(yDecimals);
+  const fmtY = (n: number) => n.toFixed(tickDecimals(yStep, yDecimals));
   const fmtAxisX = xAxis === 'rpm' ? fmtAxisRpm : fmtFull;
 
   const line = points
@@ -71,9 +62,9 @@ export default function DynoChart({
     .join(' ');
   const area = `${line} L${sx(xMax).toFixed(1)} ${sy(yMin).toFixed(1)} L${sx(xMin).toFixed(1)} ${sy(yMin).toFixed(1)} Z`;
 
-  const HDIV = 8;
   const VDIV = 6;
-  const yTicks = Array.from({ length: HDIV + 1 }, (_, i) => yMin + (i * (yMax - yMin)) / HDIV);
+  const yTickCount = Math.max(1, Math.round((yMax - yMin) / yStep));
+  const yTicks = Array.from({ length: yTickCount + 1 }, (_, i) => yMin + i * yStep);
   const vLines = Array.from({ length: VDIV + 1 }, (_, i) => pad.l + (i * plotW) / VDIV);
   const xTicks = [xMin, (xMin + xMax) / 2, xMax];
   const gid = `area-${String(xKey)}-${String(yKey)}`;

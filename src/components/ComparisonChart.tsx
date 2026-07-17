@@ -1,4 +1,5 @@
 import { ComparisonPoint } from '@/lib/products';
+import { yAxisFor, tickDecimals } from '@/lib/chartScale';
 
 const BRAND = 'var(--color-brand)';
 const GRID = 'var(--color-border)';
@@ -6,14 +7,6 @@ const TXT = 'var(--color-text-secondary)';
 const THEIRS = '#3b82f6';
 
 type YKey = 'current' | 'pElec' | 'sysEff' | 'elecEff';
-
-function axisMax(v: number): number {
-  if (v <= 0) return 1;
-  const pow = Math.pow(10, Math.floor(Math.log10(v)));
-  const steps = [1, 1.2, 1.6, 2, 2.5, 3, 4, 5, 6, 8, 10];
-  for (const s of steps) if (s * pow >= v * 1.0001) return s * pow;
-  return 10 * pow;
-}
 
 export default function ComparisonChart({
   title,
@@ -41,19 +34,20 @@ export default function ComparisonChart({
   const all = [...ours, ...theirs];
   const xMin = 0;
   const xMax = Math.max(...all.map((p) => p.thrust));
-  const yMin = 0;
-  const yMax = axisMax(Math.max(...all.map((p) => p[yKey])));
+  // Fit both series (ours + competitor) so neither gets squashed.
+  const { min: yMin, max: yMax, step: yStep } = yAxisFor(all.map((p) => p[yKey]));
 
   const sx = (x: number) => pad.l + ((x - xMin) / (xMax - xMin || 1)) * plotW;
   const sy = (y: number) => pad.t + plotH - ((y - yMin) / (yMax - yMin || 1)) * plotH;
   const path = (pts: ComparisonPoint[]) =>
     pts.map((p, i) => `${i ? 'L' : 'M'}${sx(p.thrust).toFixed(1)} ${sy(p[yKey]).toFixed(1)}`).join(' ');
 
-  const yTicks = Array.from({ length: 9 }, (_, i) => yMin + (i * (yMax - yMin)) / 8);
+  const yTickCount = Math.max(1, Math.round((yMax - yMin) / yStep));
+  const yTicks = Array.from({ length: yTickCount + 1 }, (_, i) => yMin + i * yStep);
   const vLines = Array.from({ length: 7 }, (_, i) => pad.l + (i * plotW) / 6);
   const xTicks = [xMin, xMax / 2, xMax];
   const fmtThrust = (n: number) => Math.round(n).toLocaleString('en-US');
-  const fmtY = (n: number) => n.toFixed(yDecimals);
+  const fmtY = (n: number) => n.toFixed(tickDecimals(yStep, yDecimals));
 
   return (
     <div className="bg-surface-secondary rounded-xl border border-border p-4">
