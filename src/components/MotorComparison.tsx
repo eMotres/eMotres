@@ -30,8 +30,8 @@ export default function MotorComparisonSection({
 
       {/* Overlay charts vs thrust */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <ComparisonChart title="Electrical efficiency (%)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="elecEff" yDecimals={0} />
-        <ComparisonChart title="System efficiency (gf/W)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="sysEff" yDecimals={0} />
+        <ComparisonChart title="System efficiency (%) — motor + controller" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="elecEff" yDecimals={0} />
+        <ComparisonChart title="Thrust efficiency (gf/W)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="sysEff" yDecimals={0} />
         <ComparisonChart title="Current (A)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="current" yDecimals={0} />
         <ComparisonChart title="Electric power (W)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="pElec" yDecimals={0} />
       </div>

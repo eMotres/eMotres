@@ -28,8 +28,8 @@ export interface DynoPoint {
   temp?: number; // °C (optional — some controller logs have no temperature channel)
   pElec: number; // electric power, W
   pShaft: number; // shaft (mechanical) power, W
-  elecEff: number; // electrical efficiency, %
-  sysEff: number; // system efficiency, gf/W
+  elecEff: number; // system efficiency (motor + controller), %
+  sysEff: number; // thrust efficiency, gf/W
 }
 
 export interface DynoTest {
@@ -55,8 +55,8 @@ export interface ComparisonPoint {
   thrust: number; // gram-force
   current: number; // A
   pElec: number; // electric power, W
-  sysEff: number; // system efficiency, gf/W
-  elecEff: number; // electrical efficiency, %
+  sysEff: number; // thrust efficiency, gf/W
+  elecEff: number; // system efficiency (motor + controller), %
 }
 
 export interface MotorComparison {
@@ -149,7 +149,7 @@ export const products: Product[] = [
     },
     dynoTest: {
       title: 'BLDC controller (trapezoidal)',
-      intro: 'First propeller-dynamometer sweep of the CIANO14 40_12 flat-wire winding on a 3-blade HQ1050 propeller at 24 V (2026-06-16) — electrical efficiency holds a 75–77 % plateau to the top of the range while the winding stays cool.',
+      intro: 'First propeller-dynamometer sweep of the CIANO14 40_12 flat-wire winding on a 3-blade HQ1050 propeller at 24 V (2026-06-16) — system efficiency (motor + controller) holds a 75–77 % plateau to the top of the range while the winding stays cool.',
       conditions: 'HQ1050 · 3-blade propeller · 24 V bus · ambient 31.3 °C',
       date: '2026-06-16',
       note: 'Temperatures are from an automatic ramp (transient, not steady-state).',
@@ -162,7 +162,7 @@ export const products: Product[] = [
         { label: 'Air pressure', value: '100.70 kPa' },
       ],
       highlights: [
-        { label: 'Peak electrical efficiency', value: '76.9 %', sub: 'at 80 % throttle' },
+        { label: 'Peak system efficiency', value: '76.9 %', sub: 'at 80 % throttle' },
         { label: 'Max thrust', value: '4304 g', sub: '14,524 rpm @ 24 V' },
         { label: 'Power at max thrust', value: '1402 W', sub: 'at 61.9 A' },
       ],
@@ -181,10 +181,10 @@ export const products: Product[] = [
     },
     dynoTestFoc: {
       title: 'FOC controller (sinusoidal)',
-      intro: 'The same CIANO14 40_12 driven by a field-oriented (FOC / sinusoidal) controller on a 2-blade 10×4.5 propeller at 22 V (2026-07-09). Moving from trapezoidal BLDC to FOC lifts peak motor efficiency to 84.2 % — about 7 points higher — across a smoother sweep.',
+      intro: 'The same CIANO14 40_12 driven by a field-oriented (FOC / sinusoidal) controller on a 2-blade 10×4.5 propeller at 22 V (2026-07-09). Moving from trapezoidal BLDC to FOC lifts peak system efficiency to 84.2 % — about 7 points higher — across a smoother sweep.',
       conditions: '10×4.5 (1045) · 2-blade propeller · 22 V bus · FOC controller',
       date: '2026-07-09',
-      note: 'Efficiency is motor efficiency = shaft power / electric power. This controller log has no temperature channel. The propeller differs from the BLDC run (2-blade 10×4.5 vs 3-blade HQ1050), so peak thrust is not directly comparable between the two runs — the efficiency gain is.',
+      note: 'Efficiency is system efficiency (motor + controller) = shaft power / electric power. This controller log has no temperature channel. The propeller differs from the BLDC run (2-blade 10×4.5 vs 3-blade HQ1050), so peak thrust is not directly comparable between the two runs — the efficiency gain is.',
       setup: [
         { label: 'Test bench', value: 'DET G10-10KGF dynamometer' },
         { label: 'Propeller', value: '10×4.5 (1045) · 2-blade' },
@@ -193,7 +193,7 @@ export const products: Product[] = [
         { label: 'Signal', value: '50 Hz PWM sweep' },
       ],
       highlights: [
-        { label: 'Peak motor efficiency', value: '84.2 %', sub: 'at ~8,500 rpm / 1,579 g' },
+        { label: 'Peak system efficiency', value: '84.2 %', sub: 'at ~8,500 rpm / 1,579 g' },
         { label: 'Efficiency vs BLDC', value: '+7 pp', sub: '84.2 % vs 76.9 % (trapezoidal)' },
         { label: 'Max thrust', value: '3622 g', sub: '12,606 rpm @ 21.2 V' },
       ],
@@ -218,10 +218,10 @@ export const products: Product[] = [
       intro:
         'Measured head-to-head against the commercial T-Motor V3115 KV900 on the same propeller (HQ1050-3) and the same 24 V bus — a fully matched comparison, so the advantage is the motor, not the propeller.',
       highlights: [
-        { value: '+12–13 pp', label: 'Electrical efficiency at high thrust' },
+        { value: '+12–13 pp', label: 'System efficiency at high thrust' },
         { value: '−15 %', label: 'Current draw at equal thrust' },
         { value: '−16 %', label: 'Electric power at equal thrust' },
-        { value: '+15–20 %', label: 'System efficiency → flight time' },
+        { value: '+15–20 %', label: 'Thrust efficiency → flight time' },
       ],
       rows: [
         { label: 'Winding wire', ours: 'Rectangular (flat)', theirs: 'Round', win: 'ours' },
@@ -231,7 +231,7 @@ export const products: Product[] = [
         { label: 'R·KV² (copper quality, ↓ better)', ours: '14,097', theirs: '~61,560', win: 'ours' },
         { label: 'KV', ours: '858 rpm/V', theirs: '900 rpm/V', win: 'tie' },
         { label: 'Weight', ours: '125 g', theirs: '115 g', win: 'theirs' },
-        { label: 'Peak electrical efficiency', ours: '76.9 %', theirs: '~71 %', win: 'ours' },
+        { label: 'Peak system efficiency', ours: '76.9 %', theirs: '~71 %', win: 'ours' },
         { label: 'Efficiency at high thrust', ours: '76.0 %', theirs: '62–64 %', win: 'ours' },
         { label: 'Current at ~4,300 g thrust', ours: '61.9 A', theirs: '~72 A', win: 'ours' },
         { label: 'Electric power at ~4,300 g thrust', ours: '1,402 W', theirs: '~1,662 W', win: 'ours' },
@@ -301,7 +301,7 @@ export const products: Product[] = [
     dynoTest: {
       intro: 'Propeller-dynamometer sweep of the CIANO28 150_30 on a 56″ propeller — sustaining ~49 kg of continuous thrust at 8.1 kW, with the motor peaking near 92 % efficiency.',
       conditions: '56″ propeller · high-voltage bus · ambient 26 °C',
-      note: 'Electrical efficiency in the table is electric → shaft (drive, includes the controller); the motor alone peaks at 92.3 %. The continuous point (≈49 kg @ 8.1 kW) was measured at 74.9 V.',
+      note: 'System efficiency in the table is electric → shaft (drive, includes the controller); the motor alone peaks at 92.3 %. The continuous point (≈49 kg @ 8.1 kW) was measured at 74.9 V.',
       setup: [
         { label: 'Propeller', value: '56″' },
         { label: 'Bus voltage', value: '~70 V sweep / 74.9 V continuous' },

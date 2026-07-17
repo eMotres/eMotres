@@ -20,8 +20,8 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
     ...(hasTemp ? ['Temp (°C)'] : []),
     'P elec (W)',
     'P shaft (W)',
-    'Elec eff (%)',
-    'Sys (gf/W)',
+    'Sys eff (%)',
+    'Thrust eff (gf/W)',
   ];
 
   return (
@@ -49,8 +49,8 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
 
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <DynoChart points={test.points} xKey="rpm" yKey="elecEff" title="Electrical efficiency (%)" xUnit="rpm" yUnit="%" xAxis="rpm" yDecimals={0} tipDecimals={1} />
-        <DynoChart points={test.points} xKey="thrust" yKey="sysEff" title="System efficiency (gf/W)" xUnit="g" yUnit="gf/W" xAxis="int" yDecimals={0} tipDecimals={2} />
+        <DynoChart points={test.points} xKey="rpm" yKey="elecEff" title="System efficiency (%) — motor + controller" xUnit="rpm" yUnit="%" xAxis="rpm" yDecimals={0} tipDecimals={1} />
+        <DynoChart points={test.points} xKey="thrust" yKey="sysEff" title="Thrust efficiency (gf/W)" xUnit="g" yUnit="gf/W" xAxis="int" yDecimals={0} tipDecimals={2} />
         <DynoChart points={test.points} xKey="rpm" yKey="torque" title="Shaft torque (N·m)" xUnit="rpm" yUnit="N·m" xAxis="rpm" yDecimals={torqueYDec} tipDecimals={torqueTipDec} />
         <DynoChart points={test.points} xKey="rpm" yKey="pElec" title="Electric power (W)" xUnit="rpm" yUnit="W" xAxis="rpm" yDecimals={0} tipDecimals={1} />
       </div>
@@ -97,8 +97,9 @@ export default function DynoTestResults({ test }: { test: DynoTest }) {
       </div>
 
       <p className="text-xs text-text-secondary mt-3 max-w-3xl">
-        Electrical efficiency = shaft power / electric power. System efficiency = thrust / electric power. Peak
-        electrical-efficiency point highlighted.{test.note ? ` ${test.note}` : ''} Setup:{' '}
+        System efficiency = shaft power / electric power — measured at the bus, so it includes the controller
+        (motor + ESC), not the motor alone. Thrust efficiency = thrust / electric power. Peak
+        system-efficiency point highlighted.{test.note ? ` ${test.note}` : ''} Setup:{' '}
         {test.setup.map((s) => `${s.label} ${s.value}`).join(' · ')}.
       </p>
     </section>
