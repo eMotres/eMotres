@@ -149,7 +149,7 @@ export const products: Product[] = [
     },
     dynoTest: {
       title: 'BLDC controller (trapezoidal)',
-      intro: 'First propeller-dynamometer sweep of the CIANO14 40_12 flat-wire winding on a 3-blade HQ1050 propeller at 24 V (2026-06-16) — system efficiency (motor + controller) holds a 75–77 % plateau to the top of the range while the winding stays cool.',
+      intro: 'First propeller-dynamometer sweep of the CIANO14 40_12 on a 3-blade HQ1050 propeller at 24 V (2026-06-16) — system efficiency (motor + controller) holds a 75–77 % plateau to the top of the range while the winding stays cool.',
       conditions: 'HQ1050 · 3-blade propeller · 24 V bus · ambient 31.3 °C',
       date: '2026-06-16',
       note: 'Temperatures are from an automatic ramp (transient, not steady-state).',
@@ -250,7 +250,7 @@ export const products: Product[] = [
         { thrust: 4605, current: 82.99, pElec: 1889, sysEff: 2.4, elecEff: 62.3 },
       ],
       note:
-        'T-Motor figures are manufacturer thrust-test data; its electrical efficiency is computed from the published voltage, current, RPM and torque. The two propellers were verified aerodynamically identical (±1 %), so the efficiency advantage comes from the flat-wire winding’s higher copper fill factor and lower resistance. The T-Motor reaches ~7 % higher peak thrust by drawing more current; running cooler with current headroom, the CIANO is expected to close that on a larger or higher-pitch propeller. R·KV² is the normalized copper-quality metric (lower = better).',
+        'T-Motor figures are manufacturer thrust-test data; its system efficiency is computed from the published voltage, current, RPM and torque. The two propellers were verified aerodynamically identical (±1 %), so the efficiency advantage comes from the flat-wire winding’s higher copper fill factor and lower resistance. The T-Motor reaches ~7 % higher peak thrust by drawing more current; running cooler with current headroom, the CIANO is expected to close that on a larger or higher-pitch propeller. R·KV² is the normalized copper-quality metric (lower = better).',
     },
   },
   {

@@ -32,7 +32,7 @@ const news: NewsItem[] = [
       { k: 'Thrust', v: '3,455 g' },
       { k: 'Shaft power', v: '770 W (6.16 kW/kg)' },
       { k: 'Electrical input', v: '1,038 W' },
-      { k: 'Efficiency', v: '74.2 %' },
+      { k: 'System efficiency', v: '74.2 %' },
       { k: 'Current', v: '43.85 A @ 23.7 V' },
       { k: 'Max temp', v: '150 °C (stabilized)' },
     ],
@@ -51,8 +51,8 @@ const news: NewsItem[] = [
       'Benchmarked on the same propeller and the same 24 V against the class-leading T-Motor V3115 outrunner:',
     ],
     metrics: [
-      { k: 'Electrical efficiency', v: '+12–13 pp at high thrust' },
-      { k: 'Peak efficiency', v: '76.9 % (75–77 % plateau)' },
+      { k: 'System efficiency', v: '+12–13 pp at high thrust' },
+      { k: 'Peak system efficiency', v: '76.9 % (75–77 % plateau)' },
       { k: 'T-Motor V3115 at max', v: '~64 %' },
     ],
     outro: [
