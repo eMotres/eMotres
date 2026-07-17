@@ -299,7 +299,7 @@ export const products: Product[] = [
       },
     },
     dynoTest: {
-      intro: 'Propeller-dynamometer sweep of the CIANO28 150_30 on a 56″ propeller — sustaining ~49 kg of continuous thrust at 8.1 kW, with the motor peaking near 92 % efficiency.',
+      intro: 'Propeller-dynamometer sweep of the CIANO28 150_30 on a 56″ propeller — sustaining ~49 kg of continuous thrust at 8.1 kW, with system efficiency (motor + controller) peaking at 86.6 % and the motor alone at 92.3 %.',
       conditions: '56″ propeller · high-voltage bus · ambient 26 °C',
       note: 'System efficiency in the table is electric → shaft (drive, includes the controller); the motor alone peaks at 92.3 %. The continuous point (≈49 kg @ 8.1 kW) was measured at 74.9 V.',
       setup: [
@@ -309,9 +309,9 @@ export const products: Product[] = [
         { label: 'Motor weight', value: '3.0 kg' },
       ],
       highlights: [
-        { label: 'Continuous thrust', value: '48.8 kg', sub: '8.1 kW · 2,293 rpm · 90.3 % motor η' },
+        { label: 'Continuous thrust', value: '48.8 kg', sub: '8.1 kW · 2,293 rpm · motor η 90.3 %' },
         { label: 'Peak thrust', value: '67.2 kg', sub: '14.4 kW · 2,700 rpm' },
-        { label: 'Peak motor efficiency', value: '92.3 %', sub: 'electric → shaft 86.6 %' },
+        { label: 'Peak system efficiency', value: '86.6 %', sub: 'motor alone 92.3 %' },
       ],
       points: [
         { rpm: 1200, voltage: 70.2, current: 19.09, thrust: 12604, torque: 8.54, temp: 25.5, pElec: 1340.1, pShaft: 1073.2, elecEff: 80.1, sysEff: 9.40 },
