@@ -17,11 +17,27 @@ export const metadata: Metadata = {
   },
 };
 
-const stats = [
-  { value: '1.5×', label: 'Higher magnetic field vs radial construction' },
-  { value: 'IP65', label: 'Possible fully sealed construction' },
-  { value: '~75%', label: 'Copper fill factor vs 35% round wire' },
-  { value: '15', label: 'N·m/kg specific torque — prototype proven' },
+const stats: { value: string; label: string; sub: string }[] = [
+  {
+    value: '1.5×',
+    label: 'Higher magnetic field vs radial construction',
+    sub: 'More torque from the same magnets',
+  },
+  {
+    value: '~75%',
+    label: 'Copper fill factor vs 35% round wire',
+    sub: 'Lower resistance — less heat, more continuous power',
+  },
+  {
+    value: '15',
+    label: 'N·m/kg specific torque — prototype proven',
+    sub: 'Lighter propulsion for the same thrust',
+  },
+  {
+    value: 'IP65',
+    label: 'Possible fully sealed construction',
+    sub: 'Dust & water protection on request',
+  },
 ];
 
 const technologies = [
@@ -111,7 +127,7 @@ export default function Home() {
           <div className="text-center pt-10 pb-6">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand mb-8">
               <span className="w-6 h-px bg-brand inline-block" />
-              Patented Motor Technology
+              Patented Motor Technology by eMotres
               <span className="w-6 h-px bg-brand inline-block" />
             </span>
 
@@ -130,10 +146,23 @@ export default function Home() {
               <span className="text-brand">Core</span>
             </h1>
 
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-8">
-              Four patented technologies in one motor architecture.
-              The highest torque density electric motor available on the market — built for drones, UAVs, aviation and robotics.
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-6">
+              Four patented technologies in one motor architecture — the stator platform behind every{' '}
+              <span className="font-semibold text-text-primary">eMotres</span> motor. The highest torque density
+              electric motor available on the market, built for drones, UAVs, aviation and robotics.
             </p>
+
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex items-start gap-2.5 bg-orange-50 border border-orange-200 rounded-xl px-4 py-2.5 max-w-xl text-left">
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                </svg>
+                <p className="text-sm sm:text-base font-bold text-text-primary leading-snug">
+                  CIANO14: more than <span className="text-brand">2× the continuous power</span> of any competitor in
+                  its class — same size, double the sustained output.
+                </p>
+              </div>
+            </div>
 
             <div className="flex flex-wrap justify-center gap-4 mb-6">
               <Link
@@ -161,6 +190,7 @@ export default function Home() {
               <div key={s.label} className="text-center">
                 <div className="text-3xl font-extrabold text-brand mb-1">{s.value}</div>
                 <div className="text-xs text-text-secondary leading-tight">{s.label}</div>
+                <div className="text-xs font-semibold text-text-primary leading-tight mt-1.5">{s.sub}</div>
               </div>
             ))}
           </div>
