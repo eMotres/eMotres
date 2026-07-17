@@ -188,7 +188,7 @@ export const products: Product[] = [
       setup: [
         { label: 'Test bench', value: 'DET G10-10KGF dynamometer' },
         { label: 'Propeller', value: '10×4.5 (1045) · 2-blade' },
-        { label: 'Controller', value: 'Hobbywing X8 · FOC (sinusoidal)' },
+        { label: 'Controller', value: 'FOC (sinusoidal)' },
         { label: 'Bus voltage', value: '22 V' },
         { label: 'Signal', value: '50 Hz PWM sweep' },
       ],
