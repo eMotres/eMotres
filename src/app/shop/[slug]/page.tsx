@@ -125,7 +125,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {/* Info */}
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-orange-50 px-3 py-1 rounded-full">
+              <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-blue-50 px-3 py-1 rounded-full">
                 {product.category}
               </span>
               <span className="text-xs text-text-secondary bg-surface-secondary px-3 py-1 rounded-full">
@@ -152,7 +152,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               )}
 
               {product.priceComingSoon && (
-                <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-brand bg-orange-50 border border-orange-100 rounded-lg px-3 py-2">
+                <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-brand bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">
                   <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -168,7 +168,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
 
             {product.keyClaim && (
-              <div className="flex items-center gap-3 bg-orange-50 border border-orange-200 rounded-xl px-4 py-3.5 mb-6">
+              <div className="flex items-center gap-3 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3.5 mb-6">
                 <svg className="w-6 h-6 text-brand shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
                 </svg>

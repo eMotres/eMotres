@@ -180,7 +180,7 @@ export default function TechnologyPage() {
       {/* Hero */}
       <section className="px-4 sm:px-6 lg:px-8 pt-16 pb-10">
         <div className="max-w-5xl mx-auto text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-orange-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-blue-50 px-3 py-1 rounded-full">
             AeroStator Core™ Technology
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-5 mb-5">
@@ -236,7 +236,7 @@ export default function TechnologyPage() {
                     </div>
                     <h3 className="text-xl font-bold text-text-primary">{tech.title}</h3>
                     {tech.status && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider bg-orange-50 text-brand px-2.5 py-1 rounded-full">
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-brand px-2.5 py-1 rounded-full">
                         {tech.status}
                       </span>
                     )}
@@ -347,7 +347,7 @@ export default function TechnologyPage() {
               <div className="space-y-3">
                 {patents.granted.map((p) => (
                   <div key={p.number} className="flex items-start gap-3 bg-surface-secondary rounded-xl border border-border px-4 py-3">
-                    <span className="flex-shrink-0 text-[11px] font-bold text-brand bg-orange-50 rounded-md px-2 py-1 w-12 text-center">
+                    <span className="flex-shrink-0 text-[11px] font-bold text-brand bg-blue-50 rounded-md px-2 py-1 w-12 text-center">
                       {p.office}
                     </span>
                     <div>

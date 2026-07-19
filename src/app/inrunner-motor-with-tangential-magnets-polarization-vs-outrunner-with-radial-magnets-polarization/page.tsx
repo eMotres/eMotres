@@ -21,7 +21,7 @@ export default function InrunnerVsOutrunnerPage() {
         </nav>
 
         <header className="mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-orange-50 px-3 py-1 rounded-full">Technology</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-blue-50 px-3 py-1 rounded-full">Technology</span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-6 leading-tight">
             Inrunner Motor with Tangential Magnets Polarization vs Outrunner with Radial Magnets Polarization
           </h1>
@@ -68,9 +68,9 @@ export default function InrunnerVsOutrunnerPage() {
             The inrunner configuration with <strong>tangential magnet polarization</strong> achieves a fundamentally different magnetic circuit. Magnets are polarized tangentially (along the direction of rotation), creating a flux concentration effect between adjacent magnets.
           </p>
 
-          <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-8">
-            <p className="text-orange-900 font-semibold mb-2">Key advantage:</p>
-            <p className="text-orange-800">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+            <p className="text-blue-900 font-semibold mb-2">Key advantage:</p>
+            <p className="text-blue-800">
               The tangential magnetic array construction for inrunner motors can increase magnetic field strength by up to <strong>1.5×</strong> compared to standard radial magnet construction — for motors of equal size, weight and current density.
             </p>
           </div>

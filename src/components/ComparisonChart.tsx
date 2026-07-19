@@ -4,7 +4,7 @@ import { yAxisFor, tickDecimals } from '@/lib/chartScale';
 const BRAND = 'var(--color-brand)';
 const GRID = 'var(--color-border)';
 const TXT = 'var(--color-text-secondary)';
-const THEIRS = '#3b82f6';
+const THEIRS = '#94a3b8';
 
 type YKey = 'current' | 'pElec' | 'sysEff' | 'elecEff';
 

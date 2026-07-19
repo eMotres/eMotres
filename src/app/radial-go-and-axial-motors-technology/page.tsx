@@ -21,7 +21,7 @@ export default function RadialGoAxialPage() {
         </nav>
 
         <header className="mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-orange-50 px-3 py-1 rounded-full">Technology</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-blue-50 px-3 py-1 rounded-full">Technology</span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-6 leading-tight">
             Radial GO and Axial Motors Technology
           </h1>
@@ -73,8 +73,8 @@ export default function RadialGoAxialPage() {
           <p className="text-text-secondary leading-relaxed mb-6">
             The radial inrunner approach employs <strong>tangential polarization magnets</strong> — a patented construction used in eMotres motors. This configuration produces a higher magnetic field while eliminating the need for magnet segmentation, reducing manufacturing complexity and improving reliability.
           </p>
-          <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-8">
-            <p className="text-orange-900 font-medium">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+            <p className="text-blue-900 font-medium">
               Tangential magnet polarization increases magnetic field strength by up to <strong>1.5×</strong> compared to standard radial construction — directly increasing torque output for the same motor size and weight.
             </p>
           </div>

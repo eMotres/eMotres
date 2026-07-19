@@ -56,7 +56,7 @@ const FaqPage = () => {
     <main className="min-h-screen bg-surface-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <header className="text-center mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-orange-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-blue-50 px-3 py-1 rounded-full">
             FAQ
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-4">

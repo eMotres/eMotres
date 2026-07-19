@@ -2,9 +2,9 @@
 
 @theme {
   /* Brand */
-  --color-brand: #e85d04;
-  --color-brand-dark: #c94d00;
-  --color-brand-light: #fb923c;
+  --color-brand: #2563eb;
+  --color-brand-dark: #1d4ed8;
+  --color-brand-light: #60a5fa;
 
   /* Surfaces */
   --color-surface-primary: #ffffff;
@@ -22,9 +22,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-brand: #f97316;
-    --color-brand-dark: #ea580c;
-    --color-brand-light: #fbbf24;
+    --color-brand: #3b82f6;
+    --color-brand-dark: #2563eb;
+    --color-brand-light: #93c5fd;
     --color-surface-primary: #0a0a0a;
     --color-surface-secondary: #141414;
     --color-surface-tertiary: #1f1f1f;
