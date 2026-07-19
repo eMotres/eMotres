@@ -26,6 +26,7 @@ const news: NewsItem[] = [
   {
     date: '2026年7月18日',
     title: 'FOC 下 84.2 % 系统效率 —— CIANO14 40_12 完成正弦波测试',
+    image: '/images/news/news-jul18-foc.webp',
     intro: [
       '我们刚刚完成了 CIANO14 40_12 的 FOC 测试 —— 这是我们基于 AeroStator Core™ 打造的 125 g、3115 级别内转子电机。峰值系统效率（控制器 + 电机，在母线处测量）达到 84.2 %，并在整个工作范围内保持 82–84 % 的平台。作为对比，此前采用梯形波 BLDC 控制器的测试峰值为 76.9 %。',
     ],
