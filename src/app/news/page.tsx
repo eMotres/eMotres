@@ -24,6 +24,7 @@ const news: NewsItem[] = [
     date: 'July 18, 2026',
     title: '84.2 % system efficiency on FOC — the CIANO14 40_12 completes its sinusoidal round',
     image: '/images/news/news-jul18-foc.webp',
+    video: '/videos/news-jul18-foc.mp4',
     intro: [
       'We just finished the FOC round on the CIANO14 40_12 — our 125-gram 3115-class inrunner, built on AeroStator Core™. Peak system efficiency (controller + motor, measured at the bus) reached 84.2 %, holding an 82–84 % plateau across the working range. For comparison, our earlier run on a trapezoidal BLDC controller peaked at 76.9 %.',
     ],
