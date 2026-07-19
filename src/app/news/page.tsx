@@ -21,6 +21,25 @@ type NewsItem = {
 // Newest first.
 const news: NewsItem[] = [
   {
+    date: 'July 18, 2026',
+    title: '84.2 % system efficiency on FOC — the CIANO14 40_12 completes its sinusoidal round',
+    intro: [
+      'We just finished the FOC round on the CIANO14 40_12 — our 125-gram 3115-class inrunner, built on AeroStator Core™. Peak system efficiency (controller + motor, measured at the bus) reached 84.2 %, holding an 82–84 % plateau across the working range. For comparison, our earlier run on a trapezoidal BLDC controller peaked at 76.9 %.',
+    ],
+    metrics: [
+      { k: 'Peak system efficiency', v: '84.2 %' },
+      { k: 'Efficiency plateau', v: '82–84 %' },
+      { k: 'vs trapezoidal BLDC', v: '+7 pp (76.9 % peak)' },
+      { k: 'Propeller', v: '10×4.5 · 2-blade' },
+      { k: 'Bus voltage', v: '22 V' },
+      { k: 'Testing', v: 'Propeller dyno · 12-point sweep' },
+    ],
+    outro: [
+      'Why it matters: a standard 3115 motor tops out around 300–350 W continuous. This one sustains 6 kW/kg — more than 2× the continuous power of any 3115-class motor we’ve benchmarked against. Same form factor, double the sustained output. In UAV propulsion, every single watt-hour saved is extra payload and flight time.',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_foc-electricmotors-uav-ugcPost-7483804372259246080-Yv2D',
+  },
+  {
     date: 'June 23, 2026',
     title: '6 kW/kg continuous — the CIANO14 40_12 runs 30 minutes straight',
     image: '/images/news/news-jun23-continuous.jpg',
@@ -87,7 +106,7 @@ export default function NewsPage() {
     <main className="min-h-screen bg-surface-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <header className="text-center mb-14">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-orange-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-blue-50 px-3 py-1 rounded-full">
             News
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-5">

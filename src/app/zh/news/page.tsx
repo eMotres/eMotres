@@ -24,6 +24,25 @@ type NewsItem = {
 // Newest first.
 const news: NewsItem[] = [
   {
+    date: '2026年7月18日',
+    title: 'FOC 下 84.2 % 系统效率 —— CIANO14 40_12 完成正弦波测试',
+    intro: [
+      '我们刚刚完成了 CIANO14 40_12 的 FOC 测试 —— 这是我们基于 AeroStator Core™ 打造的 125 g、3115 级别内转子电机。峰值系统效率（控制器 + 电机，在母线处测量）达到 84.2 %，并在整个工作范围内保持 82–84 % 的平台。作为对比，此前采用梯形波 BLDC 控制器的测试峰值为 76.9 %。',
+    ],
+    metrics: [
+      { k: '峰值系统效率', v: '84.2 %' },
+      { k: '效率平台', v: '82–84 %' },
+      { k: '对比梯形波 BLDC', v: '+7 pp（峰值 76.9 %）' },
+      { k: '螺旋桨', v: '10×4.5 · 两叶' },
+      { k: '母线电压', v: '22 V' },
+      { k: '测试方式', v: '螺旋桨测功台 · 12 点扫描' },
+    ],
+    outro: [
+      '为什么重要：标准的 3115 电机持续功率上限约为 300–350 W。而这台电机可持续输出 6 kW/kg —— 是我们对比过的任何 3115 级别电机持续功率的 2 倍以上。相同的外形尺寸，双倍的持续输出。在无人机推进中，每节省一瓦时的能量，都意味着更多的载荷和更长的续航。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_foc-electricmotors-uav-ugcPost-7483804372259246080-Yv2D',
+  },
+  {
     date: '2026年6月23日',
     title: '6 kW/kg 持续功率 —— CIANO14 40_12 连续运行 30 分钟',
     image: '/images/news/news-jun23-continuous.jpg',
@@ -90,7 +109,7 @@ export default function NewsPage() {
     <main className="min-h-screen bg-surface-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <header className="text-center mb-14">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-orange-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand bg-blue-50 px-3 py-1 rounded-full">
             新闻
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary mt-4 mb-5">
