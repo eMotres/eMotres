@@ -21,6 +21,28 @@ type NewsItem = {
 // Newest first.
 const news: NewsItem[] = [
   {
+    date: 'July 21, 2026',
+    title: 'Two coaxial motors, or one bigger prop? The payoff is flight time',
+    image: '/images/news/news-jul21-coaxial.webp',
+    intro: [
+      'A common heavy-lift setup: a coaxial pair of T-Motor V3115 on 10″ props — 600 W of shaft power. But coaxial props fight for the same air — the lower one loses ~20 % of its efficiency in the wake of the upper.',
+      'Our proposal: replace them with one CIANO14 40_12 on a 12″ prop, tuned to the same thrust. On AeroStator Core™ technology. Same thrust (~2,865 g), same battery:',
+    ],
+    metrics: [
+      { k: 'Standard BLDC', v: '−21 % power · +27 % flight' },
+      { k: 'With FOC controller', v: '−28 % power · +39 % flight' },
+      { k: 'Weight removed', v: '~167 g (1 motor + 1 ESC)' },
+      { k: 'Single 12″ prop', v: '506 W shaft · 9,300 rpm' },
+      { k: 'Torque demand', v: '~2× vs 10″' },
+      { k: 'Efficiency', v: '~69 % (BLDC) → ~76 % (FOC, est.)' },
+    ],
+    outro: [
+      'The catch: the single 12″ prop runs at ~2× the torque — where our flat-wire winding earns its place, holding high torque at high efficiency without overheating.',
+      'These figures are an estimate — the 12″ operating point is modeled from our measured 10″ data. Bench validation on 12″ is next, and we’ll publish the numbers. AeroStator Core™ is open for licensing and co-manufacturing partners.',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_drones-uav-evtol-activity-7485227310363860992-R9El',
+  },
+  {
     date: 'July 18, 2026',
     title: '84.2 % system efficiency on FOC — the CIANO14 40_12 completes its sinusoidal round',
     image: '/images/news/news-jul18-foc.webp',

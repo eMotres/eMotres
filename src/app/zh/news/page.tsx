@@ -24,6 +24,28 @@ type NewsItem = {
 // Newest first.
 const news: NewsItem[] = [
   {
+    date: '2026年7月21日',
+    title: '两台共轴电机，还是一支更大的螺旋桨？收益是续航时间',
+    image: '/images/news/news-jul21-coaxial.webp',
+    intro: [
+      '一种常见的重载配置：一对共轴 T-Motor V3115 搭配 10″ 螺旋桨 —— 共 600 W 轴功率。但共轴螺旋桨会争夺同一股气流 —— 下桨在上桨的尾流中损失约 20 % 的效率。',
+      '我们的方案：用一台基于 AeroStator Core™ 技术的 CIANO14 40_12 搭配 12″ 螺旋桨来替代它们，并调校到相同推力。相同推力（约 2,865 g）、相同电池：',
+    ],
+    metrics: [
+      { k: '标准 BLDC', v: '−21 % 功率 · +27 % 续航' },
+      { k: '搭配 FOC 控制器', v: '−28 % 功率 · +39 % 续航' },
+      { k: '减重', v: '约 167 g（1 台电机 + 1 个电调）' },
+      { k: '单支 12″ 螺旋桨', v: '506 W 轴功率 · 9,300 rpm' },
+      { k: '扭矩需求', v: '约为 10″ 的 2 倍' },
+      { k: '效率', v: '~69 %（BLDC）→ ~76 %（FOC，估算）' },
+    ],
+    outro: [
+      '关键在于：单支 12″ 螺旋桨需要约 2 倍的扭矩 —— 这正是我们的扁线绕组发挥价值的地方：在高扭矩下保持高效率而不过热。',
+      '这些数字是估算值 —— 12″ 工作点由我们实测的 10″ 数据建模得出。接下来将在 12″ 上进行台架验证，届时我们会公布数据。AeroStator Core™ 开放授权与联合制造合作。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_drones-uav-evtol-activity-7485227310363860992-R9El',
+  },
+  {
     date: '2026年7月18日',
     title: 'FOC 下 84.2 % 系统效率 —— CIANO14 40_12 完成正弦波测试',
     image: '/images/news/news-jul18-foc.webp',
