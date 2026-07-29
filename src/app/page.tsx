@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'High-Performance Electric Motors for Drones & Aviation | eMotres',
   description: 'eMotres CIANO motors — patented AeroStator Core technology. Highest torque density on the market. IP65 sealed, rectangular copper windings, topology-optimized stator yoke. Built for drones, UAVs, aviation and robotics.',
-  alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh' } },
+  alternates: { canonical: '/', languages: { en: '/', 'zh-CN': '/zh/' } },
   openGraph: {
     type: 'website',
     siteName: 'eMotres',
@@ -310,7 +310,7 @@ export default function Home() {
                 Four technologies.<br />One stator.
               </h2>
               <p className="text-text-secondary leading-relaxed mb-6">
-                Every eMotres motor integrates three patented innovations that work together to push torque density beyond what conventional designs can achieve.
+                Every eMotres motor integrates four patented innovations that work together to push torque density beyond what conventional designs can achieve.
               </p>
               <Link
                 href="/technology"

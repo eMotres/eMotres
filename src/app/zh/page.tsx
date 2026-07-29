@@ -4,24 +4,40 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '高性能无人机与航空电机',
   description:
-    'eMotres CIANO 电机——专利 AeroStator Core 技术，市场领先的扭矩密度。IP65 密封、扁平铜线绕组，专为无人机、UAV、航空与机器人打造。',
-  alternates: { canonical: '/zh', languages: { en: '/', 'zh-CN': '/zh' } },
+    'eMotres CIANO 电机——专利 AeroStator Core™ 技术，市场领先的扭矩密度。IP65 密封、扁平铜线绕组、拓扑优化定子轭，专为无人机、UAV、航空与机器人打造。',
+  alternates: { canonical: '/zh/', languages: { en: '/', 'zh-CN': '/zh/' } },
   openGraph: {
     type: 'website',
     siteName: 'eMotres',
     locale: 'zh_CN',
     title: '高性能无人机与航空电机 | eMotres',
-    description: 'eMotres CIANO 电机——专利 AeroStator Core 技术，市场领先的扭矩密度，专为无人机、UAV 与航空打造。',
-    url: '/zh',
+    description: 'eMotres CIANO 电机——专利 AeroStator Core™ 技术，市场领先的扭矩密度，专为无人机、UAV 与航空打造。',
+    url: '/zh/',
     images: [{ url: '/images/electric-motor.webp', width: 1200, height: 630, alt: 'eMotres AeroStator Core 电机' }],
   },
 };
 
-const stats = [
-  { value: '1.5×', label: '相比径向结构更高的磁场' },
-  { value: 'IP65', label: '可选全密封结构' },
-  { value: '~75%', label: '铜槽满率（圆线仅 35%）' },
-  { value: '15', label: 'N·m/kg 比扭矩——原型验证' },
+const stats: { value: string; label: string; sub: string }[] = [
+  {
+    value: '1.5×',
+    label: '相比径向结构更高的磁场',
+    sub: '同样的磁钢，更大的扭矩',
+  },
+  {
+    value: '~75%',
+    label: '铜槽满率（圆线仅 35%）',
+    sub: '电阻更低——发热更少，持续功率更高',
+  },
+  {
+    value: '15',
+    label: 'N·m/kg 比扭矩——原型验证',
+    sub: '同等推力下更轻的推进系统',
+  },
+  {
+    value: 'IP65',
+    label: '可选全密封结构',
+    sub: '可按需提供防尘防水保护',
+  },
 ];
 
 const technologies = [
@@ -115,7 +131,7 @@ export default function HomeZh() {
           <div className="text-center pt-10 pb-6">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand mb-8">
               <span className="w-6 h-px bg-brand inline-block" />
-              专利电机技术
+              来自 eMotres 的专利电机技术
               <span className="w-6 h-px bg-brand inline-block" />
             </span>
 
@@ -133,15 +149,28 @@ export default function HomeZh() {
               <span className="text-brand">Core</span>
             </h1>
 
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-8">
-              四项专利技术，集成于同一电机架构。市场上扭矩密度最高的电机——专为无人机、UAV、航空与机器人打造。
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed mb-6">
+              四项专利技术，集成于同一电机架构——它是每一台{' '}
+              <span className="font-semibold text-text-primary">eMotres</span> 电机背后的定子平台。市场上扭矩密度最高的电机，专为无人机、UAV、航空与机器人打造。
             </p>
 
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex items-start gap-2.5 bg-blue-50 border border-blue-200 rounded-xl px-4 py-2.5 max-w-xl text-left">
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                </svg>
+                <p className="text-sm sm:text-base font-bold text-text-primary leading-snug">
+                  CIANO14：<span className="text-brand">6 kW/kg</span> —— 持续功率超过同级别任何竞品的{' '}
+                  <span className="text-brand">2×</span>。同样的尺寸，双倍的持续输出。
+                </p>
+              </div>
+            </div>
+
             <div className="flex flex-wrap justify-center gap-4 mb-6">
-              <Link href="/shop" className="bg-brand text-white font-bold py-3.5 px-8 rounded-xl hover:bg-brand-dark transition-colors text-sm">
+              <Link href="/zh/shop/" className="bg-brand text-white font-bold py-3.5 px-8 rounded-xl hover:bg-brand-dark transition-colors text-sm">
                 查看全部电机
               </Link>
-              <Link href="/technology" className="bg-surface-secondary text-text-primary font-semibold py-3.5 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-border text-sm">
+              <Link href="/zh/technology/" className="bg-surface-secondary text-text-primary font-semibold py-3.5 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-border text-sm">
                 工作原理 →
               </Link>
             </div>
@@ -157,6 +186,7 @@ export default function HomeZh() {
               <div key={s.label} className="text-center">
                 <div className="text-3xl font-extrabold text-brand mb-1">{s.value}</div>
                 <div className="text-xs text-text-secondary leading-tight">{s.label}</div>
+                <div className="text-xs font-semibold text-text-primary leading-tight mt-1.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -234,7 +264,7 @@ export default function HomeZh() {
           </div>
 
           <div className="mt-8 text-center">
-            <Link href="/shop" className="text-sm font-semibold text-text-secondary hover:text-brand transition-colors">
+            <Link href="/zh/shop/" className="text-sm font-semibold text-text-secondary hover:text-brand transition-colors">
               查看完整产品线 →
             </Link>
           </div>
@@ -249,9 +279,9 @@ export default function HomeZh() {
               <span className="text-xs font-semibold uppercase tracking-widest text-brand">核心技术</span>
               <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">四项技术，<br />一个定子。</h2>
               <p className="text-text-secondary leading-relaxed mb-6">
-                每一台 eMotres 电机都集成多项专利创新，协同将扭矩密度推升至传统设计无法企及的水平。
+                每一台 eMotres 电机都集成四项专利创新，协同将扭矩密度推升至传统设计无法企及的水平。
               </p>
-              <Link href="/technology" className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3 transition-all">
+              <Link href="/zh/technology/" className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3 transition-all">
                 完整技术介绍
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -304,9 +334,22 @@ export default function HomeZh() {
           <span className="text-xs font-semibold uppercase tracking-widest text-brand">定制订单</span>
           <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-4">需要定制电机？</h2>
           <p className="text-text-secondary leading-relaxed mb-8 max-w-2xl mx-auto">
-            我们的工程师可按您的精确规格设计电机（定制直径、长度、电压范围；可选 IP67 / IP68 密封；定制 KV、扭矩与转速目标；支持批量生产）。填写表单，我们将在 2 个工作日内估算大致成本。
+            我们的工程师可按您的精确规格设计电机。填写表单，我们将在 2 个工作日内估算大致成本。
           </p>
-          <Link href="/get-a-quote" className="inline-block bg-brand text-white font-bold py-4 px-10 rounded-xl hover:bg-brand-dark transition-colors">
+          <ul className="space-y-3 mb-8 max-w-md mx-auto text-left">
+            {[
+              '定制直径、长度与电压范围',
+              '可按需提供 IP67 / IP68 密封',
+              '定制 KV、扭矩与转速目标',
+              '支持批量生产',
+            ].map(item => (
+              <li key={item} className="flex items-start gap-2 text-sm text-text-secondary">
+                <span className="text-brand font-bold mt-0.5">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <Link href="/zh/get-a-quote/" className="inline-block bg-brand text-white font-bold py-4 px-10 rounded-xl hover:bg-brand-dark transition-colors">
             获取报价
           </Link>
         </div>
