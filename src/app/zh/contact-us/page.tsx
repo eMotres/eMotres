@@ -37,19 +37,18 @@ const ContactPage = () => {
                 <div>
                   <h3 className="text-xl font-bold">联系我们</h3>
                   <p>sales@emotres.com</p>
+                  <p>微信：xst_ish</p>
                 </div>
               </div>
-              <div className="mt-8">
-                <iframe
-                  src="https://maps.google.com/maps?q=Kotnikova%2034%2C%20Ljubljana%201000%2C%20Slovenia&t=m&z=12&output=embed&iwloc=near"
-                  width="100%"
-                  height="450"
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                  allowFullScreen={true}
-                  aria-hidden="false"
-                  tabIndex={0}
-                ></iframe>
+              <div className="mt-8 bg-white rounded-2xl border border-gray-200 p-6 text-center max-w-sm">
+                <h3 className="text-xl font-bold mb-4">微信联系</h3>
+                <img
+                  src="/images/wechat-qr.jpg"
+                  alt="微信二维码：xst_ish — 扫码添加好友"
+                  loading="lazy"
+                  className="w-full max-w-xs mx-auto rounded-xl"
+                />
+                <p className="mt-4 text-gray-500">扫二维码，添加我为朋友</p>
               </div>
             </div>
           </div>
