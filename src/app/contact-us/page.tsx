@@ -4,7 +4,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  alternates: { canonical: '/contact-us/' },
+  alternates: {
+    canonical: '/contact-us/',
+    languages: { en: '/contact-us/', 'zh-CN': '/zh/contact-us/' },
+  },
   description: 'Get in touch with eMotres for questions about our high-performance electric motors. Find our address in Ljubljana, Slovenia, and contact us via email.',
 };
 

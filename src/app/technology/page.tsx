@@ -3,7 +3,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'AeroStator Core™ — Patented Motor Technology',
-  alternates: { canonical: '/technology/' },
+  alternates: {
+    canonical: '/technology/',
+    languages: { en: '/technology/', 'zh-CN': '/zh/technology/' },
+  },
   description:
     'AeroStator Core™ combines tangential magnet polarization, rectangular copper wire, shortest-path cooling, a simplified winding, single-piece foil coils and ceramic insulation into the highest torque-density electric motor available — plus IP65 sealing and a multi-jurisdiction patent portfolio.',
 };
@@ -336,7 +339,8 @@ export default function TechnologyPage() {
           <span className="text-xs font-semibold uppercase tracking-widest text-brand">Intellectual property</span>
           <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-2">Patent portfolio</h2>
           <p className="text-text-secondary mb-10">
-            9 granted / registered · 4 pending · 6 jurisdictions · EPO inventive step confirmed.
+            {patents.granted.length} granted / registered · {patents.pending.length} pending · 6 jurisdictions ·
+            EPO inventive step confirmed.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">

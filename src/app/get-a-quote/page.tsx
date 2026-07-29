@@ -4,7 +4,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Get a Quote for Custom Electric Motors',
-  alternates: { canonical: '/get-a-quote/' },
+  alternates: {
+    canonical: '/get-a-quote/',
+    languages: { en: '/get-a-quote/', 'zh-CN': '/zh/get-a-quote/' },
+  },
   description: 'Request a quote for a custom-made electric motor. Specify your requirements for continuous power, RPM, voltage, cooling, and more, and we will calculate the approximate cost.',
 };
 

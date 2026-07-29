@@ -9,7 +9,7 @@ import { ui, localeFromPathname } from '@/i18n/dictionaries';
 // otherwise falls back to the English page (legal pages aren't translated yet).
 const companyLinks = [
   { en: '/motor-development-services', zh: '/zh/motor-development-services', key: 'service' },
-  { en: '/blog', zh: '/zh/technology', key: 'technology' },
+  { en: '/technology', zh: '/zh/technology', key: 'technology' },
   { en: '/contact-us', zh: '/zh/contact-us', key: 'contacts' },
 ] as const;
 

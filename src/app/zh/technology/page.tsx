@@ -4,8 +4,8 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'AeroStator Core™ — 专利电机技术',
   alternates: {
-    canonical: '/zh/technology',
-    languages: { en: '/technology', 'zh-CN': '/zh/technology' },
+    canonical: '/zh/technology/',
+    languages: { en: '/technology/', 'zh-CN': '/zh/technology/' },
   },
   description:
     'AeroStator Core™ 将切向磁化、扁平铜线、最短路径散热、简化绕组、单片箔线圈和陶瓷绝缘集成于一体，打造当前可量产的最高扭矩密度电机——并提供 IP65 密封和跨多个司法管辖区的专利组合。',
@@ -335,7 +335,8 @@ export default function TechnologyPage() {
           <span className="text-xs font-semibold uppercase tracking-widest text-brand">知识产权</span>
           <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-2">专利组合</h2>
           <p className="text-text-secondary mb-10">
-            9 项已授权 / 注册 · 4 项审查中 · 6 个司法管辖区 · EPO 创造性步骤已确认。
+            {patents.granted.length} 项已授权 / 注册 · {patents.pending.length} 项审查中 · 6 个司法管辖区 · EPO
+            创造性步骤已确认。
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -392,7 +393,7 @@ export default function TechnologyPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-text-primary mb-5">见证技术的实际表现</h2>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/shop" className="bg-brand text-white font-bold py-3 px-8 rounded-xl hover:bg-brand-dark transition-colors">
+            <Link href="/zh/shop/" className="bg-brand text-white font-bold py-3 px-8 rounded-xl hover:bg-brand-dark transition-colors">
               查看全部电机
             </Link>
             <Link

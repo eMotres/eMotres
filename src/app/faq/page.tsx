@@ -4,7 +4,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'FAQ — Electric Motors for Drones & Aviation',
-  alternates: { canonical: '/faq/' },
+  alternates: {
+    canonical: '/faq/',
+    languages: { en: '/faq/', 'zh-CN': '/zh/faq/' },
+  },
   description: 'Answers to common questions about our AeroStator Core™ electric motors — production, payment, shipping, warranty, technology, custom design and lead times.',
 };
 

@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: '常见问题 — 无人机与航空电机',
   description: '关于我们 AeroStator Core™ 电机的常见问题——生产、付款、配送、保修、技术、定制设计与交期。',
   alternates: {
-    canonical: '/zh/faq',
-    languages: { en: '/faq', 'zh-CN': '/zh/faq' },
+    canonical: '/zh/faq/',
+    languages: { en: '/faq/', 'zh-CN': '/zh/faq/' },
   },
 };
 

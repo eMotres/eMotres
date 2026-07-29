@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   title: '定制电机研发服务',
   description: 'eMotres 提供从概念设计到量产的全方位电机研发服务。我们专注于定制电机和发电机（0.5 kW 至 800 kW），运用先进的电磁、机械和热仿真技术。',
   alternates: {
-    canonical: '/zh/motor-development-services',
+    canonical: '/zh/motor-development-services/',
     languages: {
-      en: '/motor-development-services',
-      'zh-CN': '/zh/motor-development-services',
+      en: '/motor-development-services/',
+      'zh-CN': '/zh/motor-development-services/',
     },
   },
 };

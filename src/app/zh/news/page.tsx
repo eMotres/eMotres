@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '新闻',
   alternates: {
-    canonical: '/zh/news',
-    languages: { en: '/news', 'zh-CN': '/zh/news' },
+    canonical: '/zh/news/',
+    languages: { en: '/news/', 'zh-CN': '/zh/news/' },
   },
   description:
     'eMotres 最新动态 —— AeroStator Core™ 测试结果、里程碑与公告：CIANO14 40_12 和 CIANO 150_30 台架测试、与 T-Motor 的效率对比，以及持续功率纪录。',
@@ -97,9 +97,9 @@ const news: NewsItem[] = [
       '在相同的螺旋桨和相同的 24 V 条件下，与同级领先的 T-Motor V3115 外转子进行对比测试：',
     ],
     metrics: [
-      { k: '系统效率', v: '+12–13 pp at high thrust' },
-      { k: '峰值系统效率', v: '76.9 % (75–77 % plateau)' },
-      { k: 'T-Motor V3115 at max', v: '~64 %' },
+      { k: '系统效率', v: '高推力下 +12–13 pp' },
+      { k: '峰值系统效率', v: '76.9 %（75–77 % 平台）' },
+      { k: 'T-Motor V3115 峰值', v: '~64 %' },
     ],
     outro: [
       '而且这些还是梯形波 BLDC 的结果 —— 我们尚未切换到 FOC，因此仍有明显的提升空间。下一步：将控制器直接集成到电机内部、0.15 mm 叠片以及箔式（扁平）线圈。',
