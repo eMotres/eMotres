@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       'zh-CN': '/zh/motor-development-services/',
     },
   },
-  description: 'eMotres offers comprehensive motor development services, from conceptualization to mass production. We specialize in custom motors and generators (0.5 kW to 800 kW) using advanced electromagnetic, mechanical, and thermal simulations.',
+  description: 'eMotres offers comprehensive motor development services, from conceptualization to mass production. We specialize in custom motors and generators (0.5 kW to 1 MW) using advanced electromagnetic, mechanical, and thermal simulations.',
 };
 
 const ServicePage = () => {
@@ -21,7 +21,7 @@ const ServicePage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold text-center mb-12">Motor Development Services</h1>
           <div className="prose lg:prose-xl max-w-none">
-            <p>At Motres, we specialize in the design and development of custom motors and generators tailored to meet your unique requirements and specifications. Whether you need a bespoke solution for your current project or are starting from scratch, our team is equipped to assist you with developing propulsion systems across various applications. We have experience for development motors and generators from 0.5 kW to 800kW for the different application.</p>
+            <p>At Motres, we specialize in the design and development of custom motors and generators tailored to meet your unique requirements and specifications. Whether you need a bespoke solution for your current project or are starting from scratch, our team is equipped to assist you with developing propulsion systems across various applications. We have experience for development motors and generators from 0.5 kW to 1 MW for the different application.</p>
             <h2>Our Comprehensive Motor Development Process:</h2>
             <h3>1. Conceptualization to Prototyping:</h3>
             <p>We offer a complete cycle of motor development, transforming your initial idea into a functional prototype. Our approach ensures precision, efficiency, and effectiveness at every stage of the process.</p>

@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '定制电机研发服务',
-  description: 'eMotres 提供从概念设计到量产的全方位电机研发服务。我们专注于定制电机和发电机（0.5 kW 至 800 kW），运用先进的电磁、机械和热仿真技术。',
+  description: 'eMotres 提供从概念设计到量产的全方位电机研发服务。我们专注于定制电机和发电机（0.5 kW 至 1 MW），运用先进的电磁、机械和热仿真技术。',
   alternates: {
     canonical: '/zh/motor-development-services/',
     languages: {
@@ -21,7 +21,7 @@ const ServicePage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold text-center mb-12">电机研发服务</h1>
           <div className="prose lg:prose-xl max-w-none">
-            <p>在 Motres，我们专注于根据您的独特需求和规格设计与研发定制电机和发电机。无论您需要为当前项目量身打造的解决方案，还是从零开始，我们的团队都能协助您研发适用于各种应用场景的推进系统。我们拥有为不同应用研发 0.5 kW 至 800kW 电机和发电机的经验。</p>
+            <p>在 Motres，我们专注于根据您的独特需求和规格设计与研发定制电机和发电机。无论您需要为当前项目量身打造的解决方案，还是从零开始，我们的团队都能协助您研发适用于各种应用场景的推进系统。我们拥有为不同应用研发 0.5 kW 至 1 MW 电机和发电机的经验。</p>
             <h2>我们全方位的电机研发流程：</h2>
             <h3>1. 从概念设计到原型制作：</h3>
             <p>我们提供完整的电机研发周期，将您最初的想法转化为可运行的原型。我们的方法确保流程每个阶段的精确性、效率和有效性。</p>
