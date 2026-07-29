@@ -87,7 +87,7 @@ const cianoMotors: {
     protection: '开放式结构',
     price: '€300',
     priceTag: '样品',
-    highlight: '同级别 2 倍持续功率与推力',
+    highlight: '同级别 2.5 倍持续功率与推力',
     imageUrl: '/ciano14-40-12.png',
   },
   {
@@ -161,7 +161,7 @@ export default function HomeZh() {
                 </svg>
                 <p className="text-sm sm:text-base font-bold text-text-primary leading-snug">
                   CIANO14：<span className="text-brand">6 kW/kg</span> —— 持续功率超过同级别任何竞品的{' '}
-                  <span className="text-brand">2×</span>。同样的尺寸，双倍的持续输出。
+                  <span className="text-brand">2.5×</span>。同样的尺寸，2.5 倍的持续输出。
                 </p>
               </div>
             </div>

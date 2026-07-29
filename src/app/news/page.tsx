@@ -62,7 +62,7 @@ const news: NewsItem[] = [
       { k: 'Testing', v: 'Propeller dyno · 12-point sweep' },
     ],
     outro: [
-      'Why it matters: a standard 3115 motor tops out around 300–350 W continuous. This one sustains 6 kW/kg — more than 2× the continuous power of any 3115-class motor we’ve benchmarked against. Same form factor, double the sustained output. In UAV propulsion, every single watt-hour saved is extra payload and flight time.',
+      'Why it matters: a standard 3115 motor tops out around 300–350 W continuous. This one sustains 6 kW/kg — more than 2.5× the continuous power of any 3115-class motor we’ve benchmarked against. Same form factor, 2.5× the sustained output. In UAV propulsion, every single watt-hour saved is extra payload and flight time.',
     ],
     url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_foc-electricmotors-uav-ugcPost-7483804372259246080-Yv2D',
   },
@@ -72,7 +72,7 @@ const news: NewsItem[] = [
     image: '/images/news/news-jun23-continuous.jpg',
     video: '/videos/news-jun23-continuous.mp4',
     intro: [
-      'We ran the CIANO14 40_12 on a propeller test stand for 30 minutes straight — roughly double the sustained power of any 3115-class motor on the market. Here’s what the stand logged at minute 29 (125 g motor):',
+      'We ran the CIANO14 40_12 on a propeller test stand for 30 minutes straight — roughly 2.5× the sustained power of any 3115-class motor on the market. Here’s what the stand logged at minute 29 (125 g motor):',
     ],
     metrics: [
       { k: 'Thrust', v: '3,455 g' },
@@ -83,7 +83,7 @@ const news: NewsItem[] = [
       { k: 'Max temp', v: '150 °C (stabilized)' },
     ],
     outro: [
-      'A standard 3115 tops out at 300–350 W continuous before hitting thermal limits. Same form factor — twice the sustained power. The winding stays within its 200 °C insulation limit throughout.',
+      'A standard 3115 tops out at 300–350 W continuous before hitting thermal limits. Same form factor — 2.5× the sustained power. The winding stays within its 200 °C insulation limit throughout.',
     ],
     url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_electricmotors-bldc-aerostatorcore-activity-7475080394271358976-39zl',
   },
