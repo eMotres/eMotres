@@ -2,13 +2,58 @@
 
 import React, { useState } from 'react';
 import { trackLead } from '@/lib/gtag';
+import type { Locale } from '@/i18n/dictionaries';
 
 // 1. Go to https://formspree.io → sign up free
 // 2. Create a new form → copy the form ID (e.g. "xpwzgkla")
 // 3. Replace YOUR_FORM_ID below
 const FORMSPREE_ID = 'xbddrvlr';
 
-const ContactForm = () => {
+// User-visible copy. Backend-facing values (Formspree field names, _subject)
+// stay English on purpose.
+const strings = {
+  en: {
+    errName: 'Name is required',
+    errEmail: 'Valid email required',
+    errMessage: 'Message is required',
+    errAgree: 'Please accept the privacy policy',
+    successTitle: 'Message sent!',
+    successBody: "We'll get back to you within 1–2 business days.",
+    sendAnother: 'Send another message',
+    phName: 'Name *',
+    phEmail: 'E-mail *',
+    phSubject: 'Subject',
+    phMessage: 'Write your message *',
+    consent:
+      'By clicking "Send Message" you consent to Motres d.o.o. processing your data in accordance with GDPR and our Privacy Policy.',
+    errorBefore: 'Something went wrong. Please try again or email us directly at ',
+    errorAfter: '.',
+    sending: 'Sending…',
+    submit: 'Send Message',
+  },
+  zh: {
+    errName: '请填写姓名',
+    errEmail: '请输入有效的电子邮箱',
+    errMessage: '请填写留言内容',
+    errAgree: '请同意隐私政策',
+    successTitle: '消息已发送！',
+    successBody: '我们将在 1–2 个工作日内回复您。',
+    sendAnother: '再发送一条消息',
+    phName: '姓名 *',
+    phEmail: '电子邮箱 *',
+    phSubject: '主题',
+    phMessage: '请填写您的留言 *',
+    consent:
+      '点击“发送消息”即表示您同意 Motres d.o.o. 依据 GDPR 及我们的隐私政策处理您的数据。',
+    errorBefore: '发生错误，请重试，或直接发送邮件至 ',
+    errorAfter: '。',
+    sending: '发送中…',
+    submit: '发送消息',
+  },
+} as const;
+
+const ContactForm = ({ locale = 'en' }: { locale?: Locale }) => {
+  const t = strings[locale];
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -16,10 +61,10 @@ const ContactForm = () => {
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = 'Name is required';
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Valid email required';
-    if (!form.message.trim()) e.message = 'Message is required';
-    if (!agree) e.agree = 'Please accept the privacy policy';
+    if (!form.name.trim()) e.name = t.errName;
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t.errEmail;
+    if (!form.message.trim()) e.message = t.errMessage;
+    if (!agree) e.agree = t.errAgree;
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -61,10 +106,10 @@ const ContactForm = () => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-lg font-bold text-text-primary mb-2">Message sent!</h3>
-        <p className="text-text-secondary text-sm">We&apos;ll get back to you within 1–2 business days.</p>
+        <h3 className="text-lg font-bold text-text-primary mb-2">{t.successTitle}</h3>
+        <p className="text-text-secondary text-sm">{t.successBody}</p>
         <button onClick={() => setStatus('idle')} className="mt-6 text-sm text-brand font-semibold hover:underline">
-          Send another message
+          {t.sendAnother}
         </button>
       </div>
     );
@@ -76,7 +121,7 @@ const ContactForm = () => {
         <div>
           <input
             type="text"
-            placeholder="Name *"
+            placeholder={t.phName}
             value={form.name}
             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             className={inputClass}
@@ -86,7 +131,7 @@ const ContactForm = () => {
         <div>
           <input
             type="email"
-            placeholder="E-mail *"
+            placeholder={t.phEmail}
             value={form.email}
             onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
             className={inputClass}
@@ -97,7 +142,7 @@ const ContactForm = () => {
 
       <input
         type="text"
-        placeholder="Subject"
+        placeholder={t.phSubject}
         value={form.subject}
         onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
         className={inputClass}
@@ -106,7 +151,7 @@ const ContactForm = () => {
       <div>
         <textarea
           rows={5}
-          placeholder="Write your message *"
+          placeholder={t.phMessage}
           value={form.message}
           onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
           className={`${inputClass} resize-none`}
@@ -123,15 +168,16 @@ const ContactForm = () => {
           className="mt-0.5 h-4 w-4 text-brand border-border rounded cursor-pointer"
         />
         <label htmlFor="agree-contact" className="text-sm text-text-secondary cursor-pointer">
-          By clicking &quot;Send Message&quot; you consent to Motres d.o.o. processing your data in accordance with GDPR and our Privacy Policy.
+          {t.consent}
         </label>
       </div>
       {errors.agree && <p className="text-xs text-red-500">{errors.agree}</p>}
 
       {status === 'error' && (
         <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-          Something went wrong. Please try again or email us directly at{' '}
-          <a href="mailto:sales@emotres.com" className="underline">sales@emotres.com</a>.
+          {t.errorBefore}
+          <a href="mailto:sales@emotres.com" className="underline">sales@emotres.com</a>
+          {t.errorAfter}
         </p>
       )}
 
@@ -140,7 +186,7 @@ const ContactForm = () => {
         disabled={status === 'sending'}
         className="w-full py-3.5 px-6 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
       >
-        {status === 'sending' ? 'Sending…' : 'Send Message'}
+        {status === 'sending' ? t.sending : t.submit}
       </button>
     </form>
   );

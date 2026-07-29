@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   title: '无人机、UAV 与航空用电机',
   description: '探索我们的高性能电机系列。我们提供从 5 kW 到 170 kW 的风冷和液冷电机，专为无人机、航空及其他高要求应用而设计。',
   alternates: {
-    canonical: '/zh/shop',
-    languages: { en: '/shop', 'zh-CN': '/zh/shop' },
+    canonical: '/zh/shop/',
+    languages: { en: '/shop/', 'zh-CN': '/zh/shop/' },
   },
 };
 
@@ -43,8 +43,9 @@ const ShopPage = () => {
                   imageUrl={product.imageUrl}
                   title={product.title}
                   price={product.price}
-                  priceTag={product.priceBadge ? 'sample' : undefined}
+                  priceTag={product.priceBadge ? '样品' : undefined}
                   productUrl={`/shop/${product.slug}`}
+                  locale="zh"
                 />
               ))}
             </div>
@@ -70,8 +71,9 @@ const ShopPage = () => {
                   imageUrl={product.imageUrl}
                   title={product.title}
                   price={product.price}
-                  priceTag={product.priceBadge ? 'sample' : undefined}
+                  priceTag={product.priceBadge ? '样品' : undefined}
                   productUrl={`/shop/${product.slug}`}
+                  locale="zh"
                 />
               ))}
             </div>

@@ -5,8 +5,8 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '联系我们',
   alternates: {
-    canonical: '/zh/contact-us',
-    languages: { en: '/contact-us', 'zh-CN': '/zh/contact-us' },
+    canonical: '/zh/contact-us/',
+    languages: { en: '/contact-us/', 'zh-CN': '/zh/contact-us/' },
   },
   description: '如对我们的高性能电机有任何疑问，欢迎与 eMotres 联系。查看我们位于斯洛文尼亚卢布尔雅那的地址，并通过邮箱与我们联系。',
 };
@@ -20,7 +20,7 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <h2 className="text-2xl font-bold mb-4">有疑问吗？</h2>
-              <ContactForm />
+              <ContactForm locale="zh" />
             </div>
             <div>
               <div className="space-y-4">

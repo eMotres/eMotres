@@ -1,14 +1,30 @@
 import React from 'react';
+import type { Locale } from '@/i18n/dictionaries';
 
 interface ProductCardProps {
   imageUrl: string;
   title: string;
   price: string;
   productUrl: string;
+  /** Already-localised badge text (e.g. 'sample' / '样品') supplied by the caller. */
   priceTag?: string;
+  locale?: Locale;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ imageUrl, title, price, productUrl, priceTag }) => {
+// Product titles stay English (canonical product names); only UI chrome is localised.
+const strings = {
+  en: {
+    cta: 'Select options',
+    view: (title: string) => `View ${title}`,
+  },
+  zh: {
+    cta: '选择规格',
+    view: (title: string) => `查看 ${title}`,
+  },
+} as const;
+
+const ProductCard: React.FC<ProductCardProps> = ({ imageUrl, title, price, productUrl, priceTag, locale = 'en' }) => {
+  const t = strings[locale];
   return (
     <div className="group relative bg-surface-primary rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center overflow-hidden border border-surface-tertiary hover:-translate-y-1">
       {/* Plain <a> tag — bypasses Next.js router, works reliably everywhere */}
@@ -16,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ imageUrl, title, price, produ
       <a
         href={productUrl.endsWith('/') ? productUrl : productUrl + '/'}
         className="absolute inset-0 z-10"
-        aria-label={`View ${title}`}
+        aria-label={t.view(title)}
       />
       <div className="w-full h-52 bg-surface-secondary flex items-center justify-center overflow-hidden select-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -38,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ imageUrl, title, price, produ
           )}
         </p>
         <span className="mt-auto w-full bg-brand text-white font-bold py-2 px-6 rounded-lg group-hover:bg-brand-dark transition-colors duration-300">
-          Select options
+          {t.cta}
         </span>
       </div>
     </div>
