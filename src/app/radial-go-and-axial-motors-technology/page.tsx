@@ -3,7 +3,13 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Radial and Axial Motor Technology Comparison',
-  alternates: { canonical: '/radial-go-and-axial-motors-technology/' },
+  alternates: {
+    canonical: '/radial-go-and-axial-motors-technology/',
+    languages: {
+      en: '/radial-go-and-axial-motors-technology/',
+      'zh-CN': '/zh/radial-go-and-axial-motors-technology/',
+    },
+  },
   description: 'Technical comparison of radial motors with Grain Oriented (GO) steel cores vs axial motor designs (YASA, Emrax). Analysis of core material, winding, magnetic systems and efficiency.',
 };
 

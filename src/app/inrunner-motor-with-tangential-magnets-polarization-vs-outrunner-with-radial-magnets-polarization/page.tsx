@@ -3,7 +3,13 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Inrunner Motor with Tangential Magnets vs Outrunner with Radial Magnets',
-  alternates: { canonical: '/inrunner-motor-with-tangential-magnets-polarization-vs-outrunner-with-radial-magnets-polarization/' },
+  alternates: {
+    canonical: '/inrunner-motor-with-tangential-magnets-polarization-vs-outrunner-with-radial-magnets-polarization/',
+    languages: {
+      en: '/inrunner-motor-with-tangential-magnets-polarization-vs-outrunner-with-radial-magnets-polarization/',
+      'zh-CN': '/zh/inrunner-motor-with-tangential-magnets-polarization-vs-outrunner-with-radial-magnets-polarization/',
+    },
+  },
   description: 'Technical analysis comparing inrunner motors with tangential magnet polarization vs outrunner motors with radial polarization. Simulation results, torque equations, and performance data.',
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { BlogPostData } from '@/lib/blog';
 
-const BlogPost: React.FC<BlogPostData> = ({ imageUrl, category, title, excerpt, postUrl }) => {
+const BlogPost: React.FC<BlogPostData & { readMoreLabel?: string }> = ({ imageUrl, category, title, excerpt, postUrl, readMoreLabel = 'Continue reading →' }) => {
   return (
     <Link
       href={postUrl}
@@ -18,7 +18,7 @@ const BlogPost: React.FC<BlogPostData> = ({ imageUrl, category, title, excerpt, 
       <div className="p-6 flex flex-col flex-1">
         <h3 className="text-lg font-bold mb-2 text-text-primary leading-snug">{title}</h3>
         <p className="text-text-secondary text-sm mb-4 flex-1 leading-relaxed">{excerpt}</p>
-        <span className="text-brand font-bold text-sm group-hover:underline">Continue reading →</span>
+        <span className="text-brand font-bold text-sm group-hover:underline">{readMoreLabel}</span>
       </div>
     </Link>
   );

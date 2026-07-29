@@ -30,11 +30,42 @@ const posts: BlogPostData[] = [
     },
 ];
 
-export function getPosts(category?: string): BlogPostData[] {
-    if (!category) return posts;
-    return posts.filter(post => post.category === category);
+const zhPosts: BlogPostData[] = [
+    {
+        imageUrl: "/images/outranner-vs-inranner-1024x479.webp",
+        category: "对比分析",
+        title: "切向极化磁体内转子电机 vs 径向极化磁体外转子电机",
+        excerpt: "同步电机或发电机的扭矩方程与定子磁场强度、转子磁场强度以及两者夹角的正弦值成正比……",
+        postUrl: "/zh/inrunner-motor-with-tangential-magnets-polarization-vs-outrunner-with-radial-magnets-polarization/",
+    },
+    {
+        imageUrl: "/images/motres-cooling-system.png",
+        category: "对比分析",
+        title: "径向 GO 钢电机与轴向电机技术",
+        excerpt: "业界大力宣传轴向电机的优越性。我们决定对采用取向硅钢（GO 钢）的径向电机与轴向电机做一次对比……",
+        postUrl: "/zh/radial-go-and-axial-motors-technology/",
+    },
+    {
+        imageUrl: "/images/Tangential-magnetic-polarization.webp",
+        category: "技术",
+        title: "专利电机技术",
+        excerpt: "切向磁化、取向硅钢、扁平铜线、IP65 密封与高效散热——每一台 eMotres 电机内部的五项核心技术……",
+        postUrl: "/zh/technology/",
+    },
+];
+
+export type BlogLocale = 'en' | 'zh';
+
+function postsFor(locale: BlogLocale): BlogPostData[] {
+    return locale === 'zh' ? zhPosts : posts;
 }
 
-export function getCategories(): string[] {
-    return Array.from(new Set(posts.map(post => post.category)));
+export function getPosts(category?: string, locale: BlogLocale = 'en'): BlogPostData[] {
+    const list = postsFor(locale);
+    if (!category) return list;
+    return list.filter(post => post.category === category);
+}
+
+export function getCategories(locale: BlogLocale = 'en'): string[] {
+    return Array.from(new Set(postsFor(locale).map(post => post.category)));
 }
