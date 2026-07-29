@@ -2,7 +2,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
-  alternates: { canonical: '/terms-conditions/' },
+  alternates: {
+    canonical: '/terms-conditions/',
+    languages: { en: '/terms-conditions/', 'zh-CN': '/zh/terms-conditions/' },
+  },
   description: 'Terms and Conditions for purchasing electric motors from MOTRES D.O.O. (eMotres).',
 };
 

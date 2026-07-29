@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Order Confirmed',
-  description: 'Thank you for your order.',
+  title: '订单已确认',
+  description: '感谢您的订购。',
   alternates: {
-    canonical: '/order-confirmed/',
+    canonical: '/zh/order-confirmed/',
     languages: { en: '/order-confirmed/', 'zh-CN': '/zh/order-confirmed/' },
   },
   robots: { index: false, follow: true },
@@ -20,19 +20,19 @@ export default function OrderConfirmedPage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h1 className="text-3xl font-extrabold text-text-primary mb-3">Thank you for your order!</h1>
+        <h1 className="text-3xl font-extrabold text-text-primary mb-3">感谢您的订购！</h1>
         <p className="text-text-secondary leading-relaxed mb-8">
-          Your payment was received and a receipt has been emailed to you. We&apos;ll be in touch
-          shortly with shipping details. Questions?{' '}
+          我们已收到您的付款，收据已通过电子邮件发送给您。我们将很快与您联系，
+          告知发货详情。有疑问？{' '}
           <a href="mailto:sales@emotres.com" className="text-brand font-semibold hover:underline">
             sales@emotres.com
           </a>
         </p>
         <Link
-          href="/shop"
+          href="/zh/shop/"
           className="inline-block bg-brand text-white font-bold py-3 px-8 rounded-xl hover:bg-brand-dark transition-colors"
         >
-          Back to motors
+          返回电机产品
         </Link>
       </div>
     </main>

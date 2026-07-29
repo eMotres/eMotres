@@ -3,7 +3,10 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Delivery & Returns',
-  alternates: { canonical: '/delivery-returns/' },
+  alternates: {
+    canonical: '/delivery-returns/',
+    languages: { en: '/delivery-returns/', 'zh-CN': '/zh/delivery-returns/' },
+  },
   description: 'Shipping, delivery and returns policy for eMotres electric motors.',
 };
 
