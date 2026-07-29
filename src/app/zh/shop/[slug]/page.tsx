@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { products, getProductBySlug, PerformanceSpecs } from '@/lib/products';
+import { products } from '@/lib/products';
+import { categoryZh, getProductZhBySlug, productPriceZh, productTitleZh } from '@/lib/products.zh';
 import DynoTestResults from '@/components/DynoTestResults';
 import MotorComparisonSection from '@/components/MotorComparison';
 import BuyButton from '@/components/BuyButton';
@@ -15,20 +16,20 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getProductZhBySlug(slug);
   if (!product) return {};
-  const url = `/shop/${product.slug}/`;
+  const url = `/zh/shop/${product.slug}/`;
   return {
     title: product.title,
     description: product.description,
     alternates: {
       canonical: url,
-      languages: { en: url, 'zh-CN': `/zh/shop/${product.slug}/` },
+      languages: { en: `/shop/${product.slug}/`, 'zh-CN': url },
     },
     openGraph: {
       type: 'website',
       siteName: 'eMotres',
-      locale: 'en_US',
+      locale: 'zh_CN',
       title: `${product.title} | eMotres`,
       description: product.description,
       url,
@@ -37,9 +38,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProductPageZh({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getProductZhBySlug(slug);
   if (!product) notFound();
 
   const related = products.filter(p => p.slug !== product.slug).slice(0, 4);
@@ -48,18 +49,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const ps = product.performanceSpecs;
   const perfRows = ps
     ? [
-        { label: 'Power', cont: ps.continuous.power, peak: ps.peak.power },
-        { label: 'Torque', cont: ps.continuous.torque, peak: ps.peak.torque },
+        { label: '功率', cont: ps.continuous.power, peak: ps.peak.power },
+        { label: '扭矩', cont: ps.continuous.torque, peak: ps.peak.torque },
         ...(ps.continuous.thrust && ps.peak.thrust
-          ? [{ label: 'Thrust', cont: ps.continuous.thrust, peak: ps.peak.thrust }]
+          ? [{ label: '推力', cont: ps.continuous.thrust, peak: ps.peak.thrust }]
           : []),
-        { label: 'Speed', cont: ps.continuous.speed, peak: ps.peak.speed },
-        { label: 'DC current', cont: ps.continuous.current, peak: ps.peak.current },
-        { label: 'Efficiency', cont: ps.continuous.efficiency, peak: ps.peak.efficiency ?? '—' },
+        { label: '转速', cont: ps.continuous.speed, peak: ps.peak.speed },
+        { label: '直流电流', cont: ps.continuous.current, peak: ps.peak.current },
+        { label: '效率', cont: ps.continuous.efficiency, peak: ps.peak.efficiency ?? '—' },
       ]
     : [];
 
-  const productUrl = `${SITE_URL}/shop/${product.slug}/`;
+  const productUrl = `${SITE_URL}/zh/shop/${product.slug}/`;
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -67,14 +68,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     image: [`${SITE_URL}${product.imageUrl}`],
     description: product.description,
     sku: product.sku,
-    category: product.category,
+    category: categoryZh[product.category],
     brand: { '@type': 'Brand', name: 'eMotres' },
     offers: {
       '@type': 'Offer',
       url: productUrl,
-      priceCurrency: 'EUR',
+      priceCurrency: 'CNY',
       price: product.price.replace(/[^0-9.]/g, ''),
-      availability: /in stock/i.test(product.status)
+      availability: /现货/.test(product.status)
         ? 'https://schema.org/InStock'
         : 'https://schema.org/BackOrder',
       seller: { '@type': 'Organization', name: 'eMotres' },
@@ -84,8 +85,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: 'Shop', item: `${SITE_URL}/shop/` },
+      { '@type': 'ListItem', position: 1, name: '首页', item: `${SITE_URL}/zh/` },
+      { '@type': 'ListItem', position: 2, name: '电机产品', item: `${SITE_URL}/zh/shop/` },
       { '@type': 'ListItem', position: 3, name: product.title, item: productUrl },
     ],
   };
@@ -104,9 +105,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Breadcrumb */}
         <nav className="text-sm text-text-secondary mb-8 flex items-center gap-2">
-          <Link href="/" className="hover:text-brand transition-colors">Home</Link>
+          <Link href="/zh/" className="hover:text-brand transition-colors">首页</Link>
           <span>/</span>
-          <Link href="/shop" className="hover:text-brand transition-colors">Shop</Link>
+          <Link href="/zh/shop/" className="hover:text-brand transition-colors">电机产品</Link>
           <span>/</span>
           <span className="text-text-primary">{product.title}</span>
         </nav>
@@ -129,7 +130,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-xs font-semibold uppercase tracking-wider text-brand bg-blue-50 px-3 py-1 rounded-full">
-                {product.category}
+                {categoryZh[product.category]}
               </span>
               <span className="text-xs text-text-secondary bg-surface-secondary px-3 py-1 rounded-full">
                 SKU: {product.sku}
@@ -181,34 +182,35 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <p className="text-text-secondary leading-relaxed mb-8">{product.description}</p>
 
-            {/* CTAs — Buy now (in stock) takes over as primary, else quote-only */}
+            {/* CTAs — the shop is quote-only until STORE_ENABLED flips on */}
             <div className="flex flex-col sm:flex-row gap-4">
               {canBuy ? (
                 <>
                   <BuyButton
                     product={product}
+                    locale="zh"
                     className="flex-1 text-center bg-brand text-white font-bold py-4 px-8 rounded-xl hover:bg-brand-dark transition-colors shadow-lg"
                   />
                   <Link
-                    href="/get-a-quote"
+                    href="/zh/get-a-quote/"
                     className="flex-1 text-center bg-surface-secondary text-text-primary font-bold py-4 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-surface-tertiary"
                   >
-                    Request a Quote
+                    获取报价
                   </Link>
                 </>
               ) : (
                 <>
                   <Link
-                    href="/get-a-quote"
+                    href="/zh/get-a-quote/"
                     className="flex-1 text-center bg-brand text-white font-bold py-4 px-8 rounded-xl hover:bg-brand-dark transition-colors shadow-lg"
                   >
-                    Request a Quote
+                    获取报价
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/zh/contact-us/"
                     className="flex-1 text-center bg-surface-secondary text-text-primary font-bold py-4 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-surface-tertiary"
                   >
-                    Contact Us
+                    联系我们
                   </Link>
                 </>
               )}
@@ -220,13 +222,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="mb-16">
           <div className="border-b border-surface-tertiary mb-8">
             <span className="inline-block border-b-2 border-brand text-brand font-semibold pb-3 text-sm uppercase tracking-wider">
-              Details
+              产品详情
             </span>
           </div>
 
           {/* Unified specifications table */}
           <div className="mb-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">Specifications</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">技术参数</h2>
             <div className="rounded-xl overflow-hidden border border-surface-tertiary">
               <table className="w-full text-sm">
                 <thead>
@@ -234,11 +236,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     <th className="text-left px-5 py-3 text-text-secondary font-semibold w-1/3"></th>
                     {ps ? (
                       <>
-                        <th className="px-5 py-3 font-bold text-text-primary text-center">Continuous</th>
-                        <th className="px-5 py-3 font-bold text-brand text-center">Peak</th>
+                        <th className="px-5 py-3 font-bold text-text-primary text-center">持续</th>
+                        <th className="px-5 py-3 font-bold text-brand text-center">峰值</th>
                       </>
                     ) : (
-                      <th className="px-5 py-3 font-bold text-text-primary text-right">Value</th>
+                      <th className="px-5 py-3 font-bold text-text-primary text-right">数值</th>
                     )}
                   </tr>
                 </thead>
@@ -269,7 +271,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             {/* Applications */}
             <div className="bg-surface-secondary rounded-xl p-6">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-5">
-                Applications
+                应用领域
               </h2>
               <p className="text-text-secondary leading-relaxed text-sm">{product.applications}</p>
             </div>
@@ -277,20 +279,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             {/* Why eMotres */}
             <div className="bg-surface-secondary rounded-xl p-6">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-4">
-                Why eMotres?
+                为何选择 eMotres？
               </h2>
               <ul className="space-y-3 text-sm text-text-secondary">
                 <li className="flex items-start gap-2">
                   <span className="text-brand mt-0.5">✓</span>
-                  Patented construction — highest torque density on the market
+                  专利结构 —— 市场上最高的扭矩密度
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand mt-0.5">✓</span>
-                  1-year warranty on all motors
+                  全系电机享 1 年质保
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand mt-0.5">✓</span>
-                  Custom motor design available (0.5 kW – 1 MW)
+                  提供定制电机设计（0.5 kW – 1 MW）
                 </li>
               </ul>
             </div>
@@ -298,36 +300,39 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
 
         {/* Test results — motors with dynamometer data only */}
-        {product.dynoTest && <DynoTestResults test={product.dynoTest} />}
-        {product.dynoTestFoc && <DynoTestResults test={product.dynoTestFoc} />}
+        {product.dynoTest && <DynoTestResults test={product.dynoTest} locale="zh" />}
+        {product.dynoTestFoc && <DynoTestResults test={product.dynoTestFoc} locale="zh" />}
 
         {/* Head-to-head comparison — motors with comparison data only */}
         {product.comparison && (
-          <MotorComparisonSection data={product.comparison} oursPoints={product.dynoTest?.points ?? []} />
+          <MotorComparisonSection data={product.comparison} oursPoints={product.dynoTest?.points ?? []} locale="zh" />
         )}
 
         {/* Related products */}
         <div>
-          <h2 className="text-2xl font-bold text-text-primary mb-8">Related Products</h2>
+          <h2 className="text-2xl font-bold text-text-primary mb-8">相关产品</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {related.map(p => (
-              <Link
-                key={p.slug}
-                href={`/shop/${p.slug}`}
-                className="group bg-surface-secondary rounded-xl p-4 hover:shadow-lg transition-all duration-300 border border-surface-tertiary hover:-translate-y-1"
-              >
-                <div className="relative h-36 mb-3 bg-surface-primary rounded-lg">
-                  <Image
-                    src={p.imageUrl}
-                    alt={p.title}
-                    fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300 mix-blend-multiply"
-                  />
-                </div>
-                <p className="text-xs font-medium text-text-primary leading-snug mb-1">{p.title}</p>
-                <p className="text-brand font-bold text-sm">{p.price}</p>
-              </Link>
-            ))}
+            {related.map(p => {
+              const title = productTitleZh(p.slug, p.title);
+              return (
+                <Link
+                  key={p.slug}
+                  href={`/zh/shop/${p.slug}/`}
+                  className="group bg-surface-secondary rounded-xl p-4 hover:shadow-lg transition-all duration-300 border border-surface-tertiary hover:-translate-y-1"
+                >
+                  <div className="relative h-36 mb-3 bg-surface-primary rounded-lg">
+                    <Image
+                      src={p.imageUrl}
+                      alt={title}
+                      fill
+                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-300 mix-blend-multiply"
+                    />
+                  </div>
+                  <p className="text-xs font-medium text-text-primary leading-snug mb-1">{title}</p>
+                  <p className="text-brand font-bold text-sm">{productPriceZh(p.slug, p.price)}</p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

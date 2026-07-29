@@ -1,5 +1,8 @@
 import { ComparisonPoint } from '@/lib/products';
+import type { Locale } from '@/i18n/dictionaries';
 import { yAxisFor, tickDecimals } from '@/lib/chartScale';
+
+const xAxisLabel = { en: 'Thrust (g)', zh: '推力 (g)' } as const;
 
 const BRAND = 'var(--color-brand)';
 const GRID = 'var(--color-border)';
@@ -16,6 +19,7 @@ export default function ComparisonChart({
   theirsName,
   yKey,
   yDecimals,
+  locale = 'en',
 }: {
   title: string;
   ours: ComparisonPoint[];
@@ -24,6 +28,7 @@ export default function ComparisonChart({
   theirsName: string;
   yKey: YKey;
   yDecimals: number;
+  locale?: Locale;
 }) {
   const W = 360;
   const H = 224;
@@ -100,7 +105,7 @@ export default function ComparisonChart({
         ))}
 
         <text x={pad.l + plotW / 2} y={H - 5} textAnchor="middle" fontSize="9" fill={TXT}>
-          Thrust (g)
+          {xAxisLabel[locale]}
         </text>
       </svg>
     </div>

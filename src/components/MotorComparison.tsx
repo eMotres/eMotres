@@ -1,18 +1,43 @@
 import { MotorComparison, ComparisonPoint } from '@/lib/products';
+import type { Locale } from '@/i18n/dictionaries';
 import ComparisonChart from '@/components/ComparisonChart';
+
+// `vs` keeps its trailing space so the JSX child structure (and the rendered
+// markup) is unchanged for English.
+const strings = {
+  en: {
+    vs: 'vs ',
+    chartSysEff: 'System efficiency (%) — motor + controller',
+    chartThrustEff: 'Thrust efficiency (gf/W)',
+    chartCurrent: 'Current (A)',
+    chartPower: 'Electric power (W)',
+    highlighted: 'Highlighted = advantage.',
+  },
+  zh: {
+    vs: '对比 ',
+    chartSysEff: '系统效率 (%) —— 电机 + 控制器',
+    chartThrustEff: '推力效率 (gf/W)',
+    chartCurrent: '电流 (A)',
+    chartPower: '电功率 (W)',
+    highlighted: '高亮项 = 我方优势。',
+  },
+} as const;
 
 export default function MotorComparisonSection({
   data,
   oursPoints,
+  locale = 'en',
 }: {
   data: MotorComparison;
   oursPoints: ComparisonPoint[];
+  locale?: Locale;
 }) {
+  const t = strings[locale];
   return (
     <section className="mb-16">
       <div className="border-b border-surface-tertiary mb-6">
         <span className="inline-block border-b-2 border-brand text-brand font-semibold pb-3 text-sm uppercase tracking-wider">
-          vs {data.competitor}
+          {t.vs}{data.competitor}
         </span>
       </div>
 
@@ -30,10 +55,10 @@ export default function MotorComparisonSection({
 
       {/* Overlay charts vs thrust */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <ComparisonChart title="System efficiency (%) — motor + controller" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="elecEff" yDecimals={0} />
-        <ComparisonChart title="Thrust efficiency (gf/W)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="sysEff" yDecimals={0} />
-        <ComparisonChart title="Current (A)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="current" yDecimals={0} />
-        <ComparisonChart title="Electric power (W)" ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="pElec" yDecimals={0} />
+        <ComparisonChart title={t.chartSysEff} ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="elecEff" yDecimals={0} locale={locale} />
+        <ComparisonChart title={t.chartThrustEff} ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="sysEff" yDecimals={0} locale={locale} />
+        <ComparisonChart title={t.chartCurrent} ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="current" yDecimals={0} locale={locale} />
+        <ComparisonChart title={t.chartPower} ours={oursPoints} theirs={data.theirsPoints} oursName={data.ourName} theirsName={data.competitor} yKey="pElec" yDecimals={0} locale={locale} />
       </div>
 
       {/* Comparison table */}
@@ -65,7 +90,7 @@ export default function MotorComparisonSection({
       </div>
 
       <p className="text-xs text-text-secondary mt-3 max-w-3xl">
-        <span className="font-semibold text-text-primary">Highlighted = advantage.</span> {data.note}
+        <span className="font-semibold text-text-primary">{t.highlighted}</span> {data.note}
       </p>
     </section>
   );

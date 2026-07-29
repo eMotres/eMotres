@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { DynoPoint } from '@/lib/products';
+import type { Locale } from '@/i18n/dictionaries';
 import { yAxisFor, tickDecimals } from '@/lib/chartScale';
 
 const BRAND = 'var(--color-brand)';
@@ -16,6 +17,25 @@ type NumKey = {
 const fmtFull = (n: number) => Math.round(n).toLocaleString('en-US');
 const fmtAxisRpm = (n: number) => `${(n / 1000).toFixed(1)}k`;
 
+const strings = {
+  en: {
+    throttle: (t: number) => `${t}% throttle`,
+    xRpm: 'RPM',
+    xThrust: (unit: string) => `Thrust (${unit})`,
+  },
+  zh: {
+    throttle: (t: number) => `油门 ${t}%`,
+    xRpm: '转速 (RPM)',
+    xThrust: (unit: string) => `推力 (${unit})`,
+  },
+} as const;
+
+/** Visual width in "half-widths": CJK glyphs take roughly twice the room of Latin ones. */
+const isWide = (code: number) =>
+  (code >= 0x3000 && code <= 0x9fff) || (code >= 0xff00 && code <= 0xffef);
+const visualLength = (s: string) =>
+  [...s].reduce((n, c) => n + (isWide(c.charCodeAt(0)) ? 2 : 1), 0);
+
 export default function DynoChart({
   points,
   xKey,
@@ -26,6 +46,7 @@ export default function DynoChart({
   xAxis,
   yDecimals,
   tipDecimals,
+  locale = 'en',
 }: {
   points: DynoPoint[];
   xKey: NumKey;
@@ -36,7 +57,9 @@ export default function DynoChart({
   xAxis: 'rpm' | 'int';
   yDecimals: number;
   tipDecimals: number;
+  locale?: Locale;
 }) {
+  const t = strings[locale];
   const [hover, setHover] = useState<number | null>(null);
 
   const W = 360;
@@ -81,11 +104,11 @@ export default function DynoChart({
   if (hover !== null) {
     const p = points[hover];
     const lines = [
-      ...(p.throttle != null ? [`${p.throttle}% throttle`] : []),
+      ...(p.throttle != null ? [t.throttle(p.throttle)] : []),
       `${fmtFull(p[xKey])} ${xUnit}`,
       `${p[yKey].toFixed(tipDecimals)} ${yUnit}`,
     ];
-    const w = Math.max(...lines.map((l) => l.length)) * 5.1 + 16;
+    const w = Math.max(...lines.map(visualLength)) * 5.1 + 16;
     const h = 14 + lines.length * 12;
     const px = sx(p[xKey]);
     const py = sy(p[yKey]);
@@ -167,7 +190,7 @@ export default function DynoChart({
 
         {/* x axis label */}
         <text x={pad.l + plotW / 2} y={H - 6} textAnchor="middle" fontSize="9" fill={TXT}>
-          {xUnit === 'rpm' ? 'RPM' : `Thrust (${xUnit})`}
+          {xUnit === 'rpm' ? t.xRpm : t.xThrust(xUnit)}
         </text>
 
         {/* tooltip */}
