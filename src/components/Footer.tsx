@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ui, localeFromPathname } from '@/i18n/dictionaries';
 
-// en href is the original; zh href points to the Chinese page where one exists,
-// otherwise falls back to the English page (legal pages aren't translated yet).
+// en href is the original; zh href points to the equivalent Chinese page.
 const companyLinks = [
   { en: '/motor-development-services', zh: '/zh/motor-development-services', key: 'service' },
   { en: '/technology', zh: '/zh/technology', key: 'technology' },
@@ -16,9 +15,9 @@ const companyLinks = [
 const supportLinks = [
   { en: '/faq', zh: '/zh/faq', key: 'faq' },
   { en: '/get-a-quote', zh: '/zh/get-a-quote', key: 'getQuote' },
-  { en: '/terms-conditions', zh: '/terms-conditions', key: 'terms' },
-  { en: '/delivery-returns', zh: '/delivery-returns', key: 'delivery' },
-  { en: '/privacy-policy', zh: '/privacy-policy', key: 'privacy' },
+  { en: '/terms-conditions', zh: '/zh/terms-conditions', key: 'terms' },
+  { en: '/delivery-returns', zh: '/zh/delivery-returns', key: 'delivery' },
+  { en: '/privacy-policy', zh: '/zh/privacy-policy', key: 'privacy' },
 ] as const;
 
 const Footer = () => {

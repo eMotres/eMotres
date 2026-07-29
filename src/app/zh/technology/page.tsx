@@ -397,7 +397,7 @@ export default function TechnologyPage() {
               查看全部电机
             </Link>
             <Link
-              href="/radial-go-and-axial-motors-technology"
+              href="/zh/radial-go-and-axial-motors-technology/"
               className="bg-surface-primary text-text-primary font-bold py-3 px-8 rounded-xl hover:bg-surface-tertiary transition-colors border border-border"
             >
               径向 GO 对比轴向 →

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
+import { productPriceZh, productTitleZh } from '@/lib/products.zh';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -41,10 +42,10 @@ const ShopPage = () => {
                 <ProductCard
                   key={product.slug}
                   imageUrl={product.imageUrl}
-                  title={product.title}
-                  price={product.price}
+                  title={productTitleZh(product.slug, product.title)}
+                  price={productPriceZh(product.slug, product.price)}
                   priceTag={product.priceBadge ? '样品' : undefined}
-                  productUrl={`/shop/${product.slug}`}
+                  productUrl={`/zh/shop/${product.slug}/`}
                   locale="zh"
                 />
               ))}
@@ -69,10 +70,10 @@ const ShopPage = () => {
                 <ProductCard
                   key={product.slug}
                   imageUrl={product.imageUrl}
-                  title={product.title}
-                  price={product.price}
+                  title={productTitleZh(product.slug, product.title)}
+                  price={productPriceZh(product.slug, product.price)}
                   priceTag={product.priceBadge ? '样品' : undefined}
-                  productUrl={`/shop/${product.slug}`}
+                  productUrl={`/zh/shop/${product.slug}/`}
                   locale="zh"
                 />
               ))}

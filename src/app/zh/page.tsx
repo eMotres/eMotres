@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Metadata } from 'next';
+import { productPriceZh } from '@/lib/products.zh';
+import { getProductBySlug } from '@/lib/products';
 
 export const metadata: Metadata = {
   title: '高性能无人机与航空电机',
@@ -63,6 +65,9 @@ const technologies = [
   },
 ];
 
+// RMB price for a slug, from the Chinese overlay (falls back to the canonical EUR price).
+const priceOf = (slug: string) => productPriceZh(slug, getProductBySlug(slug)?.price ?? '');
+
 const cianoMotors: {
   slug: string;
   name: string;
@@ -85,7 +90,7 @@ const cianoMotors: {
       { k: '电压', v: '15–25 V' },
     ],
     protection: '开放式结构',
-    price: '€300',
+    price: priceOf('ciano-40-12'),
     priceTag: '样品',
     highlight: '同级别 2.5 倍持续功率与推力',
     imageUrl: '/ciano14-40-12.png',
@@ -101,7 +106,7 @@ const cianoMotors: {
       { k: '电压', v: '47–76 V' },
     ],
     protection: '开放式结构',
-    price: '€1,000',
+    price: priceOf('ciano-150-30'),
     imageUrl: '/ciano28-150-30.png',
   },
 ];
@@ -207,7 +212,7 @@ export default function HomeZh() {
             {cianoMotors.map(motor => (
               <div key={motor.slug} className="group relative bg-surface-secondary rounded-2xl border border-border hover:border-brand/40 hover:shadow-lg transition-all duration-200 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                <a href={`/shop/${motor.slug}/`} className="absolute inset-0 z-10" aria-label={`查看 ${motor.name} 规格`} />
+                <a href={`/zh/shop/${motor.slug}/`} className="absolute inset-0 z-10" aria-label={`查看 ${motor.name} 规格`} />
 
                 <div className="bg-surface-tertiary flex items-center justify-center p-8 h-56 overflow-hidden rounded-t-2xl">
                   <img src={motor.imageUrl} alt={motor.name} draggable="false" className="max-h-full max-w-full object-contain transition-opacity duration-300 group-hover:opacity-80 pointer-events-none select-none mix-blend-multiply" />

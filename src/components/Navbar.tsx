@@ -10,7 +10,7 @@ const navLinks: { href: string; key: keyof typeof ui.en.nav; zh: boolean }[] = [
   { href: '/technology', key: 'technology', zh: true },
   { href: '/motor-development-services', key: 'services', zh: true },
   { href: '/news', key: 'news', zh: true },
-  { href: '/blog', key: 'blog', zh: false },
+  { href: '/blog', key: 'blog', zh: true },
   { href: '/faq', key: 'faq', zh: true },
 ];
 
@@ -21,7 +21,7 @@ const Navbar = () => {
   const locale = localeFromPathname(pathname || '/');
   const t = ui[locale];
   const home = locale === 'zh' ? '/zh' : '/';
-  // On /zh, link to the Chinese pages; blog has no zh version yet so it's hidden there.
+  // On /zh, link to the Chinese pages. `zh: false` hides an entry that has no Chinese version.
   const links = navLinks
     .filter(l => locale === 'en' || l.zh)
     .map(l => ({ ...l, url: locale === 'zh' ? `/zh${l.href}` : l.href }));

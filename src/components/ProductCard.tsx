@@ -11,7 +11,7 @@ interface ProductCardProps {
   locale?: Locale;
 }
 
-// Product titles stay English (canonical product names); only UI chrome is localised.
+// Title and price are already localised by the caller; only UI chrome is localised here.
 const strings = {
   en: {
     cta: 'Select options',

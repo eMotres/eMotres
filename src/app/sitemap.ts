@@ -17,6 +17,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/zh/get-a-quote/`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/zh/faq/`, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/zh/contact-us/`, changeFrequency: 'yearly', priority: 0.5 },
+    { url: `${BASE}/zh/blog/`, changeFrequency: 'weekly', priority: 0.5 },
+    {
+      url: `${BASE}/zh/inrunner-motor-with-tangential-magnets-polarization-vs-outrunner-with-radial-magnets-polarization/`,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+    },
+    { url: `${BASE}/zh/radial-go-and-axial-motors-technology/`, changeFrequency: 'yearly', priority: 0.5 },
+    { url: `${BASE}/zh/privacy-policy/`, changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${BASE}/zh/terms-conditions/`, changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${BASE}/zh/delivery-returns/`, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${BASE}/shop/`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE}/technology/`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/news/`, changeFrequency: 'weekly', priority: 0.8 },
@@ -42,5 +52,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticEntries, ...productEntries];
+  const productEntriesZh: MetadataRoute.Sitemap = products.map((p) => ({
+    url: `${BASE}/zh/shop/${p.slug}/`,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...productEntries, ...productEntriesZh];
 }
