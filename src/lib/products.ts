@@ -101,7 +101,7 @@ export const products: Product[] = [
     slug: 'ciano-40-12',
     sku: 'CIANO14 40_12',
     title: 'CIANO14 40_12 — Compact High-Torque Motor',
-    price: '€300',
+    price: '€150',
     priceBadge: 'Engineering sample',
     priceNote: 'Hand-built and individually bench-tested.',
     priceComingSoon: 'Series price €60 — coming soon at production volume.',

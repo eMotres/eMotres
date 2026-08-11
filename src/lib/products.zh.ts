@@ -42,7 +42,7 @@ export interface ProductZh {
 export const productsZh: Record<string, ProductZh> = {
   'ciano-40-12': {
     title: 'CIANO14 40_12 — 紧凑型高扭矩电机',
-    priceZh: '¥2,400',
+    priceZh: '¥1,200',
     priceBadge: '工程样机',
     priceNote: '手工制造，逐台台架测试。',
     priceComingSoon: '量产价 ¥500 —— 达到量产规模后推出。',

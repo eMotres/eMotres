@@ -87,7 +87,7 @@ const cianoMotors: {
     weight: '0.125 kg',
     voltage: '15–25 V',
     protection: 'Open frame',
-    price: '€300',
+    price: '€150',
     priceTag: 'sample',
     highlight: '2.5× continuous power & thrust vs class',
     imageUrl: '/ciano14-40-12.png',
