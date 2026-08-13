@@ -126,34 +126,6 @@ export const productsZh: Record<string, ProductZh> = {
       ],
       link: { label: 'FOURnamics GmbH 的 nCTRL 电调', url: 'https://fournamics.com/' },
     },
-    comparison: {
-      ourName: 'CIANO14 40_12',
-      competitor: 'T-Motor V3115 KV900',
-      intro:
-        '在完全相同的螺旋桨（HQ1050-3）和相同的 24 V 母线下，与市售 T-Motor V3115 KV900 进行实测对比 —— 条件完全匹配，因此优势来自电机本身，而非螺旋桨。',
-      highlights: [
-        { value: '+12–13 pp', label: '大推力工况下的系统效率' },
-        { value: '−15 %', label: '同等推力下的电流消耗' },
-        { value: '−16 %', label: '同等推力下的电功率' },
-        { value: '+15–20 %', label: '推力效率 → 续航时间' },
-      ],
-      rows: [
-        { label: '绕组导线', ours: '扁平矩形线', theirs: '圆线', win: 'ours' },
-        { label: '线圈数量', ours: '6 个线圈', theirs: '12 个线圈', win: 'ours' },
-        { label: '铜槽满率', ours: '约 75 %', theirs: '约 35 %', win: 'ours' },
-        { label: '线间电阻', ours: '19.1 mΩ', theirs: '约 76 mΩ', win: 'ours' },
-        { label: 'R·KV²（铜质量指标，↓ 越低越好）', ours: '14,097', theirs: '约 61,560', win: 'ours' },
-        { label: 'KV 值', ours: '858 rpm/V', theirs: '900 rpm/V', win: 'tie' },
-        { label: '重量', ours: '125 g', theirs: '115 g', win: 'theirs' },
-        { label: '系统效率峰值', ours: '76.9 %', theirs: '约 71 %', win: 'ours' },
-        { label: '大推力工况下的效率', ours: '76.0 %', theirs: '62–64 %', win: 'ours' },
-        { label: '约 4,300 g 推力时的电流', ours: '61.9 A', theirs: '约 72 A', win: 'ours' },
-        { label: '约 4,300 g 推力时的电功率', ours: '1,402 W', theirs: '约 1,662 W', win: 'ours' },
-        { label: '最大推力（HQ1050-3，24 V）', ours: '4,304 g', theirs: '4,605 g', win: 'theirs' },
-      ],
-      note:
-        'T-Motor 的数据为厂商公布的推力测试数据；其系统效率由公布的电压、电流、转速和扭矩计算得出。两只螺旋桨经验证在气动上完全一致（±1 %），因此效率优势来自扁平铜线绕组更高的槽满率与更低的电阻。T-Motor 通过消耗更大电流取得约 7 % 更高的峰值推力；CIANO 运行温度更低且仍留有电流余量，预计在更大直径或更大螺距的螺旋桨上可以补上这一差距。R·KV² 是归一化的铜质量指标（数值越低越好）。',
-    },
   },
 
   'ciano-150-30': {
