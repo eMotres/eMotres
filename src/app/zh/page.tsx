@@ -92,7 +92,7 @@ const cianoMotors: {
     protection: '开放式结构',
     price: priceOf('ciano-40-12'),
     priceTag: '样品',
-    highlight: '同级别 2.5 倍持续功率与推力',
+    highlight: '同级别 3 倍持续功率与推力',
     imageUrl: '/ciano14-40-12.png',
   },
   {
@@ -165,8 +165,8 @@ export default function HomeZh() {
                   <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
                 </svg>
                 <p className="text-sm sm:text-base font-bold text-text-primary leading-snug">
-                  CIANO14：<span className="text-brand">6 kW/kg</span> —— 持续功率超过同级别任何竞品的{' '}
-                  <span className="text-brand">2.5×</span>。同样的尺寸，2.5 倍的持续输出。
+                  CIANO14：<span className="text-brand">8 kW/kg</span> —— 持续功率超过同级别任何竞品的{' '}
+                  <span className="text-brand">3×</span>。同样的尺寸，3 倍的持续输出。
                 </p>
               </div>
             </div>

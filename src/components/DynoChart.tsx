@@ -11,7 +11,7 @@ const TXT = 'var(--color-text-secondary)';
 const SURFACE = 'var(--color-surface-primary)';
 
 type NumKey = {
-  [K in keyof DynoPoint]-?: DynoPoint[K] extends number ? K : never;
+  [K in keyof DynoPoint]-?: NonNullable<DynoPoint[K]> extends number ? K : never;
 }[keyof DynoPoint];
 
 const fmtFull = (n: number) => Math.round(n).toLocaleString('en-US');
@@ -37,7 +37,7 @@ const visualLength = (s: string) =>
   [...s].reduce((n, c) => n + (isWide(c.charCodeAt(0)) ? 2 : 1), 0);
 
 export default function DynoChart({
-  points,
+  points: allPoints,
   xKey,
   yKey,
   title,
@@ -61,6 +61,12 @@ export default function DynoChart({
 }) {
   const t = strings[locale];
   const [hover, setHover] = useState<number | null>(null);
+
+  // Skip points that have no valid reading for this chart's axes, and points
+  // flagged as efficiency outliers (they stay in the data table only).
+  const points = allPoints.filter(
+    (p) => p[xKey] != null && p[yKey] != null && !(yKey === 'elecEff' && p.effChartOutlier),
+  ) as (DynoPoint & Record<NumKey, number>)[];
 
   const W = 360;
   const H = 224;

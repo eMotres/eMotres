@@ -36,6 +36,7 @@ export interface ProductZh {
   specs: { label: string; value: string }[];
   dynoTest?: DynoTestZh;
   dynoTestFoc?: DynoTestZh;
+  dynoTestNctrl?: DynoTestZh;
   comparison?: MotorComparisonZh;
 }
 
@@ -46,7 +47,7 @@ export const productsZh: Record<string, ProductZh> = {
     priceBadge: '工程样机',
     priceNote: '手工制造，逐台台架测试。',
     priceComingSoon: '量产价 ¥500 —— 达到量产规模后推出。',
-    keyClaim: '6 kW/kg —— 持续功率与推力超过同级别任何 3115 级电机的 2.5 倍。',
+    keyClaim: '8 kW/kg —— 持续功率与推力超过同级别任何 3115 级电机的 3 倍。',
     status: '工程样机 —— 按订单生产（约 1.5 个月）',
     description:
       'CIANO14 40_12 是基于 AeroStator Core 平台打造的紧凑型精密电机。切向磁体磁化在极小的体积内实现出色的扭矩密度 —— 是竞速无人机与精密空中系统的理想选择。',
@@ -104,6 +105,26 @@ export const productsZh: Record<string, ProductZh> = {
         { label: '相比 BLDC 的效率提升', value: '+7 pp', sub: '84.2 % 对比 76.9 %（梯形波）' },
         { label: '最大推力', value: '3622 g', sub: '12,606 rpm @ 21.2 V' },
       ],
+    },
+    dynoTestNctrl: {
+      title: 'FOC —— FOURnamics nCTRL 电调',
+      intro:
+        '与德国 FOURnamics GmbH 合作，在其测试台架上由 nCTRL 电调驱动，采用双叶 AERONAUT 12×5 螺旋桨、6S 供电（2026-08-12）。系统效率（电机 + 电调）峰值达到 93.6 % —— 这是 CIANO14 迄今测得的最佳数据，最大推力也提升至 5,764 g。',
+      conditions: 'AERONAUT 12×5 · 双叶螺旋桨 · 24.5 V（6S）· FOURnamics nCTRL 电调',
+      date: '2026-08-12',
+      note: '表格展示完整测试扫描。轻载（60 % 油门以下）时台架的电功率通道读数偏低（电功率不高于轴功率），因此该区间不显示系统效率；60 % 油门的效率读数保留在表格中，但作为异常点未纳入效率曲线。电流由电功率按 24.5 V 母线电压推算。',
+      setup: [
+        { label: '测试台架', value: 'FOURnamics 测试台' },
+        { label: '电调', value: 'FOURnamics nCTRL（FOC）' },
+        { label: '螺旋桨', value: 'AERONAUT 12×5 · 双叶' },
+        { label: '母线电压', value: '24.5 V（6S）' },
+      ],
+      highlights: [
+        { label: '系统效率峰值', value: '93.6 %', sub: '60 % 油门 / 约 10.3k rpm 时' },
+        { label: '最大推力', value: '5764 g', sub: '14,255 rpm @ 24.5 V' },
+        { label: '最大电功率', value: '1813 W', sub: '74 A / 24.5 V 时' },
+      ],
+      link: { label: 'FOURnamics GmbH 的 nCTRL 电调', url: 'https://fournamics.com/' },
     },
     comparison: {
       ourName: 'CIANO14 40_12',
@@ -410,6 +431,10 @@ export function getProductZhBySlug(slug: string): Product | undefined {
       en.dynoTestFoc && zh.dynoTestFoc
         ? { ...zh.dynoTestFoc, points: en.dynoTestFoc.points }
         : en.dynoTestFoc,
+    dynoTestNctrl:
+      en.dynoTestNctrl && zh.dynoTestNctrl
+        ? { ...zh.dynoTestNctrl, points: en.dynoTestNctrl.points }
+        : en.dynoTestNctrl,
     comparison:
       en.comparison && zh.comparison
         ? { ...zh.comparison, theirsPoints: en.comparison.theirsPoints }

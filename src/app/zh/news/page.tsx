@@ -14,6 +14,8 @@ type NewsItem = {
   date: string;
   title: string;
   image?: string;
+  /** Extra stills rendered stacked under the intro (LinkedIn-style gallery). */
+  images?: string[];
   video?: string;
   intro: string[];
   metrics?: { k: string; v: string }[];
@@ -23,6 +25,53 @@ type NewsItem = {
 
 // Newest first.
 const news: NewsItem[] = [
+  {
+    date: '2026年8月13日',
+    title: '125 g 电机实现 8 kW/kg 持续功率',
+    images: ['/images/news/news-aug13-8kwkg-table.png', '/images/news/news-aug13-8kwkg-thermal.webp'],
+    intro: [
+      '我们刚刚在 CIANO14 40_12 上实测到 1,014 W 的持续轴功率 —— 125 g 电机做到 8.11 kW/kg（三叶 10×5 螺旋桨，24.6 V / 55 A）。',
+      '实现它的关键：AeroStator Core™ 拓扑使定子散热表面积达到传统设计的 2 倍；扁平铜线线圈将绕组电阻减半 —— 实心铜截面还兼作散热器，产热更少的部件同时负责导热；以及与德国 FOURnamics GmbH 及其 nCTRL 电调共同实现的驱动优化。',
+    ],
+    metrics: [
+      { k: '持续轴功率', v: '1,014 W' },
+      { k: '功率密度（轴端）', v: '8.11 kW/kg' },
+      { k: '推力', v: '4,300 g' },
+      { k: '转速', v: '14,400 rpm' },
+      { k: '系统效率', v: '74.9 %' },
+      { k: '线圈温度', v: '201 °C（红外，最高）' },
+    ],
+    outro: [
+      '定子拓扑的上限，取决于电调允许它发挥多少 —— 而 nCTRL 让它发挥了全部。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_8-kwkg-continuous-on-a-125-g-motor-we-ugcPost-7493606955014483968-Obrg',
+  },
+  {
+    date: '2026年8月12日',
+    title: '一半的重量，同级的推力 —— CIANO14 对比 4215 级重载电机',
+    images: [
+      '/images/news/news-aug12-4215-photo.webp',
+      '/images/news/news-aug12-4215-table.png',
+      '/images/news/news-aug12-4215-charts.png',
+    ],
+    intro: [
+      '想在不牺牲效率的前提下给四旋翼减重半公斤？看看你的电机 —— 重量就藏在那里。大多数重载四旋翼使用的 4215 级电机每台重 257–262 g，而 CIANO14 40_12 仅重 125 g —— 且覆盖完全相同的推力范围。',
+      '我们与德国 FOURnamics GmbH 及其 nCTRL 电调合作，在同一 6S 台架（双叶 AERONAUT 12×5）上，将 CIANO14 40_12 与三款 4215 级电机进行了对比测试：',
+    ],
+    metrics: [
+      { k: '系统效率峰值', v: '93.6 %（电机 + 电调）' },
+      { k: '测试中最佳 4215', v: '78.1 %' },
+      { k: '全油门效率', v: '80.5 % 对比 71.3 %' },
+      { k: '减重', v: '每台 >125 g · 每机约 500 g' },
+      { k: '1,500 W 时的推力', v: '5,237 g —— 全场最佳' },
+      { k: '每克电机的推力', v: '41.9 —— 是最佳 4215 的 2.1 倍' },
+    ],
+    outro: [
+      '所有气动优势都在对手一边 —— 它们的三叶 13″ 螺旋桨比我们的双叶 12″ 多出约 17 % 的桨盘面积 —— 但 CIANO14 依然交出了更高的效率。',
+      '机身减重 500 g 的意义远不止 500 g：悬停所需推力更小、电流更低、续航更长 —— 或者零代价多带 500 g 载荷。一半的重量，同级的推力，更高的效率。',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_electricmotors-uav-dronetechnology-ugcPost-7493171849166573569-l_DV',
+  },
   {
     date: '2026年7月21日',
     title: '两台共轴电机，还是一支更大的螺旋桨？收益是续航时间',
@@ -158,6 +207,14 @@ export default function NewsPage() {
                   >
                     <source src={item.video} type="video/mp4" />
                   </video>
+                </div>
+              ) : item.images ? (
+                <div className="space-y-3 mb-5">
+                  {item.images.map((src) => (
+                    <div key={src} className="rounded-xl overflow-hidden bg-surface-tertiary flex justify-center">
+                      <img src={src} alt={item.title} loading="lazy" className="max-h-[30rem] w-auto max-w-full object-contain" />
+                    </div>
+                  ))}
                 </div>
               ) : item.image ? (
                 <div className="rounded-xl overflow-hidden mb-5 bg-surface-tertiary flex justify-center">

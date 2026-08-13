@@ -302,6 +302,7 @@ export default async function ProductPageZh({ params }: { params: Promise<{ slug
         {/* Test results — motors with dynamometer data only */}
         {product.dynoTest && <DynoTestResults test={product.dynoTest} locale="zh" />}
         {product.dynoTestFoc && <DynoTestResults test={product.dynoTestFoc} locale="zh" />}
+        {product.dynoTestNctrl && <DynoTestResults test={product.dynoTestNctrl} locale="zh" />}
 
         {/* Head-to-head comparison — motors with comparison data only */}
         {product.comparison && (

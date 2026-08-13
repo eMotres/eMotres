@@ -28,8 +28,10 @@ export interface DynoPoint {
   temp?: number; // °C (optional — some controller logs have no temperature channel)
   pElec: number; // electric power, W
   pShaft: number; // shaft (mechanical) power, W
-  elecEff: number; // system efficiency (motor + controller), %
-  sysEff: number; // thrust efficiency, gf/W
+  elecEff?: number; // system efficiency (motor + controller), % — omit when the bench reading is invalid
+  sysEff?: number; // thrust efficiency, gf/W — omit when not derivable
+  /** Keep the value in the data table but leave it out of the efficiency chart (measurement outlier). */
+  effChartOutlier?: boolean;
 }
 
 export interface DynoTest {
@@ -40,6 +42,8 @@ export interface DynoTest {
   note?: string;
   setup: { label: string; value: string }[];
   highlights: { label: string; value: string; sub?: string }[];
+  /** Optional external link (e.g. the test-bench / ESC manufacturer). */
+  link?: { label: string; url: string };
   points: DynoPoint[];
 }
 
@@ -93,6 +97,7 @@ export interface Product {
   performanceSpecs?: PerformanceSpecs;
   dynoTest?: DynoTest;
   dynoTestFoc?: DynoTest;
+  dynoTestNctrl?: DynoTest;
   comparison?: MotorComparison;
 }
 
@@ -105,7 +110,7 @@ export const products: Product[] = [
     priceBadge: 'Engineering sample',
     priceNote: 'Hand-built and individually bench-tested.',
     priceComingSoon: 'Series price €60 — coming soon at production volume.',
-    keyClaim: '6 kW/kg — more than 2.5× the continuous power and thrust of any comparable 3115-class motor.',
+    keyClaim: '8 kW/kg — more than 3× the continuous power and thrust of any comparable 3115-class motor.',
     inStock: false, // → set true + add stripePaymentLink to sell CIANO14 directly (see src/lib/store.ts)
     imageUrl: '/ciano14-40-12.png',
     category: 'Air-cooled',
@@ -210,6 +215,38 @@ export const products: Product[] = [
         { rpm: 11601, voltage: 21.48, current: 44.240, thrust: 3088, torque: 0.6276, pElec: 950.3, pShaft: 762.1, elecEff: 80.2, sysEff: 3.25 },
         { rpm: 12260, voltage: 21.32, current: 54.231, thrust: 3412, torque: 0.7018, pElec: 1156.3, pShaft: 900.6, elecEff: 77.9, sysEff: 2.95 },
         { rpm: 12606, voltage: 21.22, current: 60.537, thrust: 3622, torque: 0.7425, pElec: 1284.6, pShaft: 979.6, elecEff: 76.3, sysEff: 2.82 },
+      ],
+    },
+    dynoTestNctrl: {
+      title: 'FOC — FOURnamics nCTRL ESC',
+      intro:
+        'Benchmarked together with FOURnamics GmbH on their test bench, driven by their nCTRL ESC on a 2-blade AERONAUT 12×5 propeller at 6S (2026-08-12). Peak system efficiency (motor + ESC) reaches 93.6 % — the best figure measured on the CIANO14 so far — and max thrust climbs to 5,764 g.',
+      conditions: 'AERONAUT 12×5 · 2-blade propeller · 24.5 V (6S) · FOURnamics nCTRL ESC',
+      date: '2026-08-12',
+      note: 'Full bench sweep shown. At light load (below 60 % throttle) the bench’s electrical-power channel under-read (P elec at or below shaft power), so system efficiency is not shown for those rows; the 60 % reading stays in the table but is left out of the efficiency chart as an outlier. Current is derived from electric power at the 24.5 V bus.',
+      setup: [
+        { label: 'Test bench', value: 'FOURnamics test bench' },
+        { label: 'ESC', value: 'FOURnamics nCTRL (FOC)' },
+        { label: 'Propeller', value: 'AERONAUT 12×5 · 2-blade' },
+        { label: 'Bus voltage', value: '24.5 V (6S)' },
+      ],
+      highlights: [
+        { label: 'Peak system efficiency', value: '93.6 %', sub: 'at 60 % throttle / 10.3k rpm' },
+        { label: 'Max thrust', value: '5764 g', sub: '14,255 rpm @ 24.5 V' },
+        { label: 'Max electric power', value: '1813 W', sub: 'at 74 A / 24.5 V' },
+      ],
+      link: { label: 'nCTRL ESC by FOURnamics GmbH', url: 'https://fournamics.com/' },
+      points: [
+        { throttle: 10, rpm: 2240, voltage: 24.5, current: -0.1, thrust: 135, torque: 0.073, pElec: -2, pShaft: 17 },
+        { throttle: 20, rpm: 4126, voltage: 24.5, current: 1.3, thrust: 489, torque: 0.135, pElec: 33, pShaft: 59, sysEff: 15.0 },
+        { throttle: 30, rpm: 5924, voltage: 24.5, current: 4.2, thrust: 965, torque: 0.212, pElec: 103, pShaft: 132, sysEff: 9.4 },
+        { throttle: 40, rpm: 7529, voltage: 24.5, current: 9.1, thrust: 1581, torque: 0.301, pElec: 222, pShaft: 237, sysEff: 7.1 },
+        { throttle: 50, rpm: 9108, voltage: 24.5, current: 16.0, thrust: 2314, torque: 0.412, pElec: 393, pShaft: 393, sysEff: 5.9 },
+        { throttle: 60, rpm: 10309, voltage: 24.5, current: 24.0, thrust: 2964, torque: 0.51, pElec: 588, pShaft: 551, elecEff: 93.6, sysEff: 5.04, effChartOutlier: true },
+        { throttle: 70, rpm: 11498, voltage: 24.5, current: 34.4, thrust: 3728, torque: 0.633, pElec: 843, pShaft: 762, elecEff: 90.4, sysEff: 4.42 },
+        { throttle: 80, rpm: 12532, voltage: 24.5, current: 45.7, thrust: 4430, torque: 0.745, pElec: 1120, pShaft: 977, elecEff: 87.3, sysEff: 3.96 },
+        { throttle: 90, rpm: 13370, voltage: 24.5, current: 59.3, thrust: 5160, torque: 0.872, pElec: 1454, pShaft: 1221, elecEff: 84.0, sysEff: 3.55 },
+        { throttle: 100, rpm: 14255, voltage: 24.5, current: 74.0, thrust: 5764, torque: 0.979, pElec: 1813, pShaft: 1461, elecEff: 80.5, sysEff: 3.18 },
       ],
     },
     comparison: {

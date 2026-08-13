@@ -14,6 +14,8 @@ type NewsItem = {
   date: string;
   title: string;
   image?: string;
+  /** Extra stills rendered stacked under the intro (LinkedIn-style gallery). */
+  images?: string[];
   video?: string;
   intro: string[];
   metrics?: { k: string; v: string }[];
@@ -23,6 +25,53 @@ type NewsItem = {
 
 // Newest first.
 const news: NewsItem[] = [
+  {
+    date: 'August 13, 2026',
+    title: '8 kW/kg continuous — on a 125 g motor',
+    images: ['/images/news/news-aug13-8kwkg-table.png', '/images/news/news-aug13-8kwkg-thermal.webp'],
+    intro: [
+      'We just measured 1,014 W of continuous shaft power from the CIANO14 40_12 — 8.11 kW/kg from a 125-gram motor, on a 3-blade 10×5 propeller at 24.6 V / 55 A.',
+      'What makes it possible: the AeroStator Core™ topology gives twice the stator cooling surface of a conventional design; rectangular wire coils halve the winding resistance — and the solid copper cross-section doubles as a heat sink, so the same part that generates less heat also carries it away; and an optimized drive, achieved together with FOURnamics GmbH and their nCTRL ESC.',
+    ],
+    metrics: [
+      { k: 'Continuous shaft power', v: '1,014 W' },
+      { k: 'Power density (shaft)', v: '8.11 kW/kg' },
+      { k: 'Thrust', v: '4,300 g' },
+      { k: 'Speed', v: '14,400 rpm' },
+      { k: 'System efficiency', v: '74.9 %' },
+      { k: 'Coil temperature', v: '201 °C (IR, max)' },
+    ],
+    outro: [
+      'A stator topology can only deliver what the ESC lets it deliver — and nCTRL let it deliver everything.',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_8-kwkg-continuous-on-a-125-g-motor-we-ugcPost-7493606955014483968-Obrg',
+  },
+  {
+    date: 'August 12, 2026',
+    title: 'Half the mass, same thrust class — CIANO14 vs the 4215 heavy-lift motors',
+    images: [
+      '/images/news/news-aug12-4215-photo.webp',
+      '/images/news/news-aug12-4215-table.png',
+      '/images/news/news-aug12-4215-charts.png',
+    ],
+    intro: [
+      'Want to take half a kilo off your quadcopter without giving up efficiency? Look at your motors — that is where the weight is hiding. The 4215-class motors most heavy-lift quads fly weigh 257–262 g each. The CIANO14 40_12 weighs just 125 g — and covers the exact same thrust envelope.',
+      'Together with FOURnamics GmbH and their nCTRL ESC we benchmarked the CIANO14 40_12 against three 4215-class motors on the same 6S bench (AERONAUT 12×5 2-blade):',
+    ],
+    metrics: [
+      { k: 'Peak system efficiency', v: '93.6 % (motor + ESC)' },
+      { k: 'Best 4215 in test', v: '78.1 %' },
+      { k: 'At full throttle', v: '80.5 % vs 71.3 %' },
+      { k: 'Weight saved', v: '>125 g per motor · ~500 g per quad' },
+      { k: 'Thrust @ 1,500 W', v: '5,237 g — best in test' },
+      { k: 'Thrust per motor gram', v: '41.9 — 2.1× the best 4215' },
+    ],
+    outro: [
+      'Every aerodynamic advantage was on the competitors’ side — their 3-blade 13″ props offer ~17 % more disc area than our 2-blade 12″ — yet the CIANO14 still delivered superior efficiency.',
+      'And 500 g off the airframe is never just 500 g: it means less thrust required to hover, lower current draw, and extended flight time — or the ability to carry 500 g more payload with zero penalty. Half the mass. Same thrust class. Higher efficiency.',
+    ],
+    url: 'https://www.linkedin.com/posts/vadim-shcherbakov-4b2aa020_electricmotors-uav-dronetechnology-ugcPost-7493171849166573569-l_DV',
+  },
   {
     date: 'July 21, 2026',
     title: 'Two coaxial motors, or one bigger prop? The payoff is flight time',
@@ -158,6 +207,14 @@ export default function NewsPage() {
                   >
                     <source src={item.video} type="video/mp4" />
                   </video>
+                </div>
+              ) : item.images ? (
+                <div className="space-y-3 mb-5">
+                  {item.images.map((src) => (
+                    <div key={src} className="rounded-xl overflow-hidden bg-surface-tertiary flex justify-center">
+                      <img src={src} alt={item.title} loading="lazy" className="max-h-[30rem] w-auto max-w-full object-contain" />
+                    </div>
+                  ))}
                 </div>
               ) : item.image ? (
                 <div className="rounded-xl overflow-hidden mb-5 bg-surface-tertiary flex justify-center">

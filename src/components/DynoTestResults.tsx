@@ -51,7 +51,8 @@ const strings = {
 
 export default function DynoTestResults({ test, locale = 'en' }: { test: DynoTest; locale?: Locale }) {
   const t = strings[locale];
-  const peakEff = Math.max(...test.points.map((p) => p.elecEff));
+  const effVals = test.points.map((p) => p.elecEff).filter((v): v is number => v != null);
+  const peakEff = Math.max(...effVals);
   const hasThrottle = test.points.some((p) => p.throttle != null);
   const hasTemp = test.points.some((p) => p.temp != null);
   const maxTorque = Math.max(...test.points.map((p) => p.torque));
@@ -84,6 +85,19 @@ export default function DynoTestResults({ test, locale = 'en' }: { test: DynoTes
       <p className="text-sm text-text-secondary mb-6 max-w-3xl">
         {test.intro}{t.hover}
       </p>
+
+      {test.link && (
+        <p className="text-sm mb-6 -mt-3">
+          <a
+            href={test.link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-brand hover:underline"
+          >
+            {test.link.label} ↗
+          </a>
+        </p>
+      )}
 
       {/* Highlights */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
@@ -119,7 +133,7 @@ export default function DynoTestResults({ test, locale = 'en' }: { test: DynoTes
             </thead>
             <tbody>
               {test.points.map((p, i) => {
-                const peak = p.elecEff === peakEff;
+                const peak = p.elecEff != null && p.elecEff === peakEff;
                 return (
                   <tr key={i} className={peak ? 'bg-brand/10' : i % 2 ? 'bg-surface-secondary' : 'bg-surface-primary'}>
                     {hasThrottle && (
@@ -135,8 +149,8 @@ export default function DynoTestResults({ test, locale = 'en' }: { test: DynoTes
                     )}
                     <td className="px-3 py-2 text-right text-text-primary">{p.pElec.toFixed(1)}</td>
                     <td className="px-3 py-2 text-right text-text-secondary">{p.pShaft.toFixed(1)}</td>
-                    <td className="px-3 py-2 text-right font-semibold text-brand">{p.elecEff.toFixed(1)}</td>
-                    <td className="px-3 py-2 text-right text-text-primary">{p.sysEff.toFixed(2)}</td>
+                    <td className="px-3 py-2 text-right font-semibold text-brand">{p.elecEff != null ? p.elecEff.toFixed(1) : '—'}</td>
+                    <td className="px-3 py-2 text-right text-text-primary">{p.sysEff != null ? p.sysEff.toFixed(2) : '—'}</td>
                   </tr>
                 );
               })}

@@ -300,6 +300,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         {/* Test results — motors with dynamometer data only */}
         {product.dynoTest && <DynoTestResults test={product.dynoTest} />}
         {product.dynoTestFoc && <DynoTestResults test={product.dynoTestFoc} />}
+        {product.dynoTestNctrl && <DynoTestResults test={product.dynoTestNctrl} />}
 
         {/* Head-to-head comparison — motors with comparison data only */}
         {product.comparison && (

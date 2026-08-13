@@ -89,7 +89,7 @@ const cianoMotors: {
     protection: 'Open frame',
     price: '€150',
     priceTag: 'sample',
-    highlight: '2.5× continuous power & thrust vs class',
+    highlight: '3× continuous power & thrust vs class',
     imageUrl: '/ciano14-40-12.png',
   },
   {
@@ -158,9 +158,9 @@ export default function Home() {
                   <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
                 </svg>
                 <p className="text-sm sm:text-base font-bold text-text-primary leading-snug">
-                  CIANO14: <span className="text-brand">6 kW/kg</span> — more than{' '}
-                  <span className="text-brand">2.5× the continuous power</span> of any competitor in its class. Same
-                  size, 2.5× the sustained output.
+                  CIANO14: <span className="text-brand">8 kW/kg</span> — more than{' '}
+                  <span className="text-brand">3× the continuous power</span> of any competitor in its class. Same
+                  size, 3× the sustained output.
                 </p>
               </div>
             </div>

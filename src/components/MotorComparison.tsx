@@ -1,4 +1,4 @@
-import { MotorComparison, ComparisonPoint } from '@/lib/products';
+import { MotorComparison, ComparisonPoint, DynoPoint } from '@/lib/products';
 import type { Locale } from '@/i18n/dictionaries';
 import ComparisonChart from '@/components/ComparisonChart';
 
@@ -25,14 +25,18 @@ const strings = {
 
 export default function MotorComparisonSection({
   data,
-  oursPoints,
+  oursPoints: oursDynoPoints,
   locale = 'en',
 }: {
   data: MotorComparison;
-  oursPoints: ComparisonPoint[];
+  oursPoints: DynoPoint[];
   locale?: Locale;
 }) {
   const t = strings[locale];
+  // Overlay charts need both efficiencies — drop dyno rows without valid readings.
+  const oursPoints: ComparisonPoint[] = oursDynoPoints.filter(
+    (p): p is DynoPoint & { elecEff: number; sysEff: number } => p.elecEff != null && p.sysEff != null,
+  );
   return (
     <section className="mb-16">
       <div className="border-b border-surface-tertiary mb-6">
