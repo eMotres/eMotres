@@ -208,20 +208,32 @@ def build_message(record: dict) -> EmailMessage:
     else:
         subject_line = f"[emotres.com] Contact — {subject_field or name}"
 
-    lines = [
-        f"id: {record['id']}",
-        f"ts: {record['ts']}",
-        f"form: {form}",
-        f"locale: {record.get('locale')}",
-        f"name: {record['name']}",
-        f"email: {record['email']}",
-        f"subject: {record.get('subject') or ''}",
-        f"ip: {record.get('ip')}",
-        "",
-        "message:",
-        record["message"],
-    ]
-    body = "\n".join(lines)
+    # Written to be read by a human first: who wrote and what they wrote, then
+    # one footer line with the bits needed to trace the lead back to
+    # leads.jsonl. The date is already in the message's Date header and the
+    # subject in its Subject header, so neither is repeated in the body.
+    form_label = "Quote form" if form == "quote" else "Contact form"
+    lang = {"en": "English", "zh": "Chinese"}.get(record.get("locale") or "en", "")
+    footer = " · ".join(
+        part
+        for part in (
+            f"{form_label} on emotres.com",
+            lang,
+            f"ref {record['id'][:8]}",
+            f"IP {record.get('ip')}" if record.get("ip") else "",
+        )
+        if part
+    )
+    body = "\n".join(
+        [
+            f"{record['name']} <{record['email']}>",
+            "",
+            record["message"],
+            "",
+            "--",
+            footer,
+        ]
+    )
 
     msg = EmailMessage()
     msg["Subject"] = subject_line
