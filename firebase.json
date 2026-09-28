@@ -9,6 +9,8 @@
       "**/node_modules/**"
     ],
     "redirects": [
+      { "source": "/api",                       "destination": "https://aerostator.com/api",     "type": 301 },
+      { "source": "/api/:path*",                "destination": "https://aerostator.com/api/:path*", "type": 301 },
       { "source": "/service",                    "destination": "/motor-development-services/", "type": 301 },
       { "source": "/service/",                   "destination": "/motor-development-services/", "type": 301 },
       { "source": "/services",                   "destination": "/motor-development-services/", "type": 301 },
