@@ -119,3 +119,20 @@ fine since the process reopens the path every time.
 `journalctl -u motres-forms -f`. The service logs one line per accepted
 lead (id, form, ip), one line per dropped spam submission (honeypot), and
 mail warnings/errors. `SMTP_PASS` is never logged.
+
+## Where the notification lands
+
+`MAIL_TO` is `sales@emotres.com`. That address resolves in a way worth knowing
+about before debugging a bounce: in this Google Workspace the primary domain is
+**motresres.com**, and both **emotres.com** and **aerostator.com** are *user
+alias domains* of it — not secondary domains. So an address only exists if the
+alias exists on motresres.com; `sales@emotres.com` works because the user has
+the alias `sales@motresres.com`. The admin console will not let you create an
+alias directly on a user alias domain (the Domain dropdown stays on
+motresres.com), which looks like a broken control but is by design.
+
+A bounce with `550-5.1.1 ... account ... does not exist` therefore means the
+alias is missing on motresres.com, not that something is wrong with the relay.
+Google's Email Log Search (https://admin.google.com/ac/emaillogsearch) shows the
+real delivery outcome; the relay returning 250 only means it accepted the
+message for delivery.
