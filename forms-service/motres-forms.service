@@ -1,0 +1,23 @@
+[Unit]
+Description=Motres forms service (self-hosted Formspree replacement for emotres.com)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/motres/forms.env
+ExecStart=/usr/bin/python3 /opt/motres/forms/forms_service.py
+User=www-data
+Group=www-data
+Restart=always
+RestartSec=2
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/motres/forms
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,20 @@
+# Serves the emotres.com Contact/Quote forms (forms-service, self-hosted
+# Formspree replacement) — proxies to the motres-forms systemd unit on
+# 127.0.0.1:8095. Paste this location block inside the existing
+# aerostator.com HTTPS server block.
+#
+# NOTE: proxy_pass has NO URI part after the host:port, so nginx forwards
+# the full incoming /forms/... URI to the backend unchanged (the backend
+# routes on /forms/submit and /forms/health, not on /submit or /health).
+location /forms/ {
+    proxy_pass http://127.0.0.1:8095;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    client_max_body_size 32k;
+    proxy_read_timeout 30s;
+}

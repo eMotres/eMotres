@@ -2,13 +2,10 @@
 
 import { useState } from 'react';
 import { trackLead } from '@/lib/gtag';
+import { FORMS_ENDPOINT } from '@/lib/forms';
 import type { Locale } from '@/i18n/dictionaries';
 
-// Same Formspree form ID as ContactForm
-const FORMSPREE_ID = 'xbddrvlr';
-
-// User-visible copy only. Backend-facing values (Formspree field names and
-// the _subject line) stay English on purpose.
+// User-visible copy only. The forms-service field names stay English.
 const strings = {
   en: {
     errName: 'Name is required',
@@ -47,6 +44,7 @@ const strings = {
 const QuoteForm = ({ locale = 'en' }: { locale?: Locale }) => {
   const t = strings[locale];
   const [form, setForm] = useState({ name: '', email: '', message: '', agree: false });
+  const [company, setCompany] = useState(''); // honeypot — must stay empty
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -67,20 +65,23 @@ const QuoteForm = ({ locale = 'en' }: { locale?: Locale }) => {
     setStatus('sending');
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(FORMS_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          form: 'quote',
           name: form.name,
           email: form.email,
           message: form.message,
-          _subject: `Quote request from ${form.name}`,
+          locale,
+          company,
         }),
       });
 
       if (res.ok) {
         setStatus('success');
         setForm({ name: '', email: '', message: '', agree: false });
+        setCompany('');
         trackLead('get-a-quote');
       } else {
         setStatus('error');
@@ -112,6 +113,18 @@ const QuoteForm = ({ locale = 'en' }: { locale?: Locale }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {/* Honeypot — hidden from sighted users, left blank by humans; bots
+          that auto-fill every field get silently dropped server-side. */}
+      <input
+        type="text"
+        name="company"
+        value={company}
+        onChange={e => setCompany(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}
+      />
       <div>
         <input
           type="text"

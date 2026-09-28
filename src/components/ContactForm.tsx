@@ -2,14 +2,10 @@
 
 import React, { useState } from 'react';
 import { trackLead } from '@/lib/gtag';
+import { FORMS_ENDPOINT } from '@/lib/forms';
 import type { Locale } from '@/i18n/dictionaries';
 
-// 1. Go to https://formspree.io → sign up free
-// 2. Create a new form → copy the form ID (e.g. "xpwzgkla")
-// 3. Replace YOUR_FORM_ID below
-const FORMSPREE_ID = 'xbddrvlr';
-
-// User-visible copy. Backend-facing values (Formspree field names, _subject)
+// User-visible copy. Backend-facing values (forms-service field names)
 // stay English on purpose.
 const strings = {
   en: {
@@ -55,6 +51,7 @@ const strings = {
 const ContactForm = ({ locale = 'en' }: { locale?: Locale }) => {
   const t = strings[locale];
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [company, setCompany] = useState(''); // honeypot — must stay empty
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -76,15 +73,24 @@ const ContactForm = ({ locale = 'en' }: { locale?: Locale }) => {
     setStatus('sending');
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(FORMS_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, subject: form.subject, message: form.message }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form: 'contact',
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+          locale,
+          company,
+        }),
       });
 
       if (res.ok) {
         setStatus('success');
         setForm({ name: '', email: '', subject: '', message: '' });
+        setCompany('');
         setAgree(false);
         trackLead('contact');
       } else {
@@ -117,6 +123,18 @@ const ContactForm = ({ locale = 'en' }: { locale?: Locale }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      {/* Honeypot — hidden from sighted users, left blank by humans; bots
+          that auto-fill every field get silently dropped server-side. */}
+      <input
+        type="text"
+        name="company"
+        value={company}
+        onChange={e => setCompany(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <input
