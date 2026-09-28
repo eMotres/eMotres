@@ -208,22 +208,12 @@ def build_message(record: dict) -> EmailMessage:
     else:
         subject_line = f"[emotres.com] Contact — {subject_field or name}"
 
-    # Written to be read by a human first: who wrote and what they wrote, then
-    # one footer line with the bits needed to trace the lead back to
-    # leads.jsonl. The date is already in the message's Date header and the
-    # subject in its Subject header, so neither is repeated in the body.
+    # Written to be read, not parsed: who wrote and what they wrote. The date
+    # and subject are already the message's own Date and Subject headers, and
+    # the lead id, IP and raw fields stay in leads.jsonl where they belong.
     form_label = "Quote form" if form == "quote" else "Contact form"
     lang = {"en": "English", "zh": "Chinese"}.get(record.get("locale") or "en", "")
-    footer = " · ".join(
-        part
-        for part in (
-            f"{form_label} on emotres.com",
-            lang,
-            f"ref {record['id'][:8]}",
-            f"IP {record.get('ip')}" if record.get("ip") else "",
-        )
-        if part
-    )
+    footer = f"{form_label} on emotres.com" + (f" · {lang}" if lang else "")
     body = "\n".join(
         [
             f"{record['name']} <{record['email']}>",
