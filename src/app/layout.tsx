@@ -45,6 +45,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Search Console ownership for https://emotres.com/. Verification by Google
+  // Analytics is not an option here: Next renders the gtag snippet into the
+  // body, and Google only accepts it from <head>. Keep this tag — removing it
+  // un-verifies the property.
+  verification: {
+    google: "KWXihWoJAhJoTlGBs23IgdtfKKiCalLeelzB4clynQ8",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
