@@ -1,0 +1,32 @@
+# External uptime check of the AeroStator app (aerostator.com), independent of the server.
+# The server mails the admins itself (motres-alert), but cannot report its own total outage;
+# this job runs on GitHub every 5 minutes and FAILS when the health endpoint does not answer
+# "healthy" three times in a row. A failed scheduled run makes GitHub e-mail the account that
+# last changed this file (Settings > Notifications > Actions).
+name: uptime-aerostator
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: uptime-aerostator
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: GET https://aerostator.com/api/health
+        run: |
+          for i in 1 2 3; do
+            body=$(curl -fsS --max-time 20 https://aerostator.com/api/health) && echo "$body" | grep -q '"healthy"' && { echo "ok: $body"; exit 0; }
+            echo "attempt $i failed: ${body:-no answer}"; sleep 30
+          done
+          echo "::error::aerostator.com/api/health did not answer healthy 3 times in 90 s"
+          exit 1
