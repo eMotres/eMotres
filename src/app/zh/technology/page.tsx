@@ -334,7 +334,7 @@ export default function TechnologyPage() {
         <div className="max-w-5xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-widest text-brand">命名规则</span>
           <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-2">型号命名</h2>
-          <p className="text-text-secondary mb-6">eMotres 每个型号名称从左到右阅读：CIANO + 字母 + 极数 + 定子直径_定子长度。</p>
+          <p className="text-text-secondary mb-6">eMotres 每个型号名称从左到右阅读：按下表每项特征一个字母（如 CIANO）、可选字母、极数，然后是定子直径_定子长度。</p>
           <div className="overflow-x-auto rounded-xl border border-border bg-white">
             <table className="w-full text-sm text-left">
               <thead>

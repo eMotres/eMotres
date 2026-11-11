@@ -338,7 +338,7 @@ export default function TechnologyPage() {
         <div className="max-w-5xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-widest text-brand">Naming</span>
           <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-2">Model naming</h2>
-          <p className="text-text-secondary mb-6">Every eMotres model name is read left to right: CIANO + letters + number of poles + stator diameter_stator length.</p>
+          <p className="text-text-secondary mb-6">Every eMotres model name is read left to right: one letter per feature from the table (e.g. CIANO), optional letters, the number of poles, then stator diameter_stator length.</p>
           <div className="overflow-x-auto rounded-xl border border-border bg-white">
             <table className="w-full text-sm text-left">
               <thead>
