@@ -252,20 +252,20 @@ export const products: Product[] = [
   },
   {
     slug: 'ciano-150-30',
-    sku: 'CIANO28 150_30',
-    title: 'CIANO28 150_30 — Mid-Range Aviation Motor',
+    sku: 'CIANO42 150_30',
+    title: 'CIANO42 150_30 — Mid-Range Aviation Motor',
     price: '€1,000.00',
     imageUrl: '/ciano28-150-30.png',
     category: 'Air-cooled',
     technology: 'AeroStator Core',
     power: '15 kW',
     status: 'Made to order (~2 months)',
-    description: 'The CIANO28 150_30 delivers 8 kW of continuous power (14.4 kW peak) in an open-frame construction, with IP65 sealing available as an option. Built on the AeroStator Core platform with rectangular copper windings, it achieves the highest torque-to-weight ratio in its class — purpose-built for demanding UAV and light aviation applications.',
+    description: 'The CIANO42 150_30 delivers 8 kW of continuous power (14.4 kW peak) in an open-frame construction, with IP65 sealing available as an option. Built on the AeroStator Core platform with rectangular copper windings, it achieves the highest torque-to-weight ratio in its class — purpose-built for demanding UAV and light aviation applications.',
     applications: 'Heavy-lift UAVs, light manned aircraft, marine propulsion. Compatible with 55″–65″ propellers.',
     kvOptions: ['KV 43'],
     voltageOptions: ['47–76 V (18S LiPo)'],
     specs: [
-      { label: 'SKU', value: 'CIANO28 150_30' },
+      { label: 'SKU', value: 'CIANO42 150_30' },
       { label: 'Configuration', value: '42 Poles / 36 Slots' },
       { label: 'KV', value: '43 rpm/V' },
       { label: 'Torque Constant (Kt)', value: '0.22 Nm/A' },
@@ -296,7 +296,7 @@ export const products: Product[] = [
       },
     },
     dynoTest: {
-      intro: 'Propeller-dynamometer sweep of the CIANO28 150_30 on a 56″ propeller — sustaining ~49 kg of continuous thrust at 8.1 kW, with system efficiency (motor + controller) peaking at 86.6 % and the motor alone at 92.3 %.',
+      intro: 'Propeller-dynamometer sweep of the CIANO42 150_30 on a 56″ propeller — sustaining ~49 kg of continuous thrust at 8.1 kW, with system efficiency (motor + controller) peaking at 86.6 % and the motor alone at 92.3 %.',
       conditions: '56″ propeller · high-voltage bus · ambient 26 °C',
       note: 'System efficiency in the table is electric → shaft (drive, includes the controller); the motor alone peaks at 92.3 %. The continuous point (≈49 kg @ 8.1 kW) was measured at 74.9 V.',
       setup: [

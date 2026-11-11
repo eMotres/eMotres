@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     languages: { en: '/news/', 'zh-CN': '/zh/news/' },
   },
   description:
-    'Latest from eMotres — AeroStator Core™ test results, milestones and announcements: CIANO14 40_12 and CIANO 150_30 bench tests, efficiency benchmarks vs T-Motor, and continuous-power records.',
+    'Latest from eMotres — AeroStator Core™ test results, milestones and announcements: CIANO14 40_12 and CIANO42 150_30 bench tests, efficiency benchmarks vs T-Motor, and continuous-power records.',
 };
 
 type NewsItem = {

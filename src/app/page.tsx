@@ -94,7 +94,7 @@ const cianoMotors: {
   },
   {
     slug: 'ciano-150-30',
-    name: 'CIANO28 150_30',
+    name: 'CIANO42 150_30',
     tagline: 'Mid-range aviation',
     power: '14,400 W',
     torque: '43.5 Nm',

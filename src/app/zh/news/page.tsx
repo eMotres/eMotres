@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     languages: { en: '/news/', 'zh-CN': '/zh/news/' },
   },
   description:
-    'eMotres 最新动态 —— AeroStator Core™ 测试结果、里程碑与公告：CIANO14 40_12 和 CIANO 150_30 台架测试、与 T-Motor 的效率对比，以及持续功率纪录。',
+    'eMotres 最新动态 —— AeroStator Core™ 测试结果、里程碑与公告：CIANO14 40_12 和 CIANO42 150_30 台架测试、与 T-Motor 的效率对比，以及持续功率纪录。',
 };
 
 type NewsItem = {

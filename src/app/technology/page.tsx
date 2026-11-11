@@ -333,6 +333,62 @@ export default function TechnologyPage() {
         </div>
       </section>
 
+      {/* Model naming */}
+      <section className="bg-surface-secondary border-y border-border px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-5xl mx-auto">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand">Naming</span>
+          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-2">Model naming</h2>
+          <p className="text-text-secondary mb-6">Every eMotres model name is read left to right: CIANO + letters + number of poles + stator diameter_stator length.</p>
+          <div className="overflow-x-auto rounded-xl border border-border bg-white">
+            <table className="w-full text-sm text-left">
+              <thead>
+                <tr className="bg-surface-tertiary text-text-primary">
+                  <th className="px-4 py-2 font-semibold">Letter</th>
+                  <th className="px-4 py-2 font-semibold">Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">C / D</td>
+                    <td className="px-4 py-2 text-text-secondary">Concentrated winding / Distributed winding</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">I / O</td>
+                    <td className="px-4 py-2 text-text-secondary">Inrunner / Outrunner</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">A / L / O</td>
+                    <td className="px-4 py-2 text-text-secondary">Air cooling / Liquid cooling / Oil cooling</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">N / G / C</td>
+                    <td className="px-4 py-2 text-text-secondary">Non-oriented steel / Grain-oriented steel / FeCo alloy</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">O / C</td>
+                    <td className="px-4 py-2 text-text-secondary">Open construction / Closed, IP65</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">D · F · A (optional)</td>
+                    <td className="px-4 py-2 text-text-secondary">Double winding · Ferrite magnets · Aluminium coils</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">Number</td>
+                    <td className="px-4 py-2 text-text-secondary">Number of poles</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">Diameter_length</td>
+                    <td className="px-4 py-2 text-text-secondary">Stator diameter and stator length, mm</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-text-secondary mt-4">
+            <span className="font-semibold text-text-primary">Example:</span> CIANO42 150_30 = concentrated winding, inrunner, air cooling, non-oriented steel, open construction, 42 poles, Ø150 × 30 mm stator.
+          </p>
+        </div>
+      </section>
+
       {/* Patent portfolio */}
       <section className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto">

@@ -329,6 +329,62 @@ export default function TechnologyPage() {
         </div>
       </section>
 
+      {/* Model naming */}
+      <section className="bg-surface-secondary border-y border-border px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-5xl mx-auto">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand">命名规则</span>
+          <h2 className="text-3xl font-extrabold text-text-primary mt-3 mb-2">型号命名</h2>
+          <p className="text-text-secondary mb-6">eMotres 每个型号名称从左到右阅读：CIANO + 字母 + 极数 + 定子直径_定子长度。</p>
+          <div className="overflow-x-auto rounded-xl border border-border bg-white">
+            <table className="w-full text-sm text-left">
+              <thead>
+                <tr className="bg-surface-tertiary text-text-primary">
+                  <th className="px-4 py-2 font-semibold">字母</th>
+                  <th className="px-4 py-2 font-semibold">含义</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">C / D</td>
+                    <td className="px-4 py-2 text-text-secondary">集中绕组 / 分布绕组</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">I / O</td>
+                    <td className="px-4 py-2 text-text-secondary">内转子 / 外转子</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">A / L / O</td>
+                    <td className="px-4 py-2 text-text-secondary">风冷 / 液冷 / 油冷</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">N / G / C</td>
+                    <td className="px-4 py-2 text-text-secondary">无取向硅钢 / 取向硅钢 / FeCo 合金</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">O / C</td>
+                    <td className="px-4 py-2 text-text-secondary">开放式结构 / 封闭式 IP65</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">D · F · A（可选）</td>
+                    <td className="px-4 py-2 text-text-secondary">双绕组 · 铁氧体磁体 · 铝线圈</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">数字</td>
+                    <td className="px-4 py-2 text-text-secondary">极数</td>
+                  </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-4 py-2 font-mono font-semibold text-text-primary whitespace-nowrap">直径_长度</td>
+                    <td className="px-4 py-2 text-text-secondary">定子直径与定子长度，单位 mm</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-text-secondary mt-4">
+            <span className="font-semibold text-text-primary">示例：</span> CIANO42 150_30 = 集中绕组、内转子、风冷、无取向硅钢、开放式结构、42 极、定子 Ø150 × 30 mm。
+          </p>
+        </div>
+      </section>
+
       {/* Patent portfolio */}
       <section className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto">
