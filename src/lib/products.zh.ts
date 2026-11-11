@@ -129,14 +129,14 @@ export const productsZh: Record<string, ProductZh> = {
   },
 
   'ciano-150-30': {
-    title: 'CIANO28 150_30 — 中功率航空电机',
+    title: 'CIANO42 150_30 — 中功率航空电机',
     priceZh: '¥7,700',
     status: '按订单生产（约 2 个月）',
     description:
-      'CIANO28 150_30 以开放式结构提供 8 kW 持续功率（峰值 14.4 kW），并可选配 IP65 密封。它基于 AeroStator Core 平台并采用扁平铜线绕组，实现同级最高的扭矩重量比 —— 专为高要求的无人机与轻型航空应用打造。',
+      'CIANO42 150_30 以开放式结构提供 8 kW 持续功率（峰值 14.4 kW），并可选配 IP65 密封。它基于 AeroStator Core 平台并采用扁平铜线绕组，实现同级最高的扭矩重量比 —— 专为高要求的无人机与轻型航空应用打造。',
     applications: '重载无人机、轻型载人飞机、船舶推进。适配 55″–65″ 螺旋桨。',
     specs: [
-      { label: 'SKU', value: 'CIANO28 150_30' },
+      { label: 'SKU', value: 'CIANO42 150_30' },
       { label: '槽极配置', value: '42 极 / 36 槽' },
       { label: 'KV 值', value: '43 rpm/V' },
       { label: '扭矩常数 (Kt)', value: '0.22 Nm/A' },
@@ -150,7 +150,7 @@ export const productsZh: Record<string, ProductZh> = {
     ],
     dynoTest: {
       intro:
-        'CIANO28 150_30 搭配 56″ 螺旋桨的测功台扫描测试 —— 在 8.1 kW 下持续输出约 49 kg 推力，系统效率（电机 + 控制器）峰值达 86.6 %，电机单体效率峰值达 92.3 %。',
+        'CIANO42 150_30 搭配 56″ 螺旋桨的测功台扫描测试 —— 在 8.1 kW 下持续输出约 49 kg 推力，系统效率（电机 + 控制器）峰值达 86.6 %，电机单体效率峰值达 92.3 %。',
       conditions: '56″ 螺旋桨 · 高压母线 · 环境温度 26 °C',
       note: '表中的系统效率为电功率 → 轴功率（整个驱动系统，含控制器）；电机单体效率峰值为 92.3 %。持续工作点（约 49 kg @ 8.1 kW）在 74.9 V 下测得。',
       setup: [

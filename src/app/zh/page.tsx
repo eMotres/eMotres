@@ -97,7 +97,7 @@ const cianoMotors: {
   },
   {
     slug: 'ciano-150-30',
-    name: 'CIANO28 150_30',
+    name: 'CIANO42 150_30',
     tagline: '中功率航空',
     specs: [
       { k: '功率', v: '14,400 W' },
