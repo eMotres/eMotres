@@ -55,8 +55,8 @@ export default async function ProductPageZh({ params }: { params: Promise<{ slug
           ? [{ label: '推力', cont: ps.continuous.thrust, peak: ps.peak.thrust }]
           : []),
         { label: '转速', cont: ps.continuous.speed, peak: ps.peak.speed },
-        { label: '直流电流', cont: ps.continuous.current, peak: ps.peak.current },
-        { label: '效率', cont: ps.continuous.efficiency, peak: ps.peak.efficiency ?? '—' },
+        { label: ps.currentLabel ? '相电流（有效值）' : '直流电流', cont: ps.continuous.current, peak: ps.peak.current },
+        { label: ps.efficiencyLabel ? '效率（电机，仿真）' : '效率', cont: ps.continuous.efficiency, peak: ps.peak.efficiency ?? '—' },
       ]
     : [];
 
