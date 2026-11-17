@@ -1,4 +1,8 @@
 export interface PerformanceSpecs {
+  /** Row label of the current, when it is not the bench DC current (e.g. a simulated phase current). */
+  currentLabel?: string;
+  /** Row label of the efficiency, when it is not the bench system efficiency. */
+  efficiencyLabel?: string;
   continuous: {
     power: string;
     torque: string;
@@ -110,7 +114,7 @@ export const products: Product[] = [
     designation: 'CIANO14 40_12 7F2SY',
     title: 'CIANO14 40_12 — Compact High-Torque Motor',
     price: '€150',
-    priceBadge: 'Engineering sample',
+    priceBadge: 'Pre-production sample',
     priceNote: 'Hand-built and individually bench-tested.',
     priceComingSoon: 'Series price €60 — coming soon at production volume.',
     keyClaim: '8 kW/kg — more than 3× the continuous power and thrust of any comparable 3115-class motor.',
@@ -119,7 +123,7 @@ export const products: Product[] = [
     category: 'Air-cooled',
     technology: 'AeroStator Core',
     power: '4 kW',
-    status: 'Engineering samples — made to order (~1.5 months)',
+    status: 'Pre-production samples — ready within one month',
     description: 'The CIANO14 40_12 is a compact precision motor built on the AeroStator Core platform. Tangential magnet polarization delivers exceptional torque density in a minimal footprint — ideal for racing UAVs and precision aerial systems.',
     applications: 'Racing drones, precision UAVs, light aerial robotics. Compatible with 10″–12″ propellers.',
     kvOptions: ['KV 850'],
@@ -259,25 +263,50 @@ export const products: Product[] = [
     designation: 'CIANO14 40_20 7F2SY',
     title: 'CIANO14 40_20 — Compact High-Torque Motor, Long Stack',
     price: '€200',
+    priceBadge: 'Pre-production sample',
     inStock: false,
     imageUrl: '/ciano14-40-12.png', // placeholder: same 40 mm family picture as the 40_12 until a real photo exists
     category: 'Air-cooled',
     technology: 'AeroStator Core',
     power: '1.11 kW',
-    status: 'In production — ready within one month',
+    status: 'Pre-production samples — ready within one month',
     description: 'The CIANO14 40_20 is the longer-stack version of the CIANO14 40_12: the same 40 mm, 14-pole / 12-slot AeroStator Core motor with a 20 mm stack instead of 12 mm, for 1.11 kW at the rated point and 1.42 kW at the peak point.',
     applications: 'Propeller applications.',
+    kvOptions: ['KV 490'],
+    voltageOptions: ['36–50 V (12S LiPo)'],
     specs: [
       { label: 'SKU', value: 'CIANO14 40_20' },
       { label: 'Configuration', value: '14 Poles / 12 Slots' },
-      { label: 'Rated point', value: '1.11 kW / 0.82 N·m' },
-      { label: 'Peak point', value: '1.42 kW / 0.94 N·m' },
-      { label: 'Stator steel', value: '20SW1200' },
-      { label: 'Magnets', value: 'F52SH' },
-      { label: 'Slot insulation', value: 'Nomex' },
+      { label: 'KV', value: '~490 rpm/V' },
+      { label: 'Torque Constant (Kt)', value: '0.019 Nm/A' },
+      { label: 'Voltage', value: '36–50 V (12S LiPo)' },
       { label: 'Cooling', value: 'Air' },
       { label: 'Protection', value: 'Open frame' },
+      { label: 'Dimensions (D×L)', value: '40 × 55 mm' },
+      { label: 'Weight', value: '0.18 kg' },
+      { label: 'Max Temperature', value: '150 °C' },
+      { label: 'Warranty', value: '1 year' },
     ],
+    // Simulation values from the application (die "CIANO14 40 new", configuration L20, coupled EM-thermal points of
+    // 2026-10-19): motor only, phase current RMS. No bench sweep of the 40_20 yet, so no thrust row.
+    performanceSpecs: {
+      currentLabel: 'Phase current (RMS)',
+      efficiencyLabel: 'Efficiency (motor, simulation)',
+      continuous: {
+        power: '1,110 W',
+        torque: '0.82 Nm',
+        speed: '13,000 rpm',
+        current: '37 A',
+        efficiency: '92.8%',
+      },
+      peak: {
+        power: '1,420 W',
+        torque: '0.94 Nm',
+        speed: '14,400 rpm',
+        current: '42 A',
+        efficiency: '92.5%',
+      },
+    },
   },
   {
     slug: 'ciano-150-30',

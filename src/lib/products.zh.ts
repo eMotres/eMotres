@@ -44,11 +44,11 @@ export const productsZh: Record<string, ProductZh> = {
   'ciano-40-12': {
     title: 'CIANO14 40_12 — 紧凑型高扭矩电机',
     priceZh: '¥1,200',
-    priceBadge: '工程样机',
+    priceBadge: '预生产样机',
     priceNote: '手工制造，逐台台架测试。',
     priceComingSoon: '量产价 ¥500 —— 达到量产规模后推出。',
     keyClaim: '8 kW/kg —— 持续功率与推力超过同级别任何 3115 级电机的 3 倍。',
-    status: '工程样机 —— 按订单生产（约 1.5 个月）',
+    status: '预生产样机 —— 一个月内可交付',
     description:
       'CIANO14 40_12 是基于 AeroStator Core 平台打造的紧凑型精密电机。切向磁体磁化在极小的体积内实现出色的扭矩密度 —— 是竞速无人机与精密空中系统的理想选择。',
     applications: '竞速无人机、精密 UAV、轻型空中机器人。适配 10″–12″ 螺旋桨。',
@@ -131,20 +131,23 @@ export const productsZh: Record<string, ProductZh> = {
   'ciano-40-20': {
     title: 'CIANO14 40_20 — 紧凑型高扭矩电机（加长铁芯）',
     priceZh: '¥1,600',
-    status: '生产中 —— 一个月内可交付',
+    status: '预生产样机 —— 一个月内可交付',
+    priceBadge: '预生产样机',
     description:
       'CIANO14 40_20 是 CIANO14 40_12 的加长铁芯版本：同样是 40 mm、14 极 / 12 槽的 AeroStator Core 电机，铁芯长度由 12 mm 增至 20 mm，额定点功率 1.11 kW，峰值点功率 1.42 kW。',
     applications: '螺旋桨应用。',
     specs: [
       { label: 'SKU', value: 'CIANO14 40_20' },
       { label: '槽极配置', value: '14 极 / 12 槽' },
-      { label: '额定点', value: '1.11 kW / 0.82 N·m' },
-      { label: '峰值点', value: '1.42 kW / 0.94 N·m' },
-      { label: '定子铁芯材料', value: '20SW1200' },
-      { label: '磁体', value: 'F52SH' },
-      { label: '槽绝缘', value: 'Nomex' },
+      { label: 'KV 值', value: '约 490 rpm/V' },
+      { label: '扭矩常数 (Kt)', value: '0.019 Nm/A' },
+      { label: '电压', value: '36–50 V（12S 锂聚合物电池）' },
       { label: '冷却方式', value: '风冷' },
       { label: '防护形式', value: '开放式结构' },
+      { label: '外形尺寸（直径×长度）', value: '40 × 55 mm' },
+      { label: '重量', value: '0.18 kg' },
+      { label: '最高温度', value: '150 °C' },
+      { label: '质保', value: '1 年' },
     ],
   },
   'ciano-150-30': {
