@@ -128,6 +128,25 @@ export const productsZh: Record<string, ProductZh> = {
     },
   },
 
+  'ciano-40-20': {
+    title: 'CIANO14 40_20 — 紧凑型高扭矩电机（加长铁芯）',
+    priceZh: '¥1,600',
+    status: '生产中 —— 一个月内可交付',
+    description:
+      'CIANO14 40_20 是 CIANO14 40_12 的加长铁芯版本：同样是 40 mm、14 极 / 12 槽的 AeroStator Core 电机，铁芯长度由 12 mm 增至 20 mm，额定点功率 1.11 kW，峰值点功率 1.42 kW。',
+    applications: '螺旋桨应用。',
+    specs: [
+      { label: 'SKU', value: 'CIANO14 40_20' },
+      { label: '槽极配置', value: '14 极 / 12 槽' },
+      { label: '额定点', value: '1.11 kW / 0.82 N·m' },
+      { label: '峰值点', value: '1.42 kW / 0.94 N·m' },
+      { label: '定子铁芯材料', value: '20SW1200' },
+      { label: '磁体', value: 'F52SH' },
+      { label: '槽绝缘', value: 'Nomex' },
+      { label: '冷却方式', value: '风冷' },
+      { label: '防护形式', value: '开放式结构' },
+    ],
+  },
   'ciano-150-30': {
     title: 'CIANO42 150_30 — 中功率航空电机',
     priceZh: '¥7,700',

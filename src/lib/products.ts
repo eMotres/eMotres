@@ -76,6 +76,8 @@ export interface MotorComparison {
 export interface Product {
   slug: string;
   sku: string;
+  /** Standard motor designation, e.g. "CIANO14 40_12 7F2SY". Shown on the product page when set. */
+  designation?: string;
   title: string;
   price: string;
   priceBadge?: string;
@@ -91,8 +93,8 @@ export interface Product {
   status: string;
   description: string;
   applications: string;
-  kvOptions: string[];
-  voltageOptions: string[];
+  kvOptions?: string[];
+  voltageOptions?: string[];
   specs: { label: string; value: string }[];
   performanceSpecs?: PerformanceSpecs;
   dynoTest?: DynoTest;
@@ -105,6 +107,7 @@ export const products: Product[] = [
   {
     slug: 'ciano-40-12',
     sku: 'CIANO14 40_12',
+    designation: 'CIANO14 40_12 7F2SY',
     title: 'CIANO14 40_12 — Compact High-Torque Motor',
     price: '€150',
     priceBadge: 'Engineering sample',
@@ -249,6 +252,32 @@ export const products: Product[] = [
         { throttle: 100, rpm: 14255, voltage: 24.5, current: 74.0, thrust: 5764, torque: 0.979, pElec: 1813, pShaft: 1461, elecEff: 80.5, sysEff: 3.18 },
       ],
     },
+  },
+  {
+    slug: 'ciano-40-20',
+    sku: 'CIANO14 40_20',
+    designation: 'CIANO14 40_20 7F2SY',
+    title: 'CIANO14 40_20 — Compact High-Torque Motor, Long Stack',
+    price: '€200',
+    inStock: false,
+    imageUrl: '/ciano14-40-12.png', // placeholder: same 40 mm family picture as the 40_12 until a real photo exists
+    category: 'Air-cooled',
+    technology: 'AeroStator Core',
+    power: '1.11 kW',
+    status: 'In production — ready within one month',
+    description: 'The CIANO14 40_20 is the longer-stack version of the CIANO14 40_12: the same 40 mm, 14-pole / 12-slot AeroStator Core motor with a 20 mm stack instead of 12 mm, for 1.11 kW at the rated point and 1.42 kW at the peak point.',
+    applications: 'Propeller applications.',
+    specs: [
+      { label: 'SKU', value: 'CIANO14 40_20' },
+      { label: 'Configuration', value: '14 Poles / 12 Slots' },
+      { label: 'Rated point', value: '1.11 kW / 0.82 N·m' },
+      { label: 'Peak point', value: '1.42 kW / 0.94 N·m' },
+      { label: 'Stator steel', value: '20SW1200' },
+      { label: 'Magnets', value: 'F52SH' },
+      { label: 'Slot insulation', value: 'Nomex' },
+      { label: 'Cooling', value: 'Air' },
+      { label: 'Protection', value: 'Open frame' },
+    ],
   },
   {
     slug: 'ciano-150-30',

@@ -245,6 +245,12 @@ export default async function ProductPageZh({ params }: { params: Promise<{ slug
                   </tr>
                 </thead>
                 <tbody>
+                  {product.designation && (
+                    <tr className="bg-surface-primary">
+                      <td className="px-5 py-3 text-text-secondary">型号</td>
+                      <td colSpan={ps ? 2 : 1} className="px-5 py-3 text-text-primary font-semibold text-right">{product.designation}</td>
+                    </tr>
+                  )}
                   {perfRows.map((row, i) => (
                     <tr key={row.label} className={i % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
                       <td className="px-5 py-3 text-text-secondary">{row.label}</td>
@@ -254,7 +260,7 @@ export default async function ProductPageZh({ params }: { params: Promise<{ slug
                   ))}
                   {/* SKU is already shown in the header badge, so skip it here */}
                   {product.specs.filter((s) => s.label !== 'SKU').map((spec, j) => {
-                    const idx = perfRows.length + j;
+                    const idx = perfRows.length + j + (product.designation ? 1 : 0);
                     return (
                       <tr key={spec.label} className={idx % 2 === 0 ? 'bg-surface-primary' : 'bg-surface-secondary'}>
                         <td className="px-5 py-3 text-text-secondary">{spec.label}</td>
