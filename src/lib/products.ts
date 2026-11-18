@@ -265,7 +265,7 @@ export const products: Product[] = [
     price: '€150',
     priceBadge: 'Pre-production sample',
     inStock: false,
-    imageUrl: '/ciano14-40-12.png', // placeholder: same 40 mm family picture as the 40_12 until a real photo exists
+    imageUrl: '/ciano14-40-20.png',
     category: 'Air-cooled',
     technology: 'AeroStator Core',
     power: '1.11 kW',
@@ -282,7 +282,7 @@ export const products: Product[] = [
       { label: 'Voltage', value: '36–50 V (12S LiPo)' },
       { label: 'Cooling', value: 'Air' },
       { label: 'Protection', value: 'Open frame' },
-      { label: 'Dimensions (D×L)', value: '40 × 55 mm' },
+      { label: 'Dimensions (D×L)', value: '40 × 57 mm' },
       { label: 'Weight', value: '0.18 kg' },
       { label: 'Max Temperature', value: '150 °C' },
       { label: 'Warranty', value: '1 year' },
