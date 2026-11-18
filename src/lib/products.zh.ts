@@ -144,7 +144,7 @@ export const productsZh: Record<string, ProductZh> = {
       { label: '电压', value: '36–50 V（12S 锂聚合物电池）' },
       { label: '冷却方式', value: '风冷' },
       { label: '防护形式', value: '开放式结构' },
-      { label: '外形尺寸（直径×长度）', value: '40 × 55 mm' },
+      { label: '外形尺寸（直径×长度）', value: '40 × 57 mm' },
       { label: '重量', value: '0.18 kg' },
       { label: '最高温度', value: '150 °C' },
       { label: '质保', value: '1 年' },
