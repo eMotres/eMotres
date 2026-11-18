@@ -90,7 +90,7 @@ const cianoMotors: {
     price: '€100',
     priceTag: 'sample',
     highlight: '3× continuous power & thrust vs class',
-    imageUrl: '/ciano14-40-12.png',
+    imageUrl: '/ciano14-40-12-v2.png',
   },
   {
     slug: 'ciano-150-30',

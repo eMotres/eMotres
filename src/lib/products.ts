@@ -119,7 +119,7 @@ export const products: Product[] = [
     priceComingSoon: 'Series price €60 — coming soon at production volume.',
     keyClaim: '8 kW/kg — more than 3× the continuous power and thrust of any comparable 3115-class motor.',
     inStock: false, // → set true + add stripePaymentLink to sell CIANO14 directly (see src/lib/store.ts)
-    imageUrl: '/ciano14-40-12.png',
+    imageUrl: '/ciano14-40-12-v2.png',
     category: 'Air-cooled',
     technology: 'AeroStator Core',
     power: '4 kW',
