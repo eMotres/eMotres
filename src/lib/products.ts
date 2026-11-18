@@ -113,7 +113,7 @@ export const products: Product[] = [
     sku: 'CIANO14 40_12',
     designation: 'CIANO14 40_12 7F2SY',
     title: 'CIANO14 40_12 — Compact High-Torque Motor',
-    price: '€150',
+    price: '€100',
     priceBadge: 'Pre-production sample',
     priceNote: 'Hand-built and individually bench-tested.',
     priceComingSoon: 'Series price €60 — coming soon at production volume.',
@@ -262,7 +262,7 @@ export const products: Product[] = [
     sku: 'CIANO14 40_20',
     designation: 'CIANO14 40_20 7F2SY',
     title: 'CIANO14 40_20 — Compact High-Torque Motor, Long Stack',
-    price: '€200',
+    price: '€150',
     priceBadge: 'Pre-production sample',
     inStock: false,
     imageUrl: '/ciano14-40-12.png', // placeholder: same 40 mm family picture as the 40_12 until a real photo exists
