@@ -93,7 +93,7 @@ const cianoMotors: {
     price: priceOf('ciano-40-12'),
     priceTag: '样品',
     highlight: '同级别 3 倍持续功率与推力',
-    imageUrl: '/ciano14-40-12.png',
+    imageUrl: '/ciano14-40-12-v2.png',
   },
   {
     slug: 'ciano-150-30',
